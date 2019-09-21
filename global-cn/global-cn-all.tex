@@ -49,8 +49,17 @@
 \newcommand \ty {\mathtt{y}}
 \newcommand \tz {\mathtt{z}}
 \newcommand \tg {\mathtt{g}}
+
+
+
+\usepackage{hyperref}
+\usepackage[backend=biber,style=gb7714-2015,gbpub=false,isbn=false,doi=false,gbtitlelink=true,url=false,sortlocale=zh__pinyin]{biblatex}
+\addbibresource{../intro-cn/all-all.bib}
  
 \begin{document}
+
 \input{global-chap}
+
+\printbibliography[heading=bibintoc]
 
 \end{document}
