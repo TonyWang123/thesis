@@ -3,7 +3,7 @@
 \usepackage{geometry}
 \geometry{left=3cm,right=3cm,top=4.0cm,bottom=4.0cm}
 
-\hfuzz=100.0pt   % TODO: 临时解决方案
+\hfuzz=1000.0pt   % TODO: 临时解决方案
 
 
 \usepackage{graphicx}
@@ -49,9 +49,16 @@
 \newcommand \ty {\mathtt{y}}
 \newcommand \tz {\mathtt{z}}
 \newcommand \tg {\mathtt{g}}
+
+
+\usepackage{hyperref}
+\usepackage[backend=biber,style=gb7714-2015,gbpub=false,isbn=false,doi=false,gbtitlelink=true,url=false,sortlocale=zh__pinyin]{biblatex}
+\addbibresource{../intro-cn/all-all.bib}
+
  
 \begin{document}
 \input{stateful-chap}
 
- 
+\printbibliography[heading=bibintoc]
+
 \end{document}

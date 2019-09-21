@@ -12,7 +12,7 @@
 %under highly dynamic tactical network environments with resource constraints,
 %such as limited power and processing capability, and dynamic connectivity. 
 
-将SDN与军事联合结合并形成SDC的想法相对直观，因为通过SDN数据面上的灵活的数据包匹配处理和控制面上的集中式控制，联合成员可以在联合网络上实现高效、灵活的控制~\cite{p4, rmt}。然而这些突出的性质仍然无法充分满足需求。
+将SDN与军事联合结合并形成SDC的想法相对直观，因为通过SDN数据面上的灵活的数据包匹配处理和控制面上的集中式控制，联合成员可以在联合网络上实现高效、灵活的控制~\cite{P4, rmt}。然而这些突出的性质仍然无法充分满足需求。
 
 %One may think that the integration of SDN into SDC is straightforward, because SDN
 %allows coalition members to realize efficient, flexible control over the
@@ -88,7 +88,7 @@
 % performance of \concept{} in Section~\ref{sec:eval} before concluding the paper
 % in Section~\ref{sec:conclusion}.
  
-\section{相关工作以及研究动机}
+\section{相关工作以及研究动机}\label{sec:motivation}
 \para{相关工作}:
 近期一些SDN/SDC数据平面的工作被提出~\cite{arashloo2016snap, heorhiadi2016simplifying, soule2014merlin, benet2018mp, katta2016hula, gember2012stratos, anwer2015programming, monsanto2012compiler, kohler2018p4cep, bianchi2014openstate, opensdc}，它们主要的思想是将对数据包进行复杂有状态的操作（例如，计数、流安全探测、拥塞控制）从控制平面（例如，基站）卸载到数据平面设备（例如，移动设备）上，从而提高在动态战术环境中SDN应用的性能。在这些设计中，被卸载的对数据包操作的结果独立地存储在每个数据平面设备上。SOL~\cite{heorhiadi2016simplifying}和Merlin~\cite{soule2014merlin}在受限的网络状态环境下，通过计算路径，来解决数据平面设备的放置以及配置问题。P4CEP~\cite{kohler2018p4cep}和OpenSDC~\cite{opensdc}考虑拓展数据平面的能力，从可以进行简单的数据包处理到可以进行事件处理。SNAP~\cite{arashloo2016snap}设计一个高级网络编程系统，从而将一个高级程序转为有状态数据平面设备的配置。我们可以看出，尽管以上主要工作均关注SDC数据平面的设计，但这些系统的一个共同的限制是数据平面设备的本地状态无法共享给其他设备。下面的一个例子显示在SDC网络中这种情况会导致资源的不充分利用，进而影响SDC应用的性能。
  
