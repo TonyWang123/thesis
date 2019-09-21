@@ -15,81 +15,63 @@
   % 中文信息
   %=========
   % 题目过长可以换行（推荐手动加入换行符，这样就可以控制换行的地方啦）。
-  ctitle={同济大学学位论文 \LaTeX{} 模板\\使用示例说明与参考},
-  cheadingtitle={同济大学学位论文 \LaTeX{} 模板使用示例说明与参考},    %用于页眉的标题，不要换行
-  cauthor={同济人},  
-  studentnumber={201804},
-  cmajorfirst={工学},
-  cmajorsecond={电子控制计算机},
-  cdepartment={同济大学Linux用户组},
-  csupervisor={陈杰 教授}, 
+  ctitle={软件定义网络高级编程模型研究},
+  cheadingtitle={软件定义网络高级编程模型研究},    %用于页眉的标题，不要换行 
+  studentnumber={XXXXXXX},
+  cdepartment={电子与信息工程学院},
+  cmajorfirst={计算机科学与技术},
+  cmajorsecond={计算机软件与理论},
+  cauthor={XXX}, 
+  csupervisor={XX 教授}, 
   % 如果没有副指导老师或者校外指导老师，把{}中内容留空即可，或者直接注释掉。
-  cassosupervisor={裴刚 教授~（校外）}, % 副指导老师
+  % cassosupervisor={裴刚 教授~（校外）}, % 副指导老师
   % 日期自动使用当前时间，若需手动指定，按如下方式修改：
   % cdate={\zhdigits{2018}年\zhnumber{11}月},
   % 没有基金的话就注释掉吧。
-  cfunds={（本论文由我要努力想办法撑到两行的著名国家杰出青年基金 (No.123456789) 支持）},
+  % cfunds={（本论文由我要努力想办法撑到两行的著名国家杰出青年基金 (No.123456789) 支持）},
   %
   %=========
   % 英文信息
   %=========
-  etitle={A Simple Sample of Tongji Thesis\\ Using \tongjithesis{}}, 
-  eauthor={Tongji Ren},
-  emajorfirst={Gong Xue},
-  emajorsecond={DianziControlComputerScience},
-  edepartment={TONGJILUG},
+  etitle={Research about SDN High-level Programming Model}, 
+  edepartment={College of Electronics and Information Engineering},
+  emajorfirst={Computer Science and Technology},
+  emajorsecond={Computer Software and Theory},
   % 日期自动使用当前时间，若需手动指定，按如下方式修改：
   % edate={November,\ 2018},
-  efunds={(Supported by the Natural Science Foundation of China for\\ Distinguished Young Scholars, Grant No.123456789)},    
-  esupervisor={Prof. Jie Chen},
-  eassosupervisor={Prof. Gang Pei (XiaoWai)}
+  % efunds={(Supported by the Natural Science Foundation of China for\\ Distinguished Young Scholars, Grant No.123456789)},    
+  eauthor={XXX},
+  esupervisor={Prof. XXX},
+  % eassosupervisor={Prof. Gang Pei (XiaoWai)}
   }
 
 % 定义中英文摘要和关键字
 \begin{cabstract}  
-  论文的摘要是对论文研究内容和成果的高度概括。摘要应对论文所研究的问题及其研究目
-  的进行描述，对研究方法和过程进行简单介绍，对研究成果和所得结论进行概括。摘要应
-  具有独立性和自明性，其内容应包含与论文全文同等量的主要信息。使读者即使不阅读全
-  文，通过摘要就能了解论文的总体内容和主要成果。
 
-  论文摘要的书写应力求精确、简明。切忌写成对论文书写内容进行提要的形式，尤其要避
-  免“第 1 章……；第 2 章……；……”这种或类似的陈述方式。
+软件定义网络（SDN）的一个重要能力是高级编程。通过SDN高级编程语言，网络管理者可以实现对网络中数据流的灵活控制，而不必关心底层网络设备的具体架构。然而，一方面，随着SDN的普及，新应用的不断产生，人们对SDN高级编程语言的要求也不断提高；另一方面，随着网络设备技术的迅速发展，底层网络设备在不断变得高效、灵活的同时，其架构也变得越来越复杂。因此，如何将高级SDN程序高效地转化为底层网络设备的低级配置，是SDN高级编程模型始终需要考虑的问题。
 
-  本文介绍同济大学论文模板 \tongjithesis{} 的使用方法。本模板符合学校的硕士、
-  博士论文格式要求。
+首先，对于单交换机，目前有通过低级配置接口生成具有固定结构（如OF-DPA）数据通路配置的相关工作，也有将高级程序转化为具有可定制结构（如RMT）数据通路配置的相关工作，但是没有将高级程序转化为具有固定结构数据通路配置的相关工作。要想利用那些高效的但具有固定结构数据通路，而且不想关心其复杂的实现架构，则将高级程序转化为具有固定结构数据通路配置的工作非常重要。而在进行转化前，一个重要问题则是，一个高级SDN程序是否可以被具有固定结构数据通路所实现。该问题的复杂地方在于高级SDN程序和底层数据通路之间结构差异性非常大，而且各自都具有丰富的多样性，因此我们需要一个系统的方法去解决该问题。针对该问题，我们提出一个将高级SDN程序和底层数据通路统一的特征空间，通过特征函数，高级SDN程序和数据通路都可以映射到该空间上的点，最后通过定义空间上的比较函数，来判断该高级SDN程序是否可以该数据通路实现。除此之外，当高级SDN程序具有循环结构时，如何将该程序高效地实现在可定制结构的数据通路上，则并没有有效的工作。针对该问题，我们提出了重复软件流水线转换。，在计算循环结构的最佳数据通路结构时显示出更高的效率。
 
-  本文的创新点主要有：
-  \begin{itemize}
-    \item 用例子来解释模板的使用方法；
-    \item 用废话来填充无关紧要的部分；
-    \item 一边学习摸索一边编写新代码。
-  \end{itemize}
 
-  关键词是为了文献标引工作、用以表示全文主要内容信息的单词或术语。关键词不超过 5
-  个，每个关键词中间用分号分隔。（模板作者注：关键词分隔符不用考虑，模板会自动处
-  理。英文关键词同理。）
+第一，在面向单交换机编程模型的研究中，已有的相关工作可以分为如下：1. 通过低级配置接口生成具有固定结构（如单流表或OF-DPA）数据通路的配置；2. 将高级程序转化为具有可定制结构（如RMT）数据通路的配置。但是缺少将高级程序转化为具有固定结构数据通路的配置的相关工作。而在转化之前，需要考虑的是该固定结构数据通路是否可以实现高级程序。因此，如何判断一个高级SDN程序是否可以在具有固定结构数据通路上实现，是一个挑战。除此之外，当SDN程序具有循环结构时，如何将该SDN程序实现在可定制结构数据通路上并没有相关工作。因此高级SDN程序中循环结构在可定制结构数据平面的高效实现，是一个挑战。
+
+第二，在面向全网络编程模型的研究中，对于一般网络，大量工作是以响应式模式（即不会主动生成配置）对网络进行管理，因此效率并不高。SNAP实现了主动编译生成数据平面配置，但其程序并不灵活。因此，给定一个高级灵活的SDN程序，如何生成面向全网络的数据平面配置是一个挑战。除此之外，针对不同场景，如软件定义联合~\cite{mishra2017comparing}网络的低时延要求，以及车联网中车的移动性要求，如何优化数据平面配置是一个挑战。
+
 \end{cabstract}
 
-\ckeywords{\TeX, \LaTeX, CJK, 模板, 论文}
+\ckeywords{软件定义网络, 编程模型}
 
 \begin{eabstract}
-   An abstract of a dissertation is a summary and extraction of research work
-   and contributions. Included in an abstract should be description of research
-   topic and research objective, brief introduction to methodology and research
-   process, and summarization of conclusion and contributions of the
-   research. An abstract should be characterized by independence and clarity and
-   carry identical information with the dissertation. It should be such that the
-   general idea and major contributions of the dissertation are conveyed without
-   reading the dissertation.
 
-   An abstract should be concise and to the point. It is a misunderstanding to
-   make an abstract an outline of the dissertation and words ``the first
-   chapter'', ``the second chapter'' and the like should be avoided in the
-   abstract.
+An important capability of Software Defined Networking (SDN) is advanced programming. Through the SDN high-level programming language, network managers can achieve flexible control of data flows in the network without having to care about the specific architecture of the underlying network devices. However, on the one hand, with the popularity of SDN and the continuous emergence of new applications, people's requirements for SDN high-level programming languages ​​are constantly improving; on the other hand, with the rapid development of network device technology, the underlying network devices are constantly becoming more efficient. At the same time, the architecture is becoming more and more complex. Therefore, how to efficiently convert advanced SDN programs into low-level configurations of underlying network devices is an issue that must be considered in the SDN advanced programming model.
 
-   Key words are terms used in a dissertation for indexing, reflecting core
-   information of the dissertation. An abstract may contain a maximum of 5 key
-   words, with semi-colons used in between to separate one another.
+First, for a single switch, there is currently a work related to generating a fixed-structure (such as OF-DPA) data path configuration through a low-level configuration interface, and a related work of converting a high-level program into a data path configuration with a customizable structure (such as RMT). However, there is no work related to converting high-level programs to a fixed-structure data path configuration. To take advantage of efficient but fixed-structure data paths and don't want to care about their complex implementation architecture, it's important to turn high-level programs into work with fixed-structured data path configurations. An important issue before conversion is whether an advanced SDN program can be implemented with a fixed-structure data path. The complication of this problem is that the structural differences between the advanced SDN program and the underlying data path are very large, and each has a rich diversity, so we need a systematic approach to solve the problem. To solve this problem, we propose a feature space that unifies the advanced SDN program and the underlying data path. Through the feature function, the advanced SDN program and the data path can be mapped to the points on the space, and finally by defining the spatial comparison function. It is determined whether the advanced SDN program can be implemented by the data path. In addition, when the advanced SDN program has a loop structure, how to efficiently implement the program on the data path of the customizable structure does not work effectively. In response to this problem, we propose a repetitive software pipeline conversion. It shows higher efficiency when calculating the optimal data path structure of the loop structure.
+
+
+First, in the research of the single-switch programming model, the existing related work can be divided into the following: 1. Generate a configuration with a fixed structure (such as single-flow table or OF-DPA) data path through the low-level configuration interface; Transform high-level programs into configurations with customizable structure (such as RMT) data paths. However, there is a lack of work related to converting high-level programs into configurations with fixed-structure data paths. Before conversion, what needs to be considered is whether the fixed structure data path can implement advanced programs. Therefore, how to determine whether an advanced SDN program can be implemented on a fixed-structured data path is a challenge. In addition, when the SDN program has a loop structure, there is no relevant work on how to implement the SDN program on the customizable structure data path. Therefore, the efficient implementation of the loop structure in the advanced SDN program in the customizable structural data plane is a challenge.
+
+Second, in the research of the whole network programming model, for the general network, a lot of work is to manage the network in a responsive mode (that is, it does not actively generate the configuration), so the efficiency is not high. SNAP implements active compilation to generate data plane configuration, but its program is not flexible. Therefore, given an advanced and flexible SDN program, how to generate a data plane configuration for the entire network is a challenge. In addition, how to optimize the data plane configuration is a challenge for different scenarios, such as the low latency requirements of the software-defined joint ~\cite{mishra2017comparing} network and the mobility requirements of the car in the car network.
+
 \end{eabstract}
 
-\ekeywords{\TeX, \LaTeX, CJK, template, thesis}
+\ekeywords{SDN, Programming Model}

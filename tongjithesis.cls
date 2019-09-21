@@ -732,16 +732,16 @@
             \else
               \begin{tabular}{p{\tongji@title@width}c@{\extracolsep{8pt}}p{7cm}l}
             \fi              
-            \tongji@put@title{\tongji@cauthortitle}        & \tongji@title@sep 
-            & \tongji@cauthor\\
-            \tongji@put@title{\tongji@cstudentnumbertitle} & \tongji@title@sep 
-            & \tongji@studentnumber\\
+            % \tongji@put@title{\tongji@cstudentnumbertitle} & \tongji@title@sep 
+            % & \tongji@studentnumber\\
             \tongji@put@title{\tongji@cdepartmenttitle}    & \tongji@title@sep 
             & \tongji@cdepartment\\                
             \tongji@put@title{\tongji@cmajorfirsttitleprofession}    & \tongji@title@sep
             & \tongji@cmajorfirst\\
             \tongji@put@title{\tongji@cmajorsecondtitleprofession}   & \tongji@title@sep
             & \tongji@cmajorsecond\\ 
+            \tongji@put@title{\tongji@cauthortitle}        & \tongji@title@sep 
+            & \tongji@cauthor\\
             \tongji@put@title{\tongji@csupervisortitle}    & \tongji@title@sep 
             & \tongji@csupervisor\\
             \ifx\tongji@cassosupervisor\@empty\else
@@ -758,17 +758,17 @@
               \begin{tabular}{p{\tongji@title@width}@{}c@{\extracolsep{8pt}}p{7cm}l}
             \else
               \begin{tabular}{p{\tongji@title@width}c@{\extracolsep{8pt}}p{7cm}l}
-            \fi              
-            \tongji@put@title{\tongji@cauthortitle}        & \tongji@title@sep 
-            & \tongji@cauthor\\
-            \tongji@put@title{\tongji@cstudentnumbertitle} & \tongji@title@sep 
-            & \tongji@studentnumber\\
+            \fi
+            % \tongji@put@title{\tongji@cstudentnumbertitle} & \tongji@title@sep 
+            % & \tongji@studentnumber\\
             \tongji@put@title{\tongji@cdepartmenttitle}    & \tongji@title@sep 
             & \tongji@cdepartment\\
             \tongji@put@title{\tongji@cmajorfirsttitle}    & \tongji@title@sep
             & \tongji@cmajorfirst\\
             \tongji@put@title{\tongji@cmajorsecondtitle}   & \tongji@title@sep
             & \tongji@cmajorsecond\\
+            \tongji@put@title{\tongji@cauthortitle}        & \tongji@title@sep 
+            & \tongji@cauthor\\
             \tongji@put@title{\tongji@csupervisortitle}    & \tongji@title@sep 
             & \tongji@csupervisor\\
             \ifx\tongji@cassosupervisor\@empty\else
@@ -826,11 +826,11 @@
         \sanhao[1.5] 
         \begin{center}
           \begin{tabular}{lp{6cm}} 
-            Candidate :         & \tongji@eauthor       \\
-            Student Number :    & \tongji@studentnumber \\
+            % Student Number :    & \tongji@studentnumber \\
             School/Department : & \tongji@edepartment   \\
             Discipline :        & \tongji@emajorfirst   \\
             Major :             & \tongji@emajorsecond  \\
+            Candidate :         & \tongji@eauthor       \\
             Supervisor :        & \tongji@esupervisor \\
             \ifx\tongji@eassosupervisor\@empty\else
               Associate Supervisor : & \tongji@eassosupervisor \\
