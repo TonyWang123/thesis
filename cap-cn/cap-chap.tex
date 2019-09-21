@@ -279,8 +279,8 @@ L8: if !g1: return Drop()
   \hline
 \end{tabular}
 \vspace{2mm}
-\label{cap:tbl:sym-table}
 \caption{在我们``主要结果以及相关证明"一节中使用的符号标识列表。}
+\label{cap:tbl:sym-table}
 \end{table}
 
 \subsection{概述}
@@ -611,7 +611,7 @@ otherwise, \quad \quad \quad \quad \quad \quad \quad \ \ \ \ \, \, \,  (\mathrm{
 我们可以将任意$v_i(M) \in dom(M)$编码为$\chi_f(M)$中的码字，并且仍然可以传递足够的信息来计算$f$。如果$\mu_f(M)$可以取$|dom(\mu_f(M))|$不同的值，我们可以从集合：$0$, $...$, $|dom(\mu_f(M))|-1$中为每个值分配一个唯一的码字，最多使用$log_2(\lceil |dom(\mu_f(M))|-1 \rceil)$位来表示。
 \end{proof}
 
-\para{实现定理的证明}：基于我们对函数传输需求的描述，我们现在可以开始证明我们的实现定理。首先，我们将给出我们的关键潜在引理，引理~\ref{{lemma:core-lemma}}，随后可以得到我们的实现定理。
+\para{实现定理的证明}：基于我们对函数传输需求的描述，我们现在可以开始证明我们的实现定理。首先，我们将给出我们的关键潜在引理，引理~\ref{lemma:core-lemma}，随后可以得到我们的实现定理。
 
 \begin{lemma} 
 \label{lemma:core-lemma}
@@ -826,8 +826,8 @@ L6:     return route
 
   \begin{subfigure}[b]{0.4\textwidth}
       \includegraphics[width=\textwidth]{figures/figure-eval-t1.pdf}
-      \label{cap:fig:eval-ct:a}
       \caption{输入比特位长度变化}
+      \label{cap:fig:eval-ct:a}
   \end{subfigure}
 
   \hspace{1in}
@@ -838,10 +838,10 @@ L6:     return route
 
   \begin{subfigure}[b]{0.4\textwidth}
       \includegraphics[width=\textwidth]{figures/figure-eval-t2.pdf}
-      \label{cap:fig:eval-ct:b}
       \caption{表大小变化}  %% TODO fix position 计算$\tau(\texttt{simpleRoute})$和$\tau_G(\texttt{simpleRoute})$的所需时间。
+      \label{cap:fig:eval-ct:b}
   \end{subfigure}
-
+  \caption{评估结果}  % TODO: 标题
   \label{cap:fig:eval-ct}
 \end{figure}
 
@@ -866,6 +866,7 @@ L6:     return route
 %shows the characterization results of several pipelines including four real pipeline structures and the example pipeline, \exampledp. We say a set of packet match fields $M$ is valid in a pipeline $p$ means the value of $\kappa_\rho(\rho)(M)$ can be computed by the first formula in the definition of $\kappa_\rho(\rho)(M)$.  The result shows that though there are many combinations of $M$ for the output of characterization of a pipeline, the real memory utilization should be small. Also, it shows the computation of pipeline characterization is very fast.
 
 \begin{table}[t]
+\centering
 \scalebox{0.8}{
 \begin{tabular}{ | l | l | l | l | l | }
     \hline
@@ -902,8 +903,8 @@ L6:     return route
 
   \begin{subfigure}[b]{0.4\textwidth}
       \includegraphics[width=\textwidth]{figures/figure-eval-rp-2.pdf}
-      \label{cap:fig:eval-rp:a}
       \caption{表数量 = 2}
+      \label{cap:fig:eval-rp:a}
   \end{subfigure}
 
   \hspace{1in}
@@ -913,8 +914,8 @@ L6:     return route
 
   \begin{subfigure}[b]{0.4\textwidth}
       \includegraphics[width=\textwidth]{figures/figure-eval-rp-3.pdf}
-      \label{cap:fig:eval-rp:b}
       \caption{表数量 = 3}
+      \label{cap:fig:eval-rp:b}
   \end{subfigure}
 
   % \subfigure[表数量 = 4]{
@@ -923,15 +924,20 @@ L6:     return route
 
   \begin{subfigure}[b]{0.4\textwidth}
       \includegraphics[width=\textwidth]{figures/figure-eval-rp-4.pdf}
-      \label{cap:fig:eval-rp:c}
       \caption{表数量 = 4}
+      \label{cap:fig:eval-rp:c}
   \end{subfigure}
 
   \caption{对于不同表数量和寄存器位长度的实现成功百分比。}
   \label{cap:fig:eval-rp} %% label for entire figure
 \end{figure}
 
-\para{结果}：如图~\ref{cap:fig:eval-rp}所示。其中，图\ref{cap:fig:eval-rp:a}考虑的具有两个表的流水线；图\ref{cap:fig:eval-rp:b}为3个表的流水线；图\ref{cap:fig:eval-rp:c}为4个表。对于每种情况，我们变化每个表的寄存器位长度，并计算实现成功的百分比。从图~\ref{fig:eval-rp:a}的结果中，我们可以发现具有更多位寄存器的流水线可以实现更高百分比的功能。但是，当长度大于一定阈值时，成功实现百分比不会增加太多。阈值由函数中变量域的大小确定。如图\ref{cap:fig:eval-rp:a}所示，实现成功的百分比在4位和6位寄存器长度之间的差距（即等效类的可用大小从16到64）可以通过变量的平均域大小（即20）在16到64之间的范围来解释。
+\para{结果}：如图~\ref{cap:fig:eval-rp}所示。
+其中，图\ref{cap:fig:eval-rp:a}考虑的具有两个表的流水线；图\ref{cap:fig:eval-rp:b}为3个表的流水线；图\ref{cap:fig:eval-rp:c}为4个表。
+对于每种情况，我们变化每个表的寄存器位长度，并计算实现成功的百分比。
+从图~\ref{cap:fig:eval-rp:a}的结果中，我们可以发现具有更多位寄存器的流水线可以实现更高百分比的功能。
+但是，当长度大于一定阈值时，成功实现百分比不会增加太多。阈值由函数中变量域的大小确定。
+如图\ref{cap:fig:eval-rp:a}所示，实现成功的百分比在4位和6位寄存器长度之间的差距（即等效类的可用大小从16到64）可以通过变量的平均域大小（即20）在16到64之间的范围来解释。
 
 
 
