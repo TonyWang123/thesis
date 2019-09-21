@@ -13,17 +13,57 @@
 
 \usepackage{tongjiutils}
 \usepackage{import}
-
-
+\usepackage{algorithm}
+\usepackage{algorithmic}
 % \usepackage{graphicx}
 % \usepackage{subfigure}
 % \usepackage{amsmath} %equation
 % \usepackage{mathabx} %rightrightharpoons
 
 
+
+
 \newcommand{\para}[1]{\smallskip\noindent {\bf #1}}
 \newcommand{\exampledp}{\texttt{ExampleDP}}
-\newcommand{\rightrightharpoons}{{\rightarrow}}   % TODO: fix it
+\newcommand{\rightrightharpoons}{{\Longrightarrow}}   % TODO: fix it
+\newcommand{\codeword}[1]{\texttt{\small{#1}}}
+
+\newcommand{\rulesep}{\unskip\ \vrule\ }
+\newcommand \bnfdef  {\mathrel{\color{blue}{::=}}}
+\newcommand \bnfalt  {\mathrel{\color{blue}{|}}}
+
+\newcommand \keyfont {\mathsf}
+\newcommand \ONPKT {\keyfont{onPacket(pkt)}}
+% \newcommand \WHILE  {\keyfont{while}}
+\newcommand \IFSTR     {\keyfont{if}}
+\newcommand \THEN     {\keyfont{then}}
+% \newcommand \SKIP   {\keyfont{skip}}
+\newcommand \RETURNSTR   {\keyfont{return}}
+% \newcommand \ADD   {\keyfont{add}}
+% \newcommand \CONTAINS   {\keyfont{contains}}
+% \newcommand \GET   {\keyfont{get}}
+% \newcommand \PUT   {\keyfont{put}}
+% \newcommand \GLOBAL   {\keyfont{global}}
+% \newcommand \forl   {\keyfont{for}}
+% \newcommand \while[2]   {\WHILE\ {#1}\ {#2}}
+\newcommand \ifelse[3]  {\IFSTR\ {#1}:{#2}\ \THEN:{#3}}
+\newcommand \return[1]   { \RETURNSTR\ {#1}}
+% \newcommand \CYCLIC  {\keyfont{loop}}
+% \newcommand \cyclic[1]   { \CYCLIC\ {#1}}
+
+% \newcommand \JUMP  {\keyfont{jump}}
+% \newcommand \CJUMP  {\keyfont{cjump}}
+% \newcommand \LBL  {\keyfont{label}}
+
+% \newcommand \jump[1]   { \JUMP\ {#1}}
+% \newcommand \cjump[3]   { \CJUMP\ {#1}\ {#2}\ {#3}}
+% \newcommand \lbl[1]   { \LBL\ {#1}}
+
+\newcommand \tx {\mathtt{x}}
+\newcommand \ty {\mathtt{y}}
+\newcommand \tz {\mathtt{z}}
+\newcommand \tg {\mathtt{g}}
+
 
 
 \newtheorem{corrollary}{推论}
@@ -48,9 +88,9 @@
 % 目录
 \tableofcontents
 % 符号对照表
-\begin{denotation}
-\input{others/denotation}
-\end{denotation}
+% \begin{denotation}
+% \input{others/denotation}
+% \end{denotation}
 
 %%% 以下索引按需要选择
 % 插图索引
@@ -62,10 +102,12 @@
 
 %%% 正文 
 \mainmatter
-\import{./intro-cn/}{chap.tex}
-\import{./cap-cn/}{chap.tex}
-% \include{data/chap02}
-
+\import{./intro-cn/}{intro-chap.tex}
+\import{./cap-cn/}{cap-chap.tex}
+\import{./loop-cn/}{loop-chap.tex}
+\import{./global-cn/}{global-chap.tex}
+\import{./stateful-cn/}{stateful-chap.tex}
+\import{./sdiv-cn/}{sdiv-chap.tex}
 
 
 
