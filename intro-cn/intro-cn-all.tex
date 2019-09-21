@@ -1,4 +1,9 @@
-\documentclass{ctexbook}
+\documentclass[a4paper]{ctexbook}
+
+\usepackage{geometry}
+\geometry{left=3cm,right=3cm,top=4.0cm,bottom=4.0cm}
+
+\hfuzz=100.0pt   % TODO: 临时解决方案
 
 \usepackage{graphicx}
 \usepackage{subcaption}
@@ -6,6 +11,10 @@
 
 % \usepackage{mathabx} %rightrightharpoons
 
+
+\RequirePackage{hyperref}
+\usepackage[backend=biber,style=gb7714-2015,gbpub=false,isbn=false,doi=false,gbtitlelink=true,url=false,sortlocale=zh__pinyin]{biblatex}
+\addbibresource{all-all.bib}
 
 \newcommand{\para}[1]{\smallskip\noindent {\bf #1}}
 
@@ -15,5 +24,8 @@
 %\tableofcontents
 
 \input{intro-chap}
+
+
+\printbibliography[heading=bibintoc]
 
 \end{document}
