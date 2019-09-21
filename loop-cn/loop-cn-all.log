@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99999 (TeX Live 2018) (preloaded format=xelatex 2018.4.16)  21 SEP 2019 18:18
+This is XeTeX, Version 3.14159265-2.6-0.99999 (TeX Live 2018) (preloaded format=xelatex 2018.4.16)  21 SEP 2019 20:00
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1414,56 +1414,97 @@ able
 
 ]
 
-LaTeX Warning: Citation `snap' on page 2 undefined on input line 66.
+LaTeX Warning: Citation `voellmy2013maple' on page 2 undefined on input line 62
+.
+
+
+LaTeX Warning: Citation `foster2011frenetic' on page 2 undefined on input line 
+62.
+
+
+LaTeX Warning: Citation `monsanto2013composing' on page 2 undefined on input li
+ne 62.
+
+
+LaTeX Warning: Citation `voellmy2013maple' on page 2 undefined on input line 62
+.
+
+
+LaTeX Warning: Citation `snap' on page 2 undefined on input line 62.
 
 
 LaTeX Warning: Citation `sivaraman2016packet' on page 2 undefined on input line
- 66.
+ 62.
 
 
-LaTeX Warning: Citation `snap' on page 2 undefined on input line 66.
+LaTeX Warning: Citation `odl' on page 2 undefined on input line 64.
+
+
+LaTeX Warning: Citation `erickson2013beacon' on page 2 undefined on input line 
+64.
+
+
+LaTeX Warning: Citation `gude2008nox' on page 2 undefined on input line 64.
+
+
+LaTeX Warning: Citation `floodlight' on page 2 undefined on input line 64.
+
+
+LaTeX Warning: Citation `P4-new' on page 2 undefined on input line 66.
+
+
+LaTeX Warning: Citation `snap' on page 2 undefined on input line 75.
 
 
 LaTeX Warning: Citation `sivaraman2016packet' on page 2 undefined on input line
- 66.
+ 75.
 
 
-LaTeX Warning: Citation `snap' on page 2 undefined on input line 78.
+LaTeX Warning: Citation `snap' on page 2 undefined on input line 75.
 
 
 LaTeX Warning: Citation `sivaraman2016packet' on page 2 undefined on input line
- 78.
+ 75.
 
-File: figures/lp-65.pdf Graphic file (type pdf)
-<use figures/lp-65.pdf>
 [2]
 
-LaTeX Warning: Citation `ge2015h' on page 3 undefined on input line 90.
-
-
-LaTeX Warning: Citation `gupta2001algorithms' on page 3 undefined on input line
- 90.
-
-
-LaTeX Warning: Citation `snap' on page 3 undefined on input line 93.
+LaTeX Warning: Citation `snap' on page 3 undefined on input line 87.
 
 
 LaTeX Warning: Citation `sivaraman2016packet' on page 3 undefined on input line
- 93.
+ 87.
+
+File: figures/lp-65.pdf Graphic file (type pdf)
+<use figures/lp-65.pdf>
+
+LaTeX Warning: Citation `ge2015h' on page 3 undefined on input line 99.
 
 
-LaTeX Warning: Citation `ofdpa' on page 3 undefined on input line 109.
+LaTeX Warning: Citation `gupta2001algorithms' on page 3 undefined on input line
+ 99.
 
-[3] [4]
-Overfull \hbox (18.2496pt too wide) in paragraph at lines 151--152
+
+LaTeX Warning: Citation `snap' on page 3 undefined on input line 102.
+
+
+LaTeX Warning: Citation `sivaraman2016packet' on page 3 undefined on input line
+ 102.
+
+[3]
+
+LaTeX Warning: Citation `ofdpa' on page 4 undefined on input line 118.
+
+[4]
+Overfull \hbox (18.2496pt too wide) in paragraph at lines 160--161
 \TU/STSong(0)/m/n/10.53937 循 环 体 是 \TU/lmtt/m/n/9.03374 test = True if check(pk
 t.srcAddr, pkt.segmentList[i++]) else False\TU/STSong(0)/m/n/10.53937 ，|
  []
 
+[5]
 File: figures/lp-66.pdf Graphic file (type pdf)
 <use figures/lp-66.pdf>
-[5]
-Overfull \hbox (21.32095pt too wide) in paragraph at lines 181--182
+ [6]
+Overfull \hbox (21.32095pt too wide) in paragraph at lines 190--191
 \U/matha/m/n/10.95 t\OML/cmm/m/it/10.53937 v[]; v[]; :::v[]\U/matha/m/n/10.95 u
 $ \TU/STSong(0)/m/n/10.53937 且 $\OML/cmm/m/it/10.53937 t[]:outputV \OT1/cmr/m/n
 /10.53937 = \U/matha/m/n/10.95 t\OML/cmm/m/it/10.53937 v[]; v[]; :::v[]\U/matha
@@ -1471,69 +1512,25 @@ $ \TU/STSong(0)/m/n/10.53937 且 $\OML/cmm/m/it/10.53937 t[]:outputV \OT1/cmr/m/
 /it/10.53937 t[]:inputV\U/matha/m/n/10.95 | ^^F
  []
 
-[6]
 File: figures/lp-67.pdf Graphic file (type pdf)
 <use figures/lp-67.pdf>
- [7]
+[7]
 File: figures/lp-68.pdf Graphic file (type pdf)
 <use figures/lp-68.pdf>
  [8]
-
-LaTeX Warning: Reference `fig:proof' on page 9 undefined on input line 234.
-
 File: figures/lp-69.pdf Graphic file (type pdf)
 <use figures/lp-69.pdf>
-[9]
+ [9]
 
 LaTeX Warning: Citation `bosshart2013forwarding' on page 10 undefined on input 
-line 262.
+line 272.
 
-[10]
+[10] [11]
 File: figures/lp-70.png Graphic file (type bmp)
 <figures/lp-70.png>
 File: figures/lp-71.png Graphic file (type bmp)
 <figures/lp-71.png>
- [11]
-
-LaTeX Warning: Citation `voellmy2013maple' on page 12 undefined on input line 3
-23.
-
-
-LaTeX Warning: Citation `foster2011frenetic' on page 12 undefined on input line
- 323.
-
-
-LaTeX Warning: Citation `monsanto2013composing' on page 12 undefined on input l
-ine 323.
-
-
-LaTeX Warning: Citation `voellmy2013maple' on page 12 undefined on input line 3
-23.
-
-
-LaTeX Warning: Citation `snap' on page 12 undefined on input line 323.
-
-
-LaTeX Warning: Citation `sivaraman2016packet' on page 12 undefined on input lin
-e 323.
-
-
-LaTeX Warning: Citation `odl' on page 12 undefined on input line 325.
-
-
-LaTeX Warning: Citation `erickson2013beacon' on page 12 undefined on input line
- 325.
-
-
-LaTeX Warning: Citation `gude2008nox' on page 12 undefined on input line 325.
-
-
-LaTeX Warning: Citation `floodlight' on page 12 undefined on input line 325.
-
-
-LaTeX Warning: Citation `P4-new' on page 12 undefined on input line 327.
-
-[12] [13] (./loop-cn-all.aux)
+ [12] [13] (./loop-cn-all.aux)
 
 LaTeX Font Warning: Size substitutions with differences
 (Font)              up to 0.41063pt have occurred.
@@ -1543,12 +1540,12 @@ LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 16441 strings out of 492970
- 387749 string characters out of 6133938
- 441957 words of memory out of 5000000
- 20280 multiletter control sequences out of 15000+600000
+ 16487 strings out of 492970
+ 390837 string characters out of 6133938
+ 440957 words of memory out of 5000000
+ 20326 multiletter control sequences out of 15000+600000
  539687 words of font info for 78 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 53i,7n,67p,10417b,491s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 53i,7n,67p,10417b,947s stack positions out of 5000i,500n,10000p,200000b,80000s
 
 Output written on loop-cn-all.pdf (13 pages).

@@ -2,49 +2,6 @@
 \citation{openflow1-3-1}
 \@writefile{toc}{\contentsline {section}{\numberline {1}引言}{1}}
 \newlabel{sec:intro}{{1}{1}}
-\citation{snap}
-\citation{sivaraman2016packet}
-\citation{snap}
-\citation{sivaraman2016packet}
-\citation{snap}
-\citation{sivaraman2016packet}
-\@writefile{toc}{\contentsline {section}{\numberline {2}流水线设计与研究动机}{2}}
-\newlabel{sec:motivation}{{2}{2}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.1}流水线设计}{2}}
-\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces \small 上述简单路由程序转换后的三张流表。每张表的结构 $a \rightarrow b$ 表示流表的匹配字段为 $a$以及数据包匹配后可以设置$b$的值。}}{2}}
-\newlabel{fig:srp}{{1}{2}}
-\citation{ge2015h}
-\citation{gupta2001algorithms}
-\citation{snap}
-\citation{sivaraman2016packet}
-\citation{ofdpa}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.2}解决流水线设计中循环问题的研究动机}{3}}
-\@writefile{toc}{\contentsline {section}{\numberline {3}重复软件流水线（RSP）转换}{4}}
-\newlabel{sec:model}{{3}{4}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}关键概念}{4}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}重复软件流水线(RSP)转换}{5}}
-\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces \small 关于流水线(PL), PL的2个RSP和它们的SSA形式的示例。}}{6}}
-\newlabel{fig:pipelines}{{2}{6}}
-\@writefile{toc}{\contentsline {section}{\numberline {4}流水线设计以及RSP分析}{6}}
-\newlabel{sec:analysis}{{4}{6}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}最优化流水线设计}{6}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces \small The DFG of a pipeline and the source vertices selection.}}{7}}
-\newlabel{fig:dfg}{{3}{7}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}重复软件流水线的分析}{8}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces \small SO-PL示例.}}{8}}
-\newlabel{fig:sopl}{{4}{8}}
-\newlabel{lp-prop1}{{1}{9}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces \small 存在性命题的证明， 图中三个流水线 ($pl_1, pl_2, pl_3$) 在假设下只能被合并到至少四张表 ($t_1, t_2, t_3, t_4$) 。每个方块是一个流水线的DFG}}{9}}
-\citation{bosshart2013forwarding}
-\@writefile{toc}{\contentsline {section}{\numberline {5}实验评估}{11}}
-\newlabel{sec:eval}{{5}{11}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}执行时间}{11}}
-\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces  \small $m$ = 10.}}{11}}
-\newlabel{fig:eval1-a}{{6}{11}}
-\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces  \small $m$ = 20.}}{11}}
-\newlabel{fig:eval1-b}{{7}{11}}
-\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces \small The execution time of two approaches by changing the number of iterations ($n$) and the number of vertices ($m$).}}{11}}
-\newlabel{fig:eval1}{{8}{11}}
 \citation{voellmy2013maple}
 \citation{foster2011frenetic}
 \citation{monsanto2013composing}
@@ -56,8 +13,53 @@
 \citation{gude2008nox}
 \citation{floodlight}
 \citation{P4-new}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}流规则数量}{12}}
-\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces \small 单表方法和RSP方法下的流规则数}}{12}}
-\newlabel{table:eval2}{{1}{12}}
-\@writefile{toc}{\contentsline {section}{\numberline {6}相关工作}{12}}
-\newlabel{sec:related-work}{{6}{12}}
+\citation{snap}
+\citation{sivaraman2016packet}
+\citation{snap}
+\citation{sivaraman2016packet}
+\@writefile{toc}{\contentsline {section}{\numberline {2}相关工作}{2}}
+\newlabel{sec:related-work}{{2}{2}}
+\@writefile{toc}{\contentsline {section}{\numberline {3}流水线设计与研究动机}{2}}
+\newlabel{sec:motivation}{{3}{2}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}流水线设计}{2}}
+\citation{snap}
+\citation{sivaraman2016packet}
+\citation{ge2015h}
+\citation{gupta2001algorithms}
+\citation{snap}
+\citation{sivaraman2016packet}
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces \small \texttt  {SimpleRoute}转换后的三张流表。每张表的结构 $a \rightarrow b$ 表示流表的匹配字段为 $a$以及数据包匹配后可以设置$b$的值。}}{3}}
+\newlabel{fig:srp}{{1}{3}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}解决流水线设计中循环问题的研究动机}{3}}
+\citation{ofdpa}
+\@writefile{toc}{\contentsline {section}{\numberline {4}重复软件流水线（RSP）转换}{5}}
+\newlabel{sec:model}{{4}{5}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}关键概念}{5}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}重复软件流水线(RSP)转换}{6}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces \small 流水线$PL$, $PL$的2-RSP形式（$PL_{RSP}$），SSA形式（$SSA(PL_{RSP})$）。}}{6}}
+\newlabel{fig:pipelines}{{2}{6}}
+\@writefile{toc}{\contentsline {section}{\numberline {5}流水线设计以及RSP分析}{7}}
+\newlabel{sec:analysis}{{5}{7}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}最优化流水线设计}{7}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces \small 流水线的DFG和源节点选择。}}{8}}
+\newlabel{fig:dfg}{{3}{8}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}重复软件流水线的分析}{8}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces \small SO-PL示例.}}{9}}
+\newlabel{fig:sopl}{{4}{9}}
+\newlabel{lp-prop1}{{1}{9}}
+\citation{bosshart2013forwarding}
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces \small 存在性定理的证明， 图中三个流水线 ($pl_1, pl_2, pl_3$) 在假设下只能被合并到至少四张表 ($t_1, t_2, t_3, t_4$) 。每个方块是一个流水线的DFG.}}{10}}
+\newlabel{fig:proof}{{5}{10}}
+\@writefile{toc}{\contentsline {section}{\numberline {6}实验评估}{11}}
+\newlabel{sec:eval}{{6}{11}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.1}执行时间}{11}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces  \small $m$ = 10.}}{12}}
+\newlabel{fig:eval1-a}{{6}{12}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces  \small $m$ = 20.}}{12}}
+\newlabel{fig:eval1-b}{{7}{12}}
+\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces \small 两种方法的执行时间。$n$为迭代次数。$m$为顶点数量。}}{12}}
+\newlabel{fig:eval1}{{8}{12}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.2}流规则数量}{12}}
+\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces \small 单表方法和RSP方法下的流规则数。}}{13}}
+\newlabel{table:eval2}{{1}{13}}
+\@writefile{toc}{\contentsline {section}{\numberline {7}本章小结}{13}}
