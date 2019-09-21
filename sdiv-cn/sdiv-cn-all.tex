@@ -6,8 +6,6 @@
 \usepackage{algorithmic}
 
 \begin{document}
- 
-\tableofcontents
 
 \section{引言}
 
@@ -15,21 +13,21 @@
 
 %Internet of Vehicles (IoV) is attracting considerable attention from both academia and industry. The vigorous development of communication technology and smart city makes various services possible in IoV, which significantly improves the quality and safety of human driving. Research and industry communities are carrying out several projects~\cite{CVIS, makino2005smartway} for the development of IoV. For example, EU's CVIS~\cite{CVIS} is committed to the development of the technologies needed to allow cars to communicate with each other and with the nearby roadside infrastructure. Smartway~\cite{makino2005smartway} focuses on integrating all intelligent transportation system functions to a uniform platform and provisioning services by two-way communications.
 
-虽然IoV有着很好的发展前景，但其中网络设备的封闭性阻碍了IoV上新服务的快速部署和更新。网络设备如交换机、路由器目前由不同的厂商开发，设备的更改需要专业人员的手工配置，使网络管理变得昂贵并且易出错。由于缺少一个开放和统一接口，无法实现网络的灵活和动态的配置，从而影响大规模IoV上新服务的部署和拓展。为了IoV的发展，一个新的网络架构是必要的。
+虽然IoV有着很好的发展前景，但其中网络设备的封闭性阻碍了IoV上新服务的快速部署和更新。网络设备（如交换机、路由器）目前由不同的厂商开发，设备的更改需要专业人员的手工配置，使网络管理变得昂贵并且易出错。由于缺少一个开放和统一接口，无法实现网络的灵活和动态的配置，从而影响大规模IoV上新服务的部署和拓展。为了IoV的发展，一个新的网络架构是必要的。
 
 %Though there is a promising future in IoV, the proprietary and closed way of operating devices in networks slows down the deployment and extension of new services in IoV. Network devices such as switches and routers are developed by different manufacturers. Their changes require substantial manual configuration by trained operators, which makes network management expensive and error-prone. The lack of an open and unified interface for flexible and dynamically customizable networks makes it difficult to deploy and extend new services in large-scale IoV. A new network architecture is expected for the development of IoV.
 
-关于新的网络架构以及下一代互联网，目前有如下相关的研究。命名数据网络~\cite{NDN}的目标为开发一个新的互联网架构。与传统互联网的从哪里获取服务相比，命名数据网络关注获取什么服务。为了实现移动过程中的无缝隙的数据传输，MobilityFirst~\cite{MobilityFirst}将节点的移动性作为一个普遍场景进行设计。NEBULA~\cite{NEBULA}则设计了一个基于云计算和数据中心的新的网络架构。SDN将控制层和数据层进行了分离，并提供了配置网络的统一的接口。一个统一的配置网络设备的接口，使大规模可配置的网络变得可行，从而可以加速IoV上新服务的部署。
+关于新的网络架构以及下一代互联网，目前有如下相关的研究。命名数据网络~\cite{NDN}的目标为开发一个新的互联网架构。与传统互联网的从哪里获取服务相比，命名数据网络关注获取什么服务。为了实现移动过程中的无缝隙数据传输，MobilityFirst~\cite{MobilityFirst}将节点的移动性作为一个普遍场景进行设计。NEBULA~\cite{NEBULA}则设计了一个基于云计算和数据中心的新的网络架构。SDN将控制层和数据层进行了分离，并提供了配置网络的统一的接口。一个统一的配置网络设备的接口，使大规模可灵活配置的网络变得可行，从而可以加速IoV上新服务的部署。
 
 %There are several projects for a new network architecture and next-generation Internet. Named Data Networking~\cite{NDN} aims to develop a new Internet architecture that concentrates on getting `what' services rather than `where' to get services. MobilityFirst \cite{MobilityFirst} supports seamless and smooth mobility. It takes the mobility of nodes as a common case rather than a special case in traditional networks. NEBULA \cite{NEBULA} develops a new network architecture based on cloud computing and data centers. Software-Defined Network (SDN) provides a unified interface to configure network equipment and separates a control plane from a data one. A unified interface of configuring network equipment makes a large-scale customizable network possible, and accelerates new service deployment in IoV.
 
 考虑其开放和统一的接口，我们采用SDN作为IoV中底层网络架构，并提出软件定义车联网 （Software-Defined Internet of Vehicles，SDIV）的架构。除了其开放统一的接口，SDIV在以下方面有较大优势：1. 通过将控制平面和数据平面的分离，SDIV有着非常高的可拓展性；2. 通过逻辑上集中式的控制器，SDIV简化了网络的管理；3. SDIV中的控制器可以根据当前网络状况计算数据传输的最优路径并协调车与路旁电子设备之间的通信。
 
-对于可编程数据平面的思考，由于IoV中车辆的移动性，我们提出将每一个交换机的数据通路分为两个部分：面向静态转发路径部分和面向动态转发路径部分。其中面向静态转发部分则由高级SDN程序编译生成（该部分不会随着车辆移动而变化）。对于动态转发路径部分，由于车辆的不断移动，提前生成流水线结构以及流表项并不是一个好的设计。因此SDIV将动态转发路径部分设计为单流表的响应式下发流规则。鉴于单流表的有限的流表容量以及IoT中的移动特性，如何构建紧凑的流表是SDIV的主要挑战，也是本章的主要内容。
+关于SDIV上的编程框架，由于车辆的移动性，我们提出将底层每一个交换机的数据通路分为两个部分：面向静态转发路径部分和面向动态转发路径部分。其中静态部分则由高级SDN程序编译生成（该部分不会随着车辆移动而变化）。对于动态部分，由于车辆的不断移动，提前生成流水线结构以及流表项并不是一个好的设计。因此SDIV将动态转发路径部分设计为单流表的响应式下发流规则。鉴于单流表的有限的流表容量以及IoV中的移动特性，如何构建紧凑的流表是SDIV的主要挑战，也是本章的主要技术内容。
 
 %具体的应用可以是对
 
-%由于SDIV的设计中，车辆的移动性是一个主要的考虑因素，该高级SDN程序中不会考虑数据包在全网的转发，而会处理一些本地的操作，如ACL等。对于面向全网络部分，由于车辆的不断移动，事先生成流水线结构以及流表项并不是一个好的设计，因此SDIV将面向全网络部分设计为单流表的响应式下发流规则。因此，对于这一部分，由于OpenFlow交换机的有限的流表容量以及IoT中的移动特性，如何构建紧凑的流表是SDIV的主要挑战，也是本章的主要内容。
+%由于SDIV的设计中，车辆的移动性是一个主要的考虑因素，该高级SDN程序中不会考虑数据包在全网的转发，而会处理一些本地的操作，如ACL等。对于面向全网络部分，由于车辆的不断移动，事先生成流水线结构以及流表项并不是一个好的设计，因此SDIV将面向全网络部分设计为单流表的响应式下发流规则。因此，对于这一部分，由于OpenFlow交换机的有限的流表容量以及IoV中的移动特性，如何构建紧凑的流表是SDIV的主要挑战，也是本章的主要内容。
 
 %We adopt SDN to support IoV for its open and unified interface, and propose Software-Defined Internet of Vehicles (SDIV), a new architecture for the development of IoV. SDIV has several advantages in supporting IoV besides the open and unified interface: (1) it essentially has high scalability by separating a data plane from a control one, (2) it achieves desired network manageability by using a logically centralized controller, and (3) its controller is able to choose the best path for data transmission and plays as a coordinator for roadside electronic devices according to the current network state. However, IoV characteristics introduce challenges in rule (match and corresponding action) installation due to the limited size of flow tables in its OpenFlow switches. It is thus necessary to build compact flow tables for scalability of IoV.
 
@@ -97,9 +95,9 @@ Kim等人~\cite{kim2013improving}考虑在校园网络以及家庭网络中利�
 
 \subsubsection{物理层}
 
-物理层包括车辆，接入点（Access Point，AP），路边电子设备，交换机，以及服务器（区别于SDN中的控制器）。车辆作为移动的节点通过附近AP与服务器进行连接。这里我们假设AP的数量足够多并可以覆盖所有道路。路边电子设备如摄像头再收集完路况信息后需要将数据传送到服务器或车辆。交换机连接着AP，摄像头以及服务器。当收到车辆发送的请求时，服务器会将相应的信息传送给车辆。一辆车可以同时连接多个服务器。
+物理层包括车辆，接入点（Access Point，AP），路边电子设备，交换机，以及服务器（区别于SDN中的控制器）。车辆作为移动的节点通过附近AP与服务器进行连接。这里我们假设AP的数量足够多并可以覆盖所有道路。路边电子设备如摄像头收集完路况信息后需要将数据传送到服务器或车辆。交换机连接着AP，摄像头以及服务器。当收到车辆发送的请求时，服务器会将相应的信息传送给车辆。一辆车可以同时连接多个服务器。
 
-关于交换机数据通路设计，如图~\ref{fig:sdiv-dp}所示。我们提出将每一个交换机的数据通路分为两个部分：面向静态转发路径部分和面向动态转发路径部分。其中面向静态转发路径部分则由高级SDN程序编译生成。该部分具体的应用可以是：IoV中路边设备之间的通信（如摄像头到服务器）或实现对数据包的非全网路由功能（如ACL）。对于面向动态转发路径部分，由于车辆的不断移动，提前生成流水线结构以及流表项并不是一个好的设计。无法提前生成流表项比较好理解，因为节点的移动性，流表项应该不断变化。对于流水线方面，由于车辆的不断移动，若对动态转发路径部分使用流水线结构，则要求网络中所有节点都为相同的流水线结构。该做法即浪费网络资源，也会提高数据包时延，因为数据包经过流水线的时间与流表数量成正比。因此SDIV将面向动态转发路径部分设计为单流表的响应式下发流规则。
+关于交换机数据通路设计，如图~\ref{fig:sdiv-dp}所示。我们提出将每一个交换机的数据通路分为两个部分：面向静态转发路径部分和面向动态转发路径部分。其中静态部分则由高级SDN程序编译生成。该部分具体的应用可以是：IoV中设施之间的通信（如摄像头到服务器）或实现对数据包的非全网路由的操作（如ACL）。对于面向动态转发路径部分，由于车辆的不断移动，提前生成流水线结构以及流表项并不是一个好的设计。无法提前生成流表项可以很好理解，因为节点的移动性，流表项应该不断变化。对于流水线方面，由于车辆的不断移动，若对动态转发路径部分使用流水线结构，则要求网络中所有节点都为相同的流水线结构。该做法既浪费网络资源，也会增加数据包时延，因为数据包经过流水线的时间与流表数量成正比。因此SDIV将面向动态转发路径部分设计为单流表的响应式下发流规则。
 
 \begin{figure} [t]
 \begin{center}
