@@ -1,0 +1,30 @@
+\title{Results}
+\date{\today}
+
+\documentclass[12pt]{article}
+\usepackage{sectsty}
+\usepackage{graphicx}
+\usepackage{etoolbox}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\sectionfont{\fontsize{12}{15}\selectfont}
+
+\makeatletter
+\patchcmd{\@verbatim}
+  {\verbatim@font}
+  {\verbatim@font\fontsize{8}{10}\selectfont}
+  {}{}
+\makeatother
+
+\begin{document}
+\maketitle
+
+\begin{equation}
+v_i(M_i) \sim_f v_j(M_i) \triangleq f(M_i = v_i(M_i),\ M_{i-1} = v_k(M_{i-1})) = \\
+f(M_i = v_j(M),\ M_{i-1} = v_k(M_{i-1}))\ \forall\ v_k(M_{i-1})) \in dom(M_{i-1})
+\end{equation}
+
+
+\end{document}

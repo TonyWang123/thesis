@@ -1,0 +1,135 @@
+\relax 
+\citation{lee2018toward}
+\citation{openflow13}
+\citation{OF-DPA}
+\citation{P4}
+\citation{Domino}
+\citation{bosshart2013forwarding}
+\citation{frenetic}
+\citation{maple}
+\@writefile{toc}{\contentsline {section}{\numberline {I}Introduction}{2}}
+\newlabel{sec:introduction}{{I}{2}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces A simple example datapath: Simple-DP.}}{3}}
+\newlabel{fig:fig1-update}{{1}{3}}
+\citation{maple}
+\@writefile{toc}{\contentsline {section}{\numberline {II}Models}{4}}
+\newlabel{sec:model-and-main-results}{{II}{4}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {II-A}}Routing Function Model}{4}}
+\newlabel{subsec:function-model}{{\unhbox \voidb@x \hbox {II-A}}{4}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces The routing function \texttt  {onPkt}'s DFG $G_{\texttt  {onPkt}}$.}}{6}}
+\newlabel{fig:onpkt-dfg}{{2}{6}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {II-B}}Pipeline Model}{6}}
+\newlabel{subsec:pipeline-model}{{\unhbox \voidb@x \hbox {II-B}}{6}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Example datapath, \texttt  {ExampleDP}}}{7}}
+\newlabel{fig:swPipeline}{{3}{7}}
+\@writefile{toc}{\contentsline {section}{\numberline {III}Main Results}{7}}
+\newlabel{sec:main-results}{{III}{7}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {III-A}}Overview}{7}}
+\newlabel{tbl:sym-table}{{III}{8}}
+\@writefile{lot}{\contentsline {table}{\numberline {I}{\ignorespaces Symbol table listing notation in our main results.}}{8}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces The spaces $\mathcal  {F}$, $\mathcal  {P}$ and $\mathcal  {C}$ and the mappings between them.}}{8}}
+\newlabel{fig:function-spaces}{{4}{8}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {III-B}}Characteristic Functions}{9}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {III-C}}Characterization of a Routing Function}{9}}
+\newlabel{def:set-comparator}{{5}{9}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces A subgraph of \texttt  {onPkt}'s DFG $G_{\texttt  {onPkt}}$.}}{11}}
+\newlabel{fig:onpkt-dfg-subgraph}{{5}{11}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces A table matching $\texttt  {dstIP}$ and $\texttt  {dstPort}$ outputs \texttt  {dstCond}. For each group of table entries with the same $\texttt  {dstPort}$ field, there is only one entry whose \texttt  {dstCond} field is 1 and the entry has different $\texttt  {dstIP}$ values for each group.}}{11}}
+\newlabel{fig:table-example}{{6}{11}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces The routing function \texttt  {onPkt}'s DFG $G_{\texttt  {onPkt}}$ and the cut $(\texttt  {srcIP}, \texttt  {srcPort}, \texttt  {dstPort})$.}}{12}}
+\newlabel{fig:onpkt-dfg}{{7}{12}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {III-D}}Characterization of a Pipeline}{13}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {III-E}}Datapath Programming Capacity Theorems}{14}}
+\@writefile{toc}{\contentsline {section}{\numberline {IV}Proofs}{15}}
+\newlabel{sec:proofs}{{IV}{15}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {IV-A}}Proof of Pipeline Realization Theorem}{15}}
+\newlabel{lemma:M-to-mu}{{1}{16}}
+\newlabel{lemma:domM-domMu}{{2}{16}}
+\newlabel{lemma:codewords}{{3}{17}}
+\newlabel{lemma:core-lemma}{{4}{17}}
+\newlabel{lemma:eq-cl-approx}{{1}{19}}
+\newlabel{lemma:eq-cl-approx}{{2}{19}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {IV-B}}Proof of Extension of Pipeline Realization Theorem}{19}}
+\@writefile{toc}{\contentsline {section}{\numberline {V}Evaluation}{20}}
+\newlabel{sec:evaluation}{{V}{20}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {V-A}}Routing Function Characterization Tightness}{20}}
+\newlabel{sec:eval1}{{\unhbox \voidb@x \hbox {V-A}}{20}}
+\@writefile{lot}{\contentsline {table}{\numberline {II}{\ignorespaces Characterization results of routing functions with different statistics.}}{22}}
+\newlabel{table:table1}{{II}{22}}
+\newlabel{fig:eval-ct:a}{{8(a)}{22}}
+\newlabel{sub@fig:eval-ct:a}{{(a)}{22}}
+\newlabel{fig:eval-ct:b}{{8(b)}{22}}
+\newlabel{sub@fig:eval-ct:b}{{(b)}{22}}
+\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces Computation time required to generate $\tau (\texttt  {simpleRoute})$ and $\tau _G(\texttt  {simpleRoute})$ as input bit length varies and the size of table varies.}}{22}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {Input size}}}{22}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {Table size}}}{22}}
+\newlabel{fig:eval-ct}{{8}{22}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {V-B}}Routing Function Characterization Time Complexity}{22}}
+\citation{OF-DPA}
+\citation{PicOS}
+\@writefile{lot}{\contentsline {table}{\numberline {III}{\ignorespaces Characterization results of pipelines.}}{23}}
+\newlabel{tbl:table3}{{III}{23}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {V-C}}Characterization of a Pipeline}{23}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {V-D}}Realization}{23}}
+\newlabel{fig:eval-rp:a}{{9(a)}{24}}
+\newlabel{sub@fig:eval-rp:a}{{(a)}{24}}
+\newlabel{fig:eval-rp:b}{{9(b)}{24}}
+\newlabel{sub@fig:eval-rp:b}{{(b)}{24}}
+\newlabel{fig:eval-rp:c}{{9(c)}{24}}
+\newlabel{sub@fig:eval-rp:c}{{(c)}{24}}
+\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces The percentage of realization for different number of tables and different length of registers.}}{24}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {\#Tables = 2}}}{24}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {\#Tables = 3}}}{24}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(c)}{\ignorespaces {\#Tables = 4}}}{24}}
+\newlabel{fig:eval-rp}{{9}{24}}
+\citation{SNAP}
+\citation{fml}
+\citation{flowlog}
+\citation{maple}
+\citation{frenetic}
+\citation{pyretic}
+\citation{P4}
+\citation{Lee2017P5}
+\citation{PISCES}
+\citation{ConcurrentNetCore}
+\@writefile{toc}{\contentsline {section}{\numberline {VI}Related Work}{25}}
+\newlabel{sec:related-work}{{VI}{25}}
+\citation{Jose-et-al}
+\citation{Sun-et-al}
+\citation{FlowAdapter}
+\citation{Domino}
+\citation{Pan2017FlowConvertor}
+\citation{Wang2017P4FPGA}
+\citation{patra2018towards}
+\citation{shahpcube}
+\citation{da2017data}
+\citation{pontarelli2017smashing}
+\bibstyle{IEEEtran}
+\bibdata{references}
+\bibcite{lee2018toward}{1}
+\bibcite{openflow13}{2}
+\bibcite{OF-DPA}{3}
+\bibcite{P4}{4}
+\bibcite{Domino}{5}
+\@writefile{toc}{\contentsline {section}{\numberline {VII}Acknowledgement}{26}}
+\@writefile{toc}{\contentsline {section}{References}{26}}
+\bibcite{bosshart2013forwarding}{6}
+\bibcite{frenetic}{7}
+\bibcite{maple}{8}
+\bibcite{PicOS}{9}
+\bibcite{SNAP}{10}
+\bibcite{fml}{11}
+\bibcite{flowlog}{12}
+\bibcite{pyretic}{13}
+\bibcite{Lee2017P5}{14}
+\bibcite{PISCES}{15}
+\bibcite{ConcurrentNetCore}{16}
+\bibcite{Jose-et-al}{17}
+\bibcite{Sun-et-al}{18}
+\bibcite{FlowAdapter}{19}
+\bibcite{Pan2017FlowConvertor}{20}
+\bibcite{Wang2017P4FPGA}{21}
+\bibcite{patra2018towards}{22}
+\bibcite{shahpcube}{23}
+\bibcite{da2017data}{24}
+\bibcite{pontarelli2017smashing}{25}

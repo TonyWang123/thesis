@@ -1,0 +1,14 @@
+This is makeindex, version 2.15 [TeX Live 2015] (kpathsea + Thai support).
+Scanning style file /usr/local/texlive/2015/texmf-dist/makeindex/nomencl/nomencl.ist.......
+** Input style error (file = /usr/local/texlive/2015/texmf-dist/makeindex/nomencl/nomencl.ist, line = 70):
+   -- Unknown specifier lethead_prefix.
+** Input style error (file = /usr/local/texlive/2015/texmf-dist/makeindex/nomencl/nomencl.ist, line = 71):
+   -- Unknown specifier lethead_suffix.
+** Input style error (file = /usr/local/texlive/2015/texmf-dist/makeindex/nomencl/nomencl.ist, line = 72):
+   -- Unknown specifier lethead_flag.
+...done (10 attributes redefined, 3 ignored).
+Scanning input file T-ITS-15-12-0882.R1.nlo....done (10 entries accepted, 0 rejected).
+Sorting entries....done (30 comparisons).
+Generating output file T-ITS-15-12-0882.R1.nls....done (23 lines written, 0 warnings).
+Output written in T-ITS-15-12-0882.R1.nls.
+Transcript written in T-ITS-15-12-0882.R1.ilg.

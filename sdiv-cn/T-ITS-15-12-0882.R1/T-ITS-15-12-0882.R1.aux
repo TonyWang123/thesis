@@ -1,0 +1,131 @@
+\relax 
+\citation{CVIS,makino2005smartway}
+\citation{CVIS}
+\citation{makino2005smartway}
+\citation{NDN}
+\citation{MobilityFirst}
+\citation{NEBULA}
+\@writefile{toc}{\contentsline {section}{\numberline {I}Introduction}{1}}
+\citation{Floodlight}
+\citation{mininet}
+\citation{du2015information}
+\citation{ott2005disconnection,balasubramanian2008interactive}
+\citation{joshi2011vehicular,xu2011utilizing}
+\citation{sahu2015bang,zhang2014geomob,zhu2013zoom,nzouonta2009vanet}
+\citation{cheng2015its}
+\citation{hare2012policy}
+\citation{abadi2015traffic}
+\citation{wu2013improving}
+\citation{ahn2012risa}
+\citation{calafate2012efficient}
+\citation{grassi2014vanet}
+\citation{yap2010blueprint}
+\citation{mckeown2008openflow}
+\citation{kim2013improving}
+\citation{kanizo2013palette}
+\citation{voellmy2013maple}
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces (a): When a vehicle moves to another place (from $A$ to $B$), it needs to establish a new connection. The dash line represents the connection which is not established yet; (b): When a vehicle \leavevmode {\color  {blue}is} connecting to multiple cameras simultaneously, it needs to build a path for each connection which is not efficient since all paths have the same destination (i.e., all data flow's destination is $A$).}}{2}}
+\newlabel{fig1}{{1}{2}}
+\@writefile{toc}{\contentsline {section}{\numberline {II}Related Work}{2}}
+\newlabel{Related Work}{{II}{2}}
+\citation{ONF}
+\@writefile{toc}{\contentsline {section}{\numberline {III}Network Architecture: Software-Defined IOV}{3}}
+\newlabel{Architecture}{{III}{3}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {III-A}}Software Defined Networks (SDN)}{3}}
+\newlabel{SDN}{{\unhbox \voidb@x \hbox {III-A}}{3}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {III-B}}Software-Defined IoV (SDIV)}{3}}
+\newlabel{SDIV}{{\unhbox \voidb@x \hbox {III-B}}{3}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {\unhbox \voidb@x \hbox {III-B}1}Physical Layer}{3}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Three-tier SDIV architecture with physical layer, control layer and application layer from bottom to top.}}{3}}
+\newlabel{fig2}{{2}{3}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {\unhbox \voidb@x \hbox {III-B}2}Control Layer}{3}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {\unhbox \voidb@x \hbox {III-B}3}Application Layer}{3}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces \leavevmode {\color  {blue}(a): A scenario shows, by analyzing vehicle conditions, the controller can install rules (dash line) in advance to avoid extra queries; (b): A scenario of achieving intelligent bandwidth allocation based on a global view in the controller.}}}{4}}
+\newlabel{fig3}{{3}{4}}
+\@writefile{lot}{\contentsline {table}{\numberline {I}{\ignorespaces Pros and cons of traditional network technologies (multicast) and SDIV}}{4}}
+\newlabel{table1}{{I}{4}}
+\@writefile{toc}{\contentsline {section}{\numberline {IV}Improved Rule Installation}{4}}
+\newlabel{Rule Optimization}{{IV}{4}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {IV-A}}Multicast Address for the Last Hop}{5}}
+\newlabel{Multicast address}{{\unhbox \voidb@x \hbox {IV-A}}{5}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces $V_{1}$ is connecting to $E$ and $F$ simultaneously, and $V_{2}$ at the path of $V_{1}$ to $E$ asks the data from $E$. $V_{3}$ also requires the data from $E$ but at the different path.}}{5}}
+\newlabel{fig4}{{4}{5}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {IV-B}}Predicting a Path and Installing Rules in Advance}{5}}
+\newlabel{Predict the path}{{\unhbox \voidb@x \hbox {IV-B}}{5}}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {1}{\ignorespaces PathFind($s,d,v$)}}{6}}
+\newlabel{Algorithm 2}{{1}{6}}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {2}{\ignorespaces ModifyAddress($s,d,path$)}}{6}}
+\newlabel{Algorithm 3}{{2}{6}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces The blue dash line is the shortest path between current location and destination, while the red dash line is a more likely path that the vehicle may choose according to the direction.}}{6}}
+\newlabel{fig5}{{5}{6}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {IV-C}}Modifying Address in Branching Nodes}{6}}
+\newlabel{Modify address}{{\unhbox \voidb@x \hbox {IV-C}}{6}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {IV-D}}Examples}{7}}
+\newlabel{Examples}{{\unhbox \voidb@x \hbox {IV-D}}{7}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Data flow $F_{1}$ (red line) comes from $S_{1}$ and its destination is $C$; Data flow $F_{2}$ (blue line) comes from $S_{1}$ and its destination is $D$; Data flow $F_{3}$ (green line) comes from $S_{2}$ and its destination is $D$. The matching conditions only depend on the destination address.}}{7}}
+\newlabel{fig6}{{6}{7}}
+\newlabel{1 to 1}{{\unhbox \voidb@x \hbox {IV-D}1}{7}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {\unhbox \voidb@x \hbox {IV-D}1}one-to-one \rm  {case}}{7}}
+\newlabel{N to 1}{{\unhbox \voidb@x \hbox {IV-D}2}{7}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {\unhbox \voidb@x \hbox {IV-D}2}N-to-one \rm  {case}}{7}}
+\newlabel{1 to N}{{\unhbox \voidb@x \hbox {IV-D}3}{7}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {\unhbox \voidb@x \hbox {IV-D}3}one-to-N \rm  {case}}{7}}
+\newlabel{N to N}{{\unhbox \voidb@x \hbox {IV-D}4}{7}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {\unhbox \voidb@x \hbox {IV-D}4}N-to-N \rm  {case}}{7}}
+\citation{Floodlight}
+\citation{mininet}
+\citation{shanghai}
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces (a): a \textit  {one-to-one} pattern that $V$ wants to receive data from $A$; (b): a \textit  {N-to-one} pattern that $V_{1}$ and $V_{2}$ want to receive data from $A$; (c): a \textit  {one-to-N} pattern that $V$ wants to receive data from $A$ and $B$ at the same time; (d): a \textit  {N-to-N} pattern that $V_{1}$ wants to receive data from $A$ and $B$ while $V_{2}$ wants to receive data from $A$.}}{8}}
+\newlabel{fig7}{{7}{8}}
+\@writefile{toc}{\contentsline {section}{\numberline {V}Performance Evaluation}{8}}
+\newlabel{Evaluation}{{V}{8}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {V-A}}Testbed}{8}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {V-B}}Effects of Improved Rule Installation}{8}}
+\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces (a): A snapshot around People's Square in Shanghai; (b): The appear and disappear time of vehicles; (c): A sketch map of (a) with the direction of vehicles.}}{9}}
+\newlabel{fig8a}{{8}{9}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {V-C}}Delay Analysis}{9}}
+\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces (a): Different number of rules for two strategies; (b): The number of vehicles at different moments; (c): The delay time of vehicles in two strategies.}}{9}}
+\newlabel{fig8b}{{9}{9}}
+\bibstyle{IEEEtran}
+\bibdata{bibsdiv}
+\bibcite{CVIS}{1}
+\bibcite{makino2005smartway}{2}
+\bibcite{NDN}{3}
+\bibcite{MobilityFirst}{4}
+\bibcite{NEBULA}{5}
+\bibcite{Floodlight}{6}
+\bibcite{mininet}{7}
+\bibcite{du2015information}{8}
+\bibcite{ott2005disconnection}{9}
+\bibcite{balasubramanian2008interactive}{10}
+\bibcite{joshi2011vehicular}{11}
+\bibcite{xu2011utilizing}{12}
+\bibcite{sahu2015bang}{13}
+\bibcite{zhang2014geomob}{14}
+\bibcite{zhu2013zoom}{15}
+\bibcite{nzouonta2009vanet}{16}
+\bibcite{cheng2015its}{17}
+\bibcite{hare2012policy}{18}
+\bibcite{abadi2015traffic}{19}
+\bibcite{wu2013improving}{20}
+\bibcite{ahn2012risa}{21}
+\bibcite{calafate2012efficient}{22}
+\bibcite{grassi2014vanet}{23}
+\bibcite{yap2010blueprint}{24}
+\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces (a): A topology of \textit  {N-to-one} mode; (b): Delay time on different number of switches in (a); (c): Number rules on different number of switches in (a); (d): A topology of \textit  {one-to-N} mode; (e): Delay time on different number of switches in (d); (f): Number rules on different number of switches in (d)}}{10}}
+\newlabel{fig9}{{10}{10}}
+\@writefile{toc}{\contentsline {section}{\numberline {VI}Conclusion and Future Work}{10}}
+\newlabel{Conclusion}{{VI}{10}}
+\@writefile{toc}{\contentsline {section}{References}{10}}
+\bibcite{mckeown2008openflow}{25}
+\bibcite{kim2013improving}{26}
+\bibcite{kanizo2013palette}{27}
+\bibcite{voellmy2013maple}{28}
+\bibcite{ONF}{29}
+\bibcite{shanghai}{30}
+\@writefile{toc}{\contentsline {section}{Biographies}{11}}
+\@writefile{toc}{\contentsline {subsection}{Xin Wang}{11}}
+\@writefile{toc}{\contentsline {subsection}{Cheng Wang}{11}}
+\@writefile{toc}{\contentsline {subsection}{Junqi Zhang}{11}}
+\@writefile{toc}{\contentsline {subsection}{Mengchu Zhou}{11}}
+\@writefile{toc}{\contentsline {subsection}{Changjun Jiang}{11}}

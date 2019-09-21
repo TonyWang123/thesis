@@ -1,0 +1,78 @@
+\relax 
+\citation{CVIS}
+\citation{makino2005smartway}
+\citation{CVIS}
+\citation{makino2005smartway}
+\@writefile{toc}{\contentsline {section}{\numberline {1}引言}{1}}
+\citation{NDN}
+\citation{MobilityFirst}
+\citation{NEBULA}
+\citation{du2015information}
+\citation{ott2005disconnection}
+\citation{balasubramanian2008interactive}
+\citation{hare2012policy}
+\citation{wu2013improving}
+\citation{ahn2012risa}
+\citation{calafate2012efficient}
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces （a）: 当车辆从$A$移到$B$时，它需要重新建立连接。虚线表示连接尚没建立；（b）当车辆同时连接多个摄像头时，对于每个连接建立路径下发规则并不高效由于所有的路径目的一样（即所有数据流目的地址为$A$）。}}{3}}
+\newlabel{fig1}{{1}{3}}
+\@writefile{toc}{\contentsline {section}{\numberline {2}相关工作}{3}}
+\citation{grassi2014vanet}
+\citation{yap2010blueprint}
+\citation{kim2013improving}
+\citation{kanizo2013palette}
+\citation{voellmy2013maple}
+\@writefile{toc}{\contentsline {section}{\numberline {3}SDIV架构以及工作流程}{4}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}SDIV架构}{4}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.1.1}物理层}{4}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces SDIV的数据通路架构。}}{5}}
+\newlabel{fig:sdiv-dp}{{2}{5}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.1.2}控制层}{5}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.1.3}应用层}{5}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces SDIV的三层架构模型。}}{6}}
+\newlabel{fig2}{{3}{6}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}工作流程}{6}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces （a）：通过分析车辆状况，控制器可以提前下发流规则（虚线）以降低额外请求；（b）：控制器通过全局信息，实现智能带宽分配。}}{7}}
+\newlabel{fig3}{{4}{7}}
+\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Pros and cons of traditional network technologies (multicast) and SDIV}}{8}}
+\newlabel{table1}{{1}{8}}
+\@writefile{toc}{\contentsline {section}{\numberline {4}优化的流规则下发}{8}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}使用多播地址作为最后一跳}{9}}
+\newlabel{Multicast address}{{4.1}{9}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces $V_{1}$ 同时连接$E$和$F$。$V_{2}$在$V_{1}$到$E$的路径上并向$E$请求数据。$V_{3}$也同时向$E$请求数据但在不同路径。}}{10}}
+\newlabel{fig4}{{5}{10}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}路线预测并提前下发流规则}{10}}
+\newlabel{Predict the path}{{4.2}{10}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces 蓝色虚线代表当前位置到目的位置的最短路径。红色虚线代表车辆可能选择的路径。}}{11}}
+\newlabel{fig5}{{6}{11}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}分支节点修改数据包地址}{11}}
+\newlabel{Modify address}{{4.3}{11}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces （a）：1对1场景即$V$接受$A$的数据；（b）：N对1场景即$V_{1}$和$V_{2}$同时接受$A$的数据；（c）：1对N场景即$V$同时接受$A$和$B$的数据；（d）：N对N场景即$V_{1}$接受$A$和$B$数据，而$V_{2}$接受$A$数据。}}{13}}
+\newlabel{fig7}{{7}{13}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4}示例}{13}}
+\newlabel{Examples}{{4.4}{13}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.4.1}1对1场景}{13}}
+\newlabel{1 to 1}{{4.4.1}{13}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.4.2}N对1场景}{13}}
+\newlabel{N to 1}{{4.4.2}{13}}
+\citation{Floodlight}
+\citation{mininet}
+\citation{shanghai}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.4.3}1对N场景}{14}}
+\newlabel{1 to N}{{4.4.3}{14}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.4.4}N对N场景}{14}}
+\newlabel{N to N}{{4.4.4}{14}}
+\@writefile{toc}{\contentsline {section}{\numberline {5}实验评估}{14}}
+\newlabel{Evaluation}{{5}{14}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}优化的规则下发}{15}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}时延分析}{16}}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {1}{\ignorespaces PathFind($s,d,v$)}}{17}}
+\newlabel{Algorithm 2}{{1}{17}}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {2}{\ignorespaces ModifyAddress($s,d,path$)}}{18}}
+\newlabel{Algorithm 3}{{2}{18}}
+\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces （a）：上海市人民广场附近的场景图；（b）：车辆的出现和离开时间；（c）：（a）的简化图并保护车辆方向信息。}}{19}}
+\newlabel{fig8a}{{8}{19}}
+\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces （a）：两个策略的规则数量差异；（b）：不同时刻的车辆数量；（c）两个策略的车辆延迟时间。}}{20}}
+\newlabel{fig8b}{{9}{20}}
+\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces （a）：N对1模式的拓扑；（b）：对于（a）中不同交换机数量的延迟时间；（c）：对于（a）中不同交换机数量的规则数量；（d）：1对N模式的拓扑；（e）：对于（d）中不同交换机数量的延迟时间；（c）：对于（d）中不同交换机数量的规则数量。}}{20}}
+\newlabel{fig9}{{10}{20}}

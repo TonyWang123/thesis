@@ -1,0 +1,79 @@
+This is BibTeX, Version 0.99d (TeX Live 2015)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: T-ITS-15-12-0882.R1.aux
+The style file: IEEEtran.bst
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Database file #1: bibsdiv.bib
+-- IEEEtran.bst version 1.13 (2008/09/30) by Michael Shell.
+-- http://www.michaelshell.org/tex/ieeetran/bibtex/
+-- See the "IEEEtran_bst_HOWTO.pdf" manual for usage information.
+Warning--empty author in CVIS
+Warning--empty booktitle in CVIS
+Warning--empty year in CVIS
+Warning--empty author in NDN
+Warning--empty booktitle in NDN
+Warning--empty year in NDN
+Warning--empty author in MobilityFirst
+Warning--empty booktitle in MobilityFirst
+Warning--empty year in MobilityFirst
+Warning--empty author in NEBULA
+Warning--empty booktitle in NEBULA
+Warning--empty year in NEBULA
+Warning--empty author in Floodlight
+Warning--empty booktitle in Floodlight
+Warning--empty year in Floodlight
+Warning--empty author in mininet
+Warning--empty booktitle in mininet
+Warning--empty year in mininet
+Warning--empty author in ONF
+Warning--empty booktitle in ONF
+Warning--empty year in ONF
+Warning--all relevant fields are empty in shanghai
+
+Done.
+You've used 30 entries,
+            4039 wiz_defined-function locations,
+            966 strings with 12040 characters,
+and the built_in function-call counts, 23783 in all, are:
+= -- 1810
+> -- 586
+< -- 216
++ -- 330
+- -- 97
+* -- 1158
+:= -- 3330
+add.period$ -- 75
+call.type$ -- 30
+change.case$ -- 29
+chr.to.int$ -- 510
+cite$ -- 52
+duplicate$ -- 1721
+empty$ -- 2029
+format.name$ -- 118
+if$ -- 5538
+int.to.chr$ -- 0
+int.to.str$ -- 30
+missing$ -- 294
+newline$ -- 113
+num.names$ -- 22
+pop$ -- 745
+preamble$ -- 1
+purify$ -- 0
+quote$ -- 2
+skip$ -- 1826
+stack$ -- 0
+substring$ -- 1219
+swap$ -- 1370
+text.length$ -- 46
+text.prefix$ -- 0
+top$ -- 5
+type$ -- 30
+warning$ -- 22
+while$ -- 106
+width$ -- 32
+write$ -- 291
+(There were 22 warnings)

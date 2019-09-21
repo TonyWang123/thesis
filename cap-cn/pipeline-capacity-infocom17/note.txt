@@ -1,0 +1,12 @@
+results:
+
+- Chara. space
+  We need to compare routing functions and pipelines, but they have quite different formats and therefore hard to handle.
+
+  Our key insight is that they both represent computations. The main contributoin of this paper is that compute their computation properties, which is the chara space.
+
+  Extract the key properties of a computation (routing function) or a computation capability (a pipeline).
+
+  Definition of a characteristics of a computation x, or chara for short.
+
+  c ()

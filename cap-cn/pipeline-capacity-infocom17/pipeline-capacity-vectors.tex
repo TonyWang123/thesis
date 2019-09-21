@@ -1,0 +1,191 @@
+\subsection{Parameterizing pipeline capacity}
+\label{subsec:pipeline-capacity}
+
+
+\para{Problem definition}
+
+\para{Pipeline table capacity:} We begin examining pipeline capacity by considering the capacity of a single table $t_i$. We start by observing that we can view a $t_i$ as an executor that can execute any $f$ whose input domain is not too large by matching on each binding in $f$'s domain and outputting $f$'s value for that binding. This observation is formalized as \textsc{Lemma 2}:
+\vspace{2mm}
+
+\noindent \textsc{Lemma 2:} A pipeline table $t_i$ can execute any $f$ whose input domain size is less than the maximum number of rules $t_i$ can hold and only takes a subset of $t_i$'s match fields as inputs.
+\vspace{2mm}
+
+%\noindent \textit{Proof:} If an $f$'s domain size is smaller than the maximum number of rules a $t_i$ can hold, we can always execute  $f$ in that $t_i$ by populating $t_i$ with rules that match on each binding in $f$'s domain and output $f$'s value for that binding.
+
+If $t_i$ is one of $p$'s output tables, it can can pass $f$'s output directly to $p$'s switch. If $t_i$ isn't, however, it must transmit information about $f$'s output for subsequent tables to act on. Specifically, $t_i$ can transmit information to subsequent tables $t_j \in p$ in two ways: by writing registers for $t_j$ to read, or by executing different pipeline branches with different $t_j$ depending on $f$'s output.
+
+% , and such transmission may be limited by $p$'s architecture.
+
+Each of these transmission mechanisms is limited: a $t_i$ with a $k$ bit output register can only transmit $2^k$ output values to its successors, whilst a $t_i$ that executes one of $k$ branches depending on $f$'s output can only transmit $k$ values. We, again, formalize this observation in \textsc{Lemma 3}:
+\vspace{2mm}
+
+\noindent \textsc{Lemma 3:} A $t_i \in p$ can transmit $log_2(t_i.$\branches$) + t_i.$\registerbits\ bits of information to subsequent $t_j \in p$,  where  $t_i.$\branches\ is the number of branches rooted at $t_i$, and $t_i.$\registerbits\ is $t_i$'s output registers' total bit length.
+\vspace{2mm}
+
+In practice, we find that of \textsc{Lemma 3}'s two transmission mechanisms, the capacity of branch encoding is dominated by the capacity of registers and therefore can be neglected. To support this assertion, we consider the standard pipeline architectures provided by two industry switches: OF-DPA and PicOS. Each architecture had less than 6 branches, which were only provided to handle different routing concerns (\eg\ single-cast vs multicast), whilst each contained 32 bit registers. Such limited opportunity for branch encoding in practical pipelines allows us to neglect it and still provide a tight lower bound on the information a table can transmit.
+
+\para{Pipeline path dfgs:} Now that we have developed a mechanism to enumerate a given $p$'s paths, we describe how we convert each of these paths $r_p$ into a dfg $G$.
+
+Before converting $r_p$ into a $G$, we transform $r_p$ into a path $r_s$ which computes exactly the same set of functions as $r_p$ by applying our \textsc{Table Split Transformation}.
+
+\vspace{2mm}
+\textsc{Table Split Transformation:} For each table $t_p \in r_p$, if $t_p$ has multiple outputs (registers or pipeline outputs) we split $t$ into a set of tables$T_s$ that write each of $t_p$'s outputs separately and share $t_p$'s inputs, which $r_s$ visits in arbitrary order.
+\vspace{2mm}
+
+To see that splitting a $t_p$ preserves the set of $f$ that it can execute, observe that  we can represent any given $t_p$'s contents in $t_s \in T_s$ by adding each of $t_p$'s rules whose outputs include a given $t_s$'s output to that $t_s$ and vice versa, and that we can traverse $T_s$ in arbitrary order because every $t_s$ shares $t_p$'s inputs, eliminating read-write conflicts.
+
+Given our transformation of each $r_p \in p$, we now describe how we convert each transformed path $r_s$ into a pipeline dfg. We begin by describing our dfg, below:
+
+\vspace{2mm}
+\noindent \textsc{Pipeline dfg:} A pipeline dfg is a connected dag $G = (V, E)$ with exactly one leaf in which each $v \in V$ either represents a pipeline input, a register and its $t \in r_s$, or a pipeline output and its $t \in r_s$, distinguished by $v$'s field $v.type$ taking the values $M$, $R$, and $O$ respectively, where:
+\begin{itemize}
+
+ \item Pipeline input verticies ($v.type = M$) have a $v.name$ field which stores the pipeline input that $v$ represents. Iff a $v \in V$ is a pipeline input, it is a root of $G$.
+
+ \item Register verticies ($v.type = R$) have fields $v.name$, $v.size$, and $v.S$, which store the register's name, its bit length, and the input verticies $v$ is descended from.
+
+ \item Pipeline output verticies ($v.type = O$) have the field $v.S$, like register verticies, and are $G$'s only leaf.
+
+\end{itemize}
+
+\noindent Each edge $e$ in $G$ denotes that $e$'s target $v$'s table takes $e$'s source $v$'s pipeline input or register as an input.
+\vspace{2mm}
+
+\noindent \textit{Pipeline dfg generation:} To generate a pipeline dfg $G$ from a $r_s$, we simply step through $\forall\ t \in r_s$ in packet traversal order, adding $M$ verticies to $G$ for each unseen pipeline input $\in t$'s inputs, and a $R$ or $O$ vertex to $G$ for each $t$'s output, and edges between each $t$'s vertex and the verticies $t$ reads.
+
+After generating $G$, we enumerate each $M$ vertex $v_m$'s descendents $d \in D$, and add $v_m.name$ to $d.S$.
+
+\para{Capacity vectors:} We develop our observations about which $f$ a $t_i$ can execute and the information a $t_i$ can transmit into a test to determine if a $p$ can execute an $f$. We begin by considering $p$ whose table size is large, and then examine $p$ with limited size tables.
+
+In the case that $\forall\ t_i \in p$ can have an arbitrary number of rules, by \textsc{Lemma 2} each $t_i$ can execute $f$ with arbitrary domain size. Execution in such a $p$ is still limited, however, by the information it can transmit about $m_i \in M_p$ to each $t_i$. 
+
+\noindent \textsc{Capacity vector:} A capacity vector is a vector with fields $cv[ti.S]\ \forall\ t_i \in \rho$ whose value is the number of bits of information $t_i$ can output to $t_i.r$.
+\vspace{2mm}
+
+\noindent \textsc{The Pipeline Capacity Theorem:} Given a $p$ with inputs $M_p$ and cvs $cvs$ and a $f$ with inputs $M_f$ and tv $tv$, if both:
+\begin{itemize}
+  \item $M_f \subseteq M_p$ 
+  \item $\exists\ cv \in cvs$ such that $cv[S] > tv[S]\ \forall\ S \in cv$
+\end{itemize}
+$\exists$ a set of contents of $p$ that can compute $f$.
+\vspace{2mm}
+
+\noindent \textit{Proof:} We prove the PCT with the following lemmas:
+
+\noindent \textsc{Lemma x:} If $\forall\ t_i \in \rho$ from $t_1$ to $t_n$, $t_i.r.bits < tv[t_i.S]$, then each $t_i$ can output a codeword for $t_i.S$'s binding into $t_i.r$.
+\vspace{2mm}
+
+\noindent \textit{Proof:} We prove \textsc{Lemma x} by induction as follows:
+\vspace{2mm}
+
+\noindent \textit{Base case:} We will prove that if $t_1.r.bits < tv[t_1.S]$, then $t_1$ can output a codeword for $t_1.S$'s binding into $t_1.r$.
+
+By \textsc{Lemma x}, $t_1$ can compute the codeword for the variables in $C_1$ and place it into $t_1.r$ if $t_1.inputs$'s dominate $C_1$. \cleet{Finish this}
+\vspace{2mm}
+
+\noindent \textit{Induction case:} By the induction hypothesis we assume that if $\forall\ t_i$ from $t_1$ to $t_k$, $t_i.r.bits < tv[t_i.S]$, then each $t_i$ can output a codeword for $t_i.S$'s binding into $t_i.r$. We show that if $t_{k+1}.r.bits < tv[t_{k+1}.S]$, $t_{k+1}$ can output a codeword for $t_{k+1}.S$ into $t_{k+1}.r$.
+
+Computing $t_{k+1}.S$'s codeword is a three step process:
+\begin{itemize}
+  \item First, $t_{k+1}$ must compute values of the variables in $t_{k+1}.S$'s vertex cut $C_{k+1}$.
+
+  \item Second, $t_{k+1}$ must map these values to their codeword.
+
+  \item Third, $t_{k+1}$ must place this codeword in its register.
+\end{itemize}
+
+We show that $t_{k+1}$ can always accomplish steps 1 and 2 if $\forall\ t_i$ from $t_1$ to $t_k$, $t_i.r.bits < tv[t_i.S]$, and can accomplish step 3 if $t_{k+1}.r.bits < tv[t_{k+1}.S]$, proving the induction hypothesis.
+
+
+By \textsc{Lemma x}, if an $e$ can calculate $C_{k+1}$ using $t_{k+1}.inputs$, $t_{k+1}$ can calculate $C_{k+1}$. Such an $e$ can calculate any vertex in a dfg given the values of that dfg's roots. Therefore, such an $e$ can calculate $C_{k+1}$  given the values of a set of verticies that dominate $C_{k+1}$ in $G$, since such verticies can form the roots of a subgraph of $G$ whose leaves are $C_{k+1}$.
+
+We now prove that $t_{k+1}.inputs$ does dominate $C_{k+1}$. Given that $C_{k+1}$, by definition, is solely descended from $t_{k+1}.S$, to prove such domination it sufficies to show that every path from some $m_i \in t_{k+1}.S$ to $C_{k+1}$ includes some $v \in t_{k+1}.inputs$.
+
+If $m_i \in t_{k+1}.S$, $t_{k+1}$ must either match directly on $m_i$ or $\exists$ some parent of $t_{k+1}$, $t_p$, such that $m_i \in t_p.S$.
+
+If $t_{k+1}$ matches on $m_i$, then $m_i \in t_{k+1}.inputs$ and trivially every path from $m_i$ to $C_{k+1}$ includes some $v \in t_{k+1}.inputs$.
+
+
+If $m_i \in$ some $t_p.S$, given that $t_p \in (t_1, ..., t_k)$, then by the induction hypothesis $t_p.r$ contains a codeword for the values of verticies which comprise a severing cut $C_p$ between $t_p.S$ and  all verticies in $G$ not solely descended from $t_p.S$, $D_{NSp}$.
+
+If some $v \in C_{k+1}$ is not solely descended from $t_p.S$, $v \in D_{NSp}$ and by the definition of a severing cut ever path from $m_i$ to $v$ must include a vertex in $C_p$.
+
+Otherwise, this $v \in C_{k+1}$ must lie on the minimium cut separating $t_p.S$ from $D_{NSp}$, which meands that $v \in C_p$ and again every path from $m_i$ to $v$ must include a vertex in $C_p$.
+
+Given that $C_p \in t_i.inputs$, we have therefore shown that always $t_i.inputs$ dominates $C_{k+1}$. Therefore, an $e$, and by extension $t_{k+1}$, can always compute $C_{k+1}$.
+
+Given that $t_{k+1}$ can always accomplish step 1, it can always accomplish step 2 by trivially outputing the codeword associated with $C_{k+1}$'s bindings rather than $C_{k+1}$ itself.
+
+Trivially, this codeword can be placed in $t_i.r$, accomplishing step 3, if $t_{k+1}.r.bits < tv[t_{k+1}.S]$, and thus we have proved the induction hypothesis.
+\vspace{2mm}
+
+\noindent \textsc{Lemma Y:} If a $\rho$'s $t_n$ can output a codeword for $t_n.S$'s binding, $t_n$ can output $f$'s output.
+\vspace{2mm}
+
+\noindent \textit{Proof:} Given that a pipeline dfg is a connected graph with one leaf, $t_n.r$, $t_n.S$ must simply equal $M$. Any $e$ that knows $M$'s binding can execute $f$, and therefore by \textsc{Lemma x} if $t_n$ can compute a codeword for $M$'s binding, $t_n$ can compute $f$'s output.
+\vspace{2mm}
+
+\noindent Given these lemmas, we prove x as follows.
+\vspace{2mm}
+
+\noindent \textit{Proof:} By \textsc{Lemma x}, if $\forall\ t_i \in \rho$ from $t_1$ to $t_n$, $t_i.r.bits < tv[t_i.S]$, then each $t_i$ can output a codeword for $t_i.S$'s binding into $t_i.r$.
+
+%In Section~\ref{subsec:function-transmission}, we showed that we could measure the amount of information that a given $f$ transmits about any subset of its inputs to its output using the notion of a $tvs$. In this section, we will measure the amount of information that a given $p$ transmits about any subset of its inputs to its output by introducing the notion of a $cvs$.%
+
+%\para{Problem definition:} We define the problem of measuring the amount of information a given $p$ can carry about its inputs to its output as the pipeline capacity problem (PCP): given a pipeline $p$ with inputs $m_i$ in $M$, how much information can $p$ carry about a given subset of its inputs $S \in M$ to its outputs $e \in E$.%
+%\vspace{2mm}
+%\noindent \cleet{TODO: How do we go from here to capacity vector?}
+%\vspace{2mm}
+
+%\noindent \cleet{This assumes pipeline is a tree - need to add capacity vector set info.}
+
+%\vspace{2mm}
+%\noindent \textsc{Definition 4: Capacity Vector:} A capacity vector (cv) is a vector $cv[t_i.S] = t_i.$\registerbits\ $\forall\ t_i$ in a reduced register tree $r_r$ in a $p$.
+%\vspace{2mm}
+
+%Consider, for example, the $p$ \examplep\ below:
+
+%\begin{verbatim}
+%pExample: (NOTE: REDO THIS NICELY)
+%t1:          t2:          t3:          t4:
+%  m1 m2 | r1   m3 r1 | r2   m4 r1 | r3   r2 r3 | eg
+%  ----------   ---------    ---------    ----------
+%        |            |            |            |
+%\end{verbatim}
+
+%If \examplep's register $r_1$ is only 8 bits long, $t_1$, which writes $r_1$, can only transmit 8 bits of information about ($m_1$, $m_2$) to the rest of \examplep. If an $f$'s $tv[m_1, m_2] > 8$ bits, $t_1$ cannot transmit enough information about ($m_1$, $m_2$) to $t_2$ - $t_4$ to execute the remainder of $f$, and thus \examplep\ cannot execute $f$.
+
+%\para{Understanding pipeline capacity:} As before, we begin by providing the reader with intuition into what the amount of information carried by a pipeline means.
+
+%For $p$'s output to use information about a given pipeline input $m$, $p$ must transmit information about $m$ to one of its outputs. $p$ can transmit such information using one of three mechanisms.
+
+%\textit{Table match fields:} $p$'s tables can transmit information about $m$ their output by either matching on $m$ or a register that contains information about $m$.
+
+%\textit{Registers:} $p$ can transmit information about $m$ between tables if an initial table writes information about $m$ to a register for subsequent tables to read.
+
+%\textit{Network encoding:} $p$ can implicitly transmit information about $m$ between tables by executing different branches depending on $m$'s value.
+
+%Now that we have identified the mechanisms a given $p$ can use to transmit information, we parameterize the amount of information transmitted by each mechanism by introduce the notion of transmission capacity, defined below:
+
+%\vspace{2mm}
+%\textsc{Definition 3 - Transmission capacity:} A pipeline's transmission mechanism $t$'s capacity is equal to the number of equivalence classes of some subset of $t$'s inputs that $t$ can transmit.
+%\vspace{2mm}
+
+%We now use this definition to parameterize the capacity of each of the information transmission mechanisms defined above.
+
+%\textit{Table match fields:} A table with $k$ rules can transmit $k$ equivalence classes by assigning each of its $k$ rules to a different equivalence class.
+
+%\textit{Registers:} A $k$ bit register can transmit $2^k$ equivalence classes by using each of its $2^k$ values to represent a different equivalence class.
+
+%\textit{Network encoding:} A $k$-way branch can transmit $k$ equivalence classes by executing a different branch for each equivalence class.
+
+%In practice, we find that of the three mechanisms above, the capacity of network encoding is dominated by the capacity of match fields and registers. To support this assertion, we investigated the standard pipeline architectures provided by two industry switches, OF-DPA and PicOS. Each pipeline architecture had no more than 5 branches whilst allowing up to $2^32$ rules per table and $32$ bit registers. On average, therefore, a practical $p$'s network encoding capacity is 8 orders of magnitude smaller than the capacity of its registers or match fields, allowing us to safely neglect it.
+
+%Given our measurement of match field and register transmission capacity, we now give a way to measure the transmission capacity of a $p$. We will begin by assuming that the size of $p$'s tables is large and thus that a pipeline's capacity is determined by the amount of information that its registers can carry between tables before extending our capacity measurement to limited size tables in Section III. 
+
+%\noindent \textsc{Lemma 4:} An intermediate pipeline table $t_i$ can output $t_i.\#branches \times t_i.\#outputBits$ bits of information about its inputs $M_t$.
+%\vspace{2mm}
+
+%\noindent \textsc{Lemma 5:} A leaf pipeline table $t_{leaf}$ can output an arbitrary bits of information about its inputs $M_t$.
+%\vspace{2mm}
+

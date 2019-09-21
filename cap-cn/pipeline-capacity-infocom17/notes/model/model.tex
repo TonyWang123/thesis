@@ -1,0 +1,79 @@
+\title{PC Model}
+
+\date{\today}
+
+\documentclass[12pt]{article}
+\usepackage{sectsty}
+\usepackage{graphicx}
+\usepackage{etoolbox}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mathabx}
+
+\sectionfont{\fontsize{12}{15}\selectfont}
+\subsectionfont{\fontsize{12}{15}\selectfont}
+
+\makeatletter
+\patchcmd{\@verbatim}
+  {\verbatim@font}
+  {\verbatim@font\fontsize{8}{10}\selectfont}
+  {}{}
+\makeatother
+
+\begin{document}
+\maketitle
+
+\section{Functions}
+\begin{itemize}
+  \item Routing function: $f$
+  \item Set of $\forall$ routing functions: $\mathcal{F}$
+  \item Packet match fields read by $f$: $\langle m_1, ..., m_n \rangle$
+  \item Set of $\forall$ packet match fields read by $f$: $\mathcal{M}$
+  \item Subset of $\mathcal{M}$: $M_i$
+  \item Values of packet match fields $M_i$ in a call to $f$: $v_i(M_i)$
+  \item Domain of valid packet match field values of M: $dom(M_i)$
+  \item Set of $\forall$ routing actions: $\mathcal{R}$
+\end{itemize}
+
+\begin{equation} 
+ f : dom(\mathcal{M}) \rightarrow \mathcal{R}
+\end{equation}
+
+\section{Pipelines}
+\begin{itemize}
+  \item Pipeline: $p$
+  \item Set of $\forall$ pipelines: $\mathcal{P}$\
+  \item $p$ is a singly rooted dag of tables $t_i$ \textit{s.t.} an edge $(t_i, t_j)$, indicates control flow may pass from $t_i$ to $t_j$.
+  \item We assume the set of packet match fields $p$ reads is the same as the set $f$ reads, and carry terminology over (\textit{e.g.} $\mathcal{M}$, $M_i$, $dom(M_i)$).
+  \item We denote `$f$ is embeddable into $p$' as: $f \rightrightharpoons p$.
+\end{itemize}
+
+\section{Tables}
+
+\subsection{Table outputs}
+\begin{itemize}
+  \item A $t_i$'s outputs may be some combination of:
+  \begin{itemize}
+      \item Pipeline egress actions
+      \item Writes to $t_i$'s output register, $r(t_i)$
+      \item Transfer of control to a subsequent table $t_j$
+  \end{itemize}
+  \item Register $r(t_i)$ has size $|r(t_i)|$.
+  \item If $t_i$ may output to a pipeline egress, we say $t_i$ is an egress table.
+\end{itemize}
+
+
+\subsection{Table inputs}
+\begin{itemize}
+  \item A $t_j$'s inputs $I(t_j)$ may be some combination of:
+  \begin{itemize}
+      \item Packet match fields read by $p$, $m_i \in \mathcal{M}$
+      \item A $t_i$'s output register $r(t_i)$
+  \end{itemize}
+\end{itemize}
+
+\subsection{Table rules}
+\begin{itemize}
+  \item The maximum number of rules a $t_i$ can contain is: $maxrules(t_i)$
+\end{itemize}
+\end{document}

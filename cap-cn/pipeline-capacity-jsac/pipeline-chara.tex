@@ -1,0 +1,22 @@
+\subsection{Pipeline characterization}
+
+In this subsection, we will give some details for the pipeline characterization. Specifically, it includes how to compute the match field closure for each table in a path $\rho$ and how to compute the characterization function $\kappa_\rho(\rho)$ for the path $\rho$.
+
+\para{Match field closure:} We use the DFG for a path to compute match field closure. The graph $G_\rho = (V_\rho, E_\rho)$ is the DFG for a path $\rho$ where each source vertex represents a packet match field and the other vertices represent tables in $\rho$. An edge $e_\rho = (u_\rho, v_\rho)$ denotes the table $v_\rho$ can directly match the packet match field $u_\rho$ if $u_\rho$ represents a packet match field, or the table $v_\rho$ can match the register $r(u_\rho)$ if $u_\rho$ represents a table. %The weight of the edge $e_\rho = (u_\rho, v_\rho)$ is the size of $dom(u_\rho)$ if $u_\rho$ represents a packet match field, or $2^{|r(u_\rho)|}$ if $u_\rho$ represents a table. 
+For example, the Figure XXX shows the DFG of the path in Figure YYY. ...
+
+Based on the DFG $G_\rho$, we now compute the match field closure $\bar{M}(t, \rho)$ for each table $t$ in the path $\rho$. If a path in $G_\rho$ leads from a vertex $u_\rho$ to a vertex $v_\rho$, then we cay $u_\rho$ can reach $v_\rho$ in $G_\rho$. Then the definition of $\bar{M}(t, \rho)$ is the following:
+
+\begin{equation}
+\bar{M}(t, \rho) = \{ u_\rho : u_\rho \in V_\rho, indegree(u_\rho) = 0, u_\rho\ can\ reach\ t\ in\ G_\rho \}
+\end{equation}
+
+\para{Characterization function for a pipeline:} Based on the definition of $\kappa_\rho(\rho)$ in the section XXX and $G_\rho$, we first compute the characterization function $\kappa_\rho(\rho)$ for each path $\rho$ in the pipeline $p$. The characterization function $\kappa_\rho(\rho)$ can be easily computed by the definition of 
+$\kappa_\rho(\rho)$ which divides the set of $M$ into three subsets: 1. A subset defined as a set of $M$ where each entry can be computed by a set of $\bar{M}(t, \rho)$ where $t$ is a table in the path $\rho$; 2. A subset defined as a set of $M$ where each entry includes at least one packet match field that is not included by the source vertices of $G_\rho$; 3. Any other $M$.
+
+Then, the characterization function $\kappa(p)$ for a pipeline $p$ can be easily computed by enumerating all paths in $p$.
+
+
+
+
+

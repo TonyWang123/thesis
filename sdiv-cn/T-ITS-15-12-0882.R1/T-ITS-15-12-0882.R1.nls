@@ -1,0 +1,23 @@
+\begin{thenomenclature} 
+
+ \nomgroup{Symbols}
+
+  \item [{SDN}]\begingroup Software-Defined Network\nomeqref {0}
+		\nompageref{1}
+  \item [{IoV}]\begingroup Internet of Vehicles\nomeqref {0}
+		\nompageref{1}
+  \item [{SDIV}]\begingroup Software-Defined Internet of Vehicles\nomeqref {0}
+		\nompageref{1}
+  \item [{AP}]\begingroup Access Point\nomeqref {0}\nompageref{1}
+  \item [{V}]\begingroup Vehicle\nomeqref {0}\nompageref{1}
+  \item [{TCAM}]\begingroup Ternary Content-Addressable Memory\nomeqref {0}
+		\nompageref{1}
+  \item [{T}]\begingroup Timeout for rules at switches\nomeqref {0}
+		\nompageref{1}
+  \item [{D(n, d)}]\begingroup Euclidean distance between n and d\nomeqref {0}
+		\nompageref{1}
+  \item [{$F_i$}]\begingroup Data flow i\nomeqref {0}\nompageref{1}
+  \item [{(S, D)}]\begingroup Packet with the source address S and the destination address D\nomeqref {0}
+		\nompageref{1}
+
+\end{thenomenclature}

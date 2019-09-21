@@ -1,0 +1,70 @@
+\section{Compression of Capacity Vectors}
+
+In this section, we first show the necessities of a set of capacity vectors for a pipeline by using a DAG to represent the pipeline. Each node in the DAG represents a table in the pipeline. If a table $t_i$ can jump to a table $t_j$ in the pipeline, then there is an edge between two nodes $n_i$ and $n_j$ which represents tables $t_i$ and $t_j$ respectively. Then, by the definition of capacity vector of a path in Section XXX, each path $p_i$ in the DAG should have a capacity vector $cv(p_i)$ to represent the capability for function computation.
+
+Before diving into the compression of capacity vectors, we will give an analysis for capacity vectors for a pipeline. Specifically, we propose the following question: is it possible to only use a single capacity vector for a pipeline? In some cases, it is possible to use a single capacity vector since there are redundancies in capacity vectors. For example, TODO: two examples for merging and  inclusion.
+
+Here, we define a concept of dominant table content $c_x$ as ...
+
+\begin{lemma}
+For a single table, there exists a dominant $c_x$ that dominates any other $c_i$.
+\end{lemma}
+
+Proof: ...
+
+\begin{lemma}
+For a path, there exists a dominant $c_x$ that dominates any other $c_i$.
+\end{lemma}
+
+Proof: ...
+
+We can find that the definition of capacity vector of a path in Section XXX follows the proof of two lemmas. For a single table, it generates a single value $v$ for a set of matches $S$, and then it combines all these <$S$, $v$> entries for a path.
+
+\begin{lemma}
+For a pipeline with branches, there does not always exist a dominant $c_x$.
+\end{lemma}
+ 
+Proof: ...
+
+Though the Lemma 3 answers the preceding question that it is not possible to only use a single capacity vector for a pipeline, as the example in Figure XXX, it is possible to do compression for a set of capacity vectors.
+
+There are two kinds of compressions a set of capacity vectors: 1. Considering an unlimited size of tables, if a capacity vector $cv_i$ dominates another capacity vector $cv_j$, then we can only keep $cv_i$; 2. If two capacity vectors can be merged into one capacity vectors, then we can only keep the merged one. Since case 1 is very easy to identify, here we give an analysis for case 2. The difficulties of case 2 is that it is highly related to the structure of pipeline.
+
+First, we have an obvious observation: If two paths have the same structure (including matches) after the branching point, then they can merge by doubling the value of equivalent class of matches in the branching point. For example, ...
+
+Then, we extend the observation as the following: If two branch paths have the same capacity vector (including which register each entry uses) after the branching point, then they can merge by doubling the value of equivalent class of matches in the branching point. For example, ...
+
+Using the extended observation, we give a recursive algorithm to compute and then compress capacity vectors for a pipeline as shown in Algorithm XXX. The algorithm ...
+
+\begin{algorithm}
+\If {$n.status$ = white}{
+  \If {$n.nc$ = 0}{
+    $n.nc$ $\gets$ ComputeCV($n$, null) \;
+  }
+  \ElseIf {$n.nc$ = 1}{
+    $CV$ $\gets$ ComputeCV($n$, dfs($n.child$)) \;
+    \If {$n.ta$ = false}{
+      $n.nc$ $\gets$ $CV$ \;
+    }
+    \Else{
+      $n.nc$ $\gets$ Merge(ComputeCV($n$, null), $CV$) \;
+    }
+  }
+  \ElseIf {$n.nc$ $>$ 1}{
+    New $CV$ \;
+    \ForEach {node $c$ $\in$ $n.childs$}{
+      $CV$ $\gets$ Merge($CV$, dfs($c$)) \;
+    }
+    $CV$ = ComputeCV(n, $CV$) \;
+    \If {$n.ta$ = false}{
+      $n.cv$ $\gets$ $CV$ \;
+    }
+    \Else{
+      $n.nc$ $\gets$ Merge(ComputeCV($n$, null), $CV$) \;
+    }
+  }
+  $n.status$ = black \;
+}
+\Return $n.cv$ \;
+\end{algorithm}
+

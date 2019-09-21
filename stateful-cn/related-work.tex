@@ -1,0 +1,12 @@
+\section{Related Work}
+\label{related-work}
+
+\para{In-band Network Telemetry:} MP-HULA~\cite{benet2018mp} and Hula~\cite{katta2016hula} use the probe packets to update the state variables for load-balancing which are motivating examples of \concept{} but they do not consider these complex dependencies of middleboxes. 
+
+%P4CEP~\cite{kohler2018p4cep} considers the event processing with network compute by using a single switch instead of considering the state transfer among multiple switches. 
+
+\para{Stateful Switches:} OpenState~\cite{bianchi2014openstate} develops a generic state machine in the data plane of an OpenFlow switch to support flow-level state access. FAST~\cite{moshref2014flow} also focuses on the development of stateful data plane which is similar with OpenState but using different state table design. Both can be the implementation of DG in \concept{}.
+
+\para{Stateful Languages:} SNAP~\cite{arashloo2016snap} targets to deploy the state operation into datapaths from a high-level program. Different with our work, it do not consider the state update across different switches. NetKAT~\cite{anderson2014netkat} defines a network querying language which is also different with \concept{} whose setting is to update state variables while keep packets processing. NetEgg~\cite{yuan2014netegg} proposes to use examples to specify the network stateful operations by keeping states in the controller while \concept{} targets to utilize state variables in stateful switches.
+
+\para{Network Function Virtualization:} Split/Merge~\cite{rajagopalan2013split} stores the state of flows in the VM and supports the split and merge of VMs. Its main focus is the elastic VM instead of general packet transmission. OpenNF~\cite{gember2014opennf} and StateAlyzr~\cite{khalid2016paving} both store a per-connection state in the controller, which can be copied to a new instance. PLEROMA~\cite{tariq2014pleroma} considers the publish/subscribe of events with the usage of a controller. \concept{} targets to leverage communication between middleboxes and switches to allow dynamic configuration for packet forwarding.

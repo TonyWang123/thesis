@@ -1,0 +1,234 @@
+\section{Pipeline capacity theorem}
+\label{sec:pipeline-capacity-theorem}
+We now present our pipeline capacity theorem. We develop our theorem in three sections.
+
+We begin by parameterizing the amount of information a given function \textit{transmits} about its inputs to its outputs by introducing the notion of a function \textit{transmission vector set} ($tvs$) in Section~\ref{subsec:function-transmission}. We then proceed by parameterizing the amount of information a given pipeline \textit{can carry} about its inputs to its output by introducing the parallel notion of a pipeline \textit{capacity vector set} ($cvs$) in Section~\ref{subsec:pipeline-capacity}. Finally, we compare function $tvs$ with pipeline $cvs$ to develop a sufficient condition to test whether a function $f$ can be compiled into a pipeline $p$ in Section~\ref{subsec:capacity-theorem}. This test is our pipeline capacity theorem.
+
+\subsection{Parameterizing function information transmission}
+\label{subsec:function-transmission}
+
+\para{Problem definition}
+
+\para{Function information transmission:} We begin by offering the reader intuition into what the amount of information transmitted by a $f$ actually means. Consider the example function \texttt{onPkt} below:
+
+\begin{verbatim}
+def onPkt(Addr dstAddr, Port dstPort):
+  if dstPort <= 1024:
+    egress = stdHostTbl[dstPort]
+  elif dstPort == 1025:
+    egress = usrHostTbl[dstPort]
+  else:
+    return Drop();
+  return Forward(egress);
+\end{verbatim}
+
+The domain of \texttt{onPkt}'s input \texttt{dstPort} is $2^{16}$, since the TCP protocol allows TCP sockets to take any port number between $0$ and $65535$. However, \texttt{onPkt} only depends very particularly on where \texttt{dstPort}'s value falls within this domain, specifically on whether \texttt{dstPort} is $\leq 1024$, $1025$, or $> 1025$. All other information about \texttt{dstPort} is irrelevant to \texttt{onPkt} - if we were to replace \texttt{dstPort} with the output of the encoder \texttt{encode(dstPort)}, which encodes \texttt{dstPort} with the code: $\{\leq 1024 \rightarrow 00, 1025 \rightarrow 01, >1025 \rightarrow 10\}$, \texttt{onPkt} could still be rewritten to run correctly. 
+
+The existence of \texttt{encode(dstPort)} provides the following insight: if we had to transmit \texttt{onPkt}'s arguments to some black box function running \texttt{onPkt}, we could compress \texttt{dstPort} from 16 to 2 bits and still supply the black box with sufficient information to function.
+
+\para{Equivalence classes:} We expand the proceeding idea into the notion of equivalence classes. Given an $f$ with inputs $M$, we say that two bindings $u$ and $v$ of some input $m_i \in M$ are equivalent if we could encode $m_i$ with an encoding that maps $u$ and $v$ to the same code-word, supply $f$ with this encoding instead of $m_i$, and still provide $f$ with enough information to run correctly. This is true if $f(m_i = u, M - m_i) == f(m_i = v, M - m_i)$ for any valid binding of $f$'s other inputs $M - m_i$. Extending this argument to sets of bindings $U$ and $V$ for sets of inputs $S \subseteq M$ gives us our definition of equivalence, below:
+
+\vspace{1mm}
+\noindent \textsc{Definition 1 - Equivalence:} Given an $f$ with inputs $M$, we say that two sets of bindings $U$ and $V$ are equivalent for some subset $S \subseteq M$ when $f(S = U, M - S) == f(S = V, M - S)$ for every valid binding of $M - S$.
+\vspace{1mm}
+
+Our definition of equivalency leads naturally to the definition of an equivalence class:
+
+\vspace{1mm}
+\noindent \textsc{Definition 2 - Equivalence class:} The set of all bindings of an $S \subseteq M$ which are mutually equivalent.
+\vspace{1mm}
+
+\para{Codewords:} Since an equivalence class's bindings are, by definition, equivalent, given a binding $b$ for an $S$ we can transmit a different binding from $b$'s equivalence class to an executor $e$ executing $f$ without changing $f$'s output. Such interchangability can be exploited to minimize $b$'s transmission bandwidth by assigning each of $S$'s equivalence classes a $codeword$, and transmitting $b$'s equivalence class's codeword in lieu of $b$, since $e$ can simply map $b$ back to some binding from $b$'s equivalence class to obtain enough information to execute $f$. We formalize our notion of codewords below:
+\vspace{1mm}
+
+\textsc{Definition 3 - Codewords:} A set of codes which correspond to each of an $S$'s equivalence classes.
+\vspace{1mm}
+
+Our notion of codewords allows us to find the minimum number of bits of information about an $S$ an executor requires to execute $f$, which we give as \textsc{Lemma 1}:
+\vspace{1mm}
+
+\noindent \textsc{Lemma 1:} If some $S$ has $k$ equivalence classes, an $e$ only requires $log_2(k-1)$ bits of information about $S$ to execute $f$ correctly.\vspace{1mm} 
+
+\noindent \textit{Proof:} We can transmit any of $S$'s bindings $b$ to $e$ by transmitting $b$'s equivalence class's codeword. If $S$ has $k$ equivalence classes, we can assign its equivalence classes the codewords [$0$, $k-1$], which take at most $log_2(k-1)$ bits to transmit.
+\vspace{1mm}
+
+\para{Dataflow graphs:} Given \textsc{Lemma 1}, if we can determine an $S$'s equivalence classes, we can bound its transmission requirements. We can generate an $S$'s equivalence classes by transforming its $f$ into a dataflow graph.
+
+\vspace{1mm}
+\noindent \cleet{TODO: Describe DFG and f $\rightarrow$ dfg transformation.}
+
+\para{Bounding equivalence class number:} Now that we have defined the notion of a dfg and shown how a dfg can be calculated from a $f$, we present our \textsc{Equivalence Class Bounding Theorem} (ECBT), which gives an upper bound on the number of equivalence classes an $S$ has.
+\vspace{1mm}
+
+\noindent \textsc{Equivalence Class Bounding Theorem:} An upper bound on $S$'s equivalence class number is given by the weight of the min-vertex-cut in $f$'s dfg $G$ separating $S$'s vertices $V_S$ from the set of vertices not solely descended from $S$, $D_{NS}$.
+\vspace{1mm}
+
+\noindent \textit{Proof:} We prove the ECBT using the following lemmas:
+\vspace{1mm}
+
+\noindent \textsc{Lemma 2:} Given a vertex cut disconnecting $D_{NS}$ from $V_S$ (that may cut $v \in V_S$), we can calculate $f$ without knowing $S$ if we know the bindings for the cut's vertices $C$.
+\vspace{1mm}
+
+\noindent \textit{Proof:}  We can calculate a dfg $G$'s output given bindings for G's roots because every vertex's variable in G must be descended from some subset of these roots. 
+
+Consider the sub-graph of $G$, $G_s$ generated by removing every vertex separated from $D_{NS}$ by our vertex cut. Each of $G_s$'s roots is either a vertex corresponding to some $m_j \in M - S$ or $v \in C$. Therefore, given bindings for every vertex in $C$ and $m_j \in M - S$, we can calculate $G_s$'s output, and therefore $G$'s output. By the definition of a dfg $G$'s output is $f$'s output, and therefore we have shown that we can calculate $f$ given bindings for $C$ in lieu of bindings for $S$.
+
+\vspace{1mm}
+\noindent \textsc{Lemma 3:} If we can calculate $f$ by transmitting bindings for a set of variables $v \in V$ calculated using $S$ in lieu of bindings for $S$, $S$ has no more equivalence classes than $C$.
+\vspace{1mm}
+
+\noindent \textit{Proof:} Suppose, by way of contradiction, that a given $S$ had more equivalence classes than some $C$ calculated from it. Each of $S$'s equivalence classes' bindings must generate a binding from at least one of $C$'s equivalence classes. Therefore, by the pigeonhole principle, if $S$ has more equivalence classes than $C$, two bindings in different equivalence classes in $S$ must generate bindings from the same equivalence class in $C$. However, given that $f$'s output is agnostic to which binding in an equivalence class $C$ takes, the two bindings of $S$ must be in the same equivalence class which is a contradiction.
+\vspace{1mm}
+
+\noindent Given these lemmas, we prove ECBT as follows:
+\vspace{1mm}
+
+\noindent \textit{Proof:}
+By \textsc{Lemma 2}, we can transmit a binding for the set of vertices in the cut $G.\textit{min-vertex-cut}(V_S, D_{NS})$ $C$ in lieu of a binding for $S$ to an executor and still calculate $f$. By, \textsc{Lemma 3}, $S$ can have no more vertices than $C$. We can put an upper bound on $C$'s number of equivalence classes by assuming that each of $C$'s bindings is a unique equivalence class. Since $C$ has $\sum_{v \in V}(|v.domain|)$ possible bindings, $S$ has at most $\sum_{v \in V}(|v.domain|)$ equivalence classes, which is value of $G.\textit{min-vertex-cut}(V_S, D_{NS})$.
+
+The vertex cuts described by our ECBT can be used simultaneously, allowing an e to calculate $f$'s output without knowing $M$'s binding provided that it knows the bindings for the vertices from a set of vertex cuts that sever every $m_i \in M$ at least once. We formalize this property as \textsc{Lemma 4:}
+\vspace{1mm}
+
+\noindent \textsc{Lemma 4:} Given a set of vertex cuts $SC = (C_1, ..., C_n)$ each disconnecting $D_{NSi}$ from $V_{Si}$ for some $S$, if $\forall\ m_i \in M$ are included in at least one $S$, we can calculate $f$'s output if know the binding of every variable in $SC$'s cuts.
+\vspace{1mm}
+
+\noindent \textsc{Proof:} Consider the subgraph of $G$, $G_s$ generated by removing  every vertex separated from $D_{NSi}$ by $\forall\ C_i \in SC$. Each of $G_s$'s roots must either be a root of $G$ or a vertex from some cut, since any new roots formed in $G_s$ by removing each $C_i$'s ancestors must be vertices in $C_i$. Given that $\forall\ m_i \in M$  are separated from some $D_{NSi}$  by at least one $C_i$, no $m_i \in M$ can appear in $G_S$  that isn't part of a cut, and therefore  each of $G_s$'s roots must come from one of our cuts.
+
+Given that we can calculate a dfg $G$'s output if we know that dfg's roots,  we can calculate $G_s$'s and therefore $G$'s and $f$'s outputs if we know bindings for every vertex in $SC$'s cuts.
+
+\para{Transmission vectors:} To review, we can calculate an $f$'s transmission requirements for an $S$ by our ECBT and generate a test with them for whether an $e$ can execute $f$ by \textsc{Lemma 4}. We now formalize these transmission requirements using novel data structure that we term a $transmission vector$ (tv), which we define as follows:
+\vspace{1mm}
+
+\noindent \textsc{Transmission vector:} A transmission vector is a vector with a field $tv[S]\ \forall\ S \subseteq M$, such that if an $e$ receives $tv[S]$ bits about each $S$ in a set that collectively contains $\forall\ m_i \in M$, $e$ can compute $f$.
+\vspace{1mm}
+
+We calculate the value of each $tv[S]$ in a $tv$ as using our Function Transmission Theorem (FTT), which we give below:
+
+\noindent \textsc{Function Transmission Theorem:} $tv[S] = \lceil log_2(k-1) \rceil$, where $k$ is the upper bound on a $f$'s equivalence classes given by the ECBT.
+\vspace{1mm}
+
+\noindent \textit{Proof:} By our ECBT, we have shown that $k$ is an upper bound  on an $S$'s equivalence classes. By \textsc{Lemma 1}, we have shown that we can transmit sufficient information about an $S$ with $k$ equivalence classes for an $e$ to execute $f$ using codewords with no more than $\lceil log_2(k-1) \rceil$ bits.
+
+Finally, given that $S$'s $k$ equivalence classes correspond to  bindings of variables given by $S$'s min-vertex-cut, by \textsc{Lemma 4} if we transmit a set of such bindings for a set of $S$ which contain collectively contains $\forall\ m_i \in M$, $e$ can compute $f$.
+
+
+%\noindent \textsc{Function Transmission Theorem:} An executor can execute $f$  if it receives $log_2(k_i)$ bits of information about every member of set of subsets of $M$: $SS = (S_1, ..., S_n)$, where each $S_i \in SS$ has $k_i$ equivalence classes and $\forall\ m_i \in M$ are contained in at least one $S_i$.
+%%\vspace{2mm}
+
+
+
+
+%\para{Codeword calculation:} sd
+%%\vspace{2mm}
+
+%\noindent \textsc{Lemma 3:} An $e$ can calculate a $S \subseteq M$'s binding's codeword if it receives codewords for a set of subsets of $M$ $PS = (P_1, ..., P_n)$, such that $\forall\ m_i \in S$ appear in at least one $Pi$.
+%\vspace{2mm}
+
+%\noindent \textit{Proof:} Suppose that $e$ has access to a set of maps from each $S \subseteq M$'s bindings to that $S$'s equivalence class's codewords (we discuss how such maps can be generated in Section III).
+
+%$e$ can use these maps to map each $P_i$'s codeword to its equivalence class's  default binding and find values $\forall\ m_i \in S$ from at least one of these bindings, which can be mapped to $S$'s codeword. If an $m_i$ that appears in more than one $P_i$'s binding takes a different value in each binding, $e$ can chose arbitarily from these values because they come from equivalence classes of the same binding and are thus equivalent.
+%\vspace{1.75mm}
+
+%\noindent \textsc{Lemma 4:} If an $e$ has received sufficient information to calculate $M$'s codeword $e$, it can also simply execute $f$.
+%\vspace{1.75mm}
+
+%\noindent \textit{Proof:} If $e$ can calculate $M$'s codeword, $e$ can map it to a full set of $M$'s bindings which $e$ can use to execute $f$.
+
+%\para{Transmission vectors:}
+
+%\vspace{5mm}
+%Our definition of an equivalence class, in turn, gives us a upper bound on the bits of information about an $S \subseteq M$ an executor requires to execute $f$, given as \textsc{Lemma 1}:
+
+%\vspace{1.75mm}
+%\noindent \textsc{Lemma 1:} If an $S \subseteq M$ has $k$ equivalence classes, we only need to transmit $log_2(k-1)$ bits of information about $S$ to an executor for it to execute $f$ correctly.
+%\vspace{1.75mm}
+
+%\noindent \textit{Proof:} We can encode any of $S$'s bindings by mapping each of $S$'s equivalence classes to an integer codeword $c$ between $0$ and $k-1$, and then transmitting the $c$ associated with its binding's equivalence class.
+
+%Since $f$'s output is agnostic to which binding in an equivalence class $S$ takes, our executor can simply map $c$ back to any binding in its equivalence class and execute normally. If $c$ is at most $k-1$, transmitting it requires $log_2(k-1)$ bits.
+
+%\para{Function transmission theorem:} We extend \textsc{Lemma 1} into our \textsc{Function Transmission Theorem}, which gives a sufficient condition to determine if an executor has received enough information about $M$ to execute $f$.
+%%\vspace{1.75mm}
+
+%\noindent \textsc{Function Transmission Theorem:} An executor can execute $f$  if it receives $log_2(k_i)$ bits of information about every member of set of subsets of $M$: $SS = (S_1, ..., S_n)$, where each $S_i \in SS$ has $k_i$ equivalence classes and $\forall\ m_i \in M$ are contained in at least one $S_i$.
+%%\vspace{1.75mm}
+
+%\noindent \textit{Proof:} If an executor receives an $SS$ in which $\forall\ m_i \in M$ appear at least once, this executor can recreate $M$'s binding since it can retrieve any $m_i \in M$'s value from at least one $S_i$.
+
+%If we use \textsc{Lemma 1}'s encoding schema to transmit $SS$, transmitting any given $S_i$ only requires $log_2(k_i)$ bits. Under this schema, different $S_i$'s are permitted to provide different values for a given $m_i$, since an executor can map an $S_i$'s codeword $c$ to any binding in $c$'s  equivalence class, but by the definition of equivalence all of $m_i$'s values must come from the same equivalence class and thus the executor can select arbitrarily from any alternatives.
+
+%\para{Transmission vectors:} We develop our \textsc{Function Transmission Theorem} into a novel data structure, the transmission vector (tv), which bounds $f$'s transmission requirements.
+%%\vspace{1.75mm}
+
+%\noindent \textsc{Definition 3 - Transmission vector:} A transmission vector (tv) is a vector with a field $tv[S] = log_2(k_i)\ \forall\ S \in M$ where $S_i$ has $k_i$ equivalence classes.
+%\vspace{1.75mm}
+
+%By the \textsc{Function Transmission Theorem}, an executor can execute an $f$ if it receives $tv[S_i]$ bits of data about each $S_i \subseteq M$ and $\forall\ m_i \in M$ are contained in at least one $S_i$.
+%\vspace{1.75mm}
+
+%\noindent \textit{Compressing transmission vectors:} By our definition of an $f$'s tv, a na\"{i}vely constructed tv contains $2^{|M|}$ fields0 since it contains a field for every $S \in M$. This na\"{i}ve approach, however, suffers from the disadvantage that practical routing $f$s may have large $M$ as modern SDN controllers increasingly route on multiple packet headers which may span multiple internet stack layers, blowing up their tv size.
+
+%We avoid such exponential tv size increase by recognizing that a subset of $M$, $S = (m_i, ..., m_j)$'s inputs will rarely have fewer equivalence classes as a set than when separate, and thus we can omit and reconstruct any $tv[S]$ where $tv[S] = tv[m_i] + ... + tv[m_j]$.
+
+
+%We develop \textsc{Lemma 1} into a novel data structure which we term a transmission vector $tv$, which defines an upper bound on the bits of data about a given $f$'s M an executor needs  to run $f$ correctly. 
+
+%\noindent \textsc{Lemma 2:} An executor that receives $tv[m_i]$ bits of information about each $m_i \in M$ can execute $f$ correctly.
+%\vspace{1.75mm}
+
+%\noindent \textit{Proof:} By \textsc{Lemma 1} an executor only needs $log_2(k_i)$ bits of information about each $m_i$ to run correctly, and $tv[m_i] = log_2(k_i)$.
+%\vspace{1.75mm}
+
+%We can improve our $tv$'s upper bound on the bits of data required to execute an $f$ by adding fields for particular $S = (m_i, ..., m_j) \subseteq M$ such that $tv[S] = log_2(k)$ where $S$ has $k$ equivalence classes when $tv[S] < tv[m_i] + ... + tv[m_j]$. These fields can be leveraged if given opportunity to do precomputation before transmission.
+
+%Such an $S$ occurs when $m_i, ..., m_j$ are correlated or when their reads are isolated from the rest of the reads in $f$. For example, in \texttt{onPkt}, \texttt{srcAddr} and \texttt{srcPort} are only read by the boolean function \texttt{isVerified}, and thus $tv[\texttt{srcAddr},\ \texttt{srcPort}] = 1$ bit (\texttt{isVerified}'s output), almost certainly less than $tv[\texttt{srcAddr}]$ + $tv[\texttt{dstAddr}]$.
+
+
+
+%\noindent \textit{Proof:} Consider encoding $S$ by mapping each of its equivalence classes to some integer code word $c$, and transmitting that code word to our executor. $S$ only has $k$ equivalence classes, so transmitting $c$ only requires $log_2(k)$ bits. Since $f$ is agnostic to which binding in an equivalence class $S$ has, our executor can simply map $c$ back into any binding in $c$'s equivalence class and execute normally.
+
+%\para{Function input encoding:} We use our notion of equivalence classes (ec) to develop an encoding schema that reduces the number of bits of information about $M$ an executor requires to execute $f$. This encoding schema, at a high level, has three major steps, which we present below:
+
+%%\vspace{1.75mm}
+%\begin{itemize}
+%  \item First, we find the ec of a set of subsets of $M$ $(S_1, ..., S_n)$ ($SS$) where each $m_i$ in $M$ appears in at least one $S_i$, and then assign each $S_i$'s ec a unique integer as a codeword.
+%
+%  \item Second, given a binding for $M$, we find $S_i$'s ec under that binding, and transmit its codeword to our executor.
+%
+%  \item Finally, our executor reconstructs the transmitted binding by mapping each $S_i$'s codeword back to some binding for $S_i$ from that codeword's ec, and then picks values for each $m_i$ in $M$ arbitrarily from the reconstructed $S_i$.
+%\end{itemize}
+%%\vspace{1.75mm}
+
+%\noindent \textit{Proof of correctness:} We now prove that our encoding schema provides the executor with enough information about $M$ to run $f$ correctly.
+%%\vspace{1.75mm}
+
+%\noindent \textit{Encoding transmission requirements:} Our encoding sch%ema's correctness allows us to bound the number of bits of information an executor requires about $M$ to execute $f$ as follows: 
+%%\vspace{1.75mm}
+
+%\noindent \textsc{Lemma 1:} If each $S_i$ in $SS$ has $k_i$ ec, we need to transmit $\sum_{i=1}^{n} log_2(k_i - 1)$ bits to transmit $SS$.
+%%\vspace{1.75mm}
+
+%\noindent \textit{Proof:} If each $S_i$ in $SS$ has $k_i$ ec, we can encode each $S_i$'s ec using an integer from $0$ to $k_i - 1$ as a codeword, which requires $log_2(k_i - 1)$ bits to transmit. Transmitting codewords $\forall\ S_i \in (S_1, ..., S_n)$ therefore requires $\sum_{i=1}^{n} log_2(k_i - 1)$ bits. 
+
+%Equivalence classes have a useful property: they comprise a minimal set of  an $S \subseteq M$'s states an executor must distinguish to execute $f$. We formalize this property as \textsc{Lemma 1}:
+
+%%\vspace{1.75mm}
+%\noindent \textsc{Lemma 1:} An $S \subseteq M$'s equivalence classes defines a minimum set of states of $S$ an executor must distinguish between to execute $f$.
+%%\vspace{1.75mm}
+
+%\noindent \textsc{Proof:} Suppose that a given executor $e$ could distinguish fewer states of $S$ than $S$ has equivalence classes and still correctly execute $f$. Then, by the pigeonhole principle, $S$ must have two  equivalence classes that $e$ cannot distinguish, and therefore that $e$ must map to the same output. But, by the definition of an equivalence class, $f$ always outputs different results  for different equivalence classes, a contradiction.
+%%\vspace{1.75mm}
+
+%\para{Equivalence class representation:} Given a binding $b$ for an $S$, we can transmit a default binding  from $b$'s equivalence class, instead of $b$ to an executor $e$ executing $f$ without changing its output, since $f$ is agnostic to the binding in an equivalence class $S$ takes. More generally, to minimize transmission, we can assign each of $S$'s equivalence classes an integer, which we refer to as its $codeword$, and transmit $b$'s equivalence class's codeword to $e$ instead of $b$ without changing $e$'s output, since $e$ can map $b$'s codeword back to a default binding from $b$'s equivalence class and execute as before. We formalize our definition of codewords below:
+
+%\textsc{Definition 3 - Codewords:} A $S$'s codewords are a set of integers that correspond to each of $S$'s equivalence classes.
+
+%%\vspace{1.75mm}
+%\noindent \textsc{Lemma 1:} If an $S$ has $k$ equivalence classes, an executor $e$  requires a minimium of $log_2(k-1)$ bits of information about $S$ to execute $f$ correctly. 
+%%\vspace{1.75mm}
+
+%LEM 1: we need only transmit $log_2(k)$ bits of information about $S$ to an $e$ executing $f$ to supply it with sufficient information to run correctly.
+
+%\noindent \textit{Proof:}  By \textsc{Lemma 1}, an $S$'s equivalence classes comprise the minimum set of states $e$ must distinguish to execute $f$. The most compact way to transmit these states is to assign each a codeword from the set [$0$, $k-1$], which takes at most $log_2(k-1)$ bits to transmit.
+%%\vspace{1.75mm}
+

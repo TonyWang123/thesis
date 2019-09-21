@@ -1,0 +1,77 @@
+====================
+
+%Such policy can be
+%specified by a high-level program as the following (\textbf{the firewall
+%program}):
+
+In Fig.~\ref{fig:code}, such a policy can be specified by a high-level SDC program in the
+SNAP~\cite{arashloo2016snap} system with three extensions: 
+(1) Add packet handling functions for available
+middleboxes in the network. For example, line 1 defines a middlebox variable
+$mFW$ with ``firewall'' as the name to indicate the middlebox $fw$ in the
+network; line 7 invokes the packet handling function of $mFW$ which can return
+the result of the identification of the flow (\ie, the 5-tuple of the packet).
+(2) Add the route algebra expression~\cite{gao2018t} to specify the requirements
+of paths in the network. For example, line 2 and 3 each defines that $path1$ and
+$path2$ must pass switch $b$  and $c$, respectively,  as waypoints constraints.
+
+%; 2. Support route algebra as the return. The route algebra~\cite{gao2018t} is used to give the constraints of a path in the network. For example, line 2 (3) specifies the path must pass through b (c) as its waypoints constraint.
+
+%Given the firewall program and the topology, the problem is how to setup the
+%configuration of datapaths (\eg, the flow rules in switches) to enforce packets
+%are handled as the program specifies. As state-of-the-art of compiling SDN
+%programs to datapath configuration, SNAP computes paths for packet forwarding
+%based on the OBS (One-Big-Switch) model. (The location of sources and
+%destinations of generated paths relies on hints from network operators who
+%specifies the mapping from ip addresses to ports in the
+%OBS~\cite{arashloo2016snap}.)
+
+%The configuration result of SNAP is shown in Fig.~\ref{fig:existing-result}.
+
+
+%Note that the original SNAP cannot support the route algebra and it considers the network as the OBS (One-Big-Switch) model. Therefore, one implementation is to add two virtual middleboxes at $c$ and $d$. Then, for the program side, it converts to the following where the variable $mC$ ($mD$) specifies the virtual middlebox at $c$ ($d$). (The location of sources and destinations of generated paths relies on hints from network operators who specifies the mapping from ip addresses to ports in the network~\cite{arashloo2016snap}.) 
+%
+%\begin{small}
+%\begin{verbatim}
+%...
+%L7: if mFW.handle(pkt) = GOOD:
+%L8:     mC.handle(pkt)
+%L9: else:
+%L10:    mD.handle(pkt)
+%\end{verbatim}
+%\end{small}
+
+Though SNAP can give a correct configuration, it does not fully utilize the
+network resource. Specifically, considering the stateless property of the
+firewall middlebox (\ie, the identification is only based on the 5-tuple of
+packets), after the identification of a flow, the result can be ``cached'' in
+switches and the following packets with the same 5-tuple can get the result
+without sending to the firewall.
+
+Fig.~\ref{fig:dsdc-result} gives the design which leverages this local state
+sharing. We assume the stateful switches logically have two tables: one is a
+state table (\ie, $match \rightarrow state$) and the other is a match table
+(\ie, $match+state \rightarrow action$). A packet first enters the state table
+to get its corresponding state (by matching its packet fields) and then enters
+the match table to get the action. By allowing the local state sharing, the
+firewall can share its result for a flow by installingl/modifying rules in the
+state table. For example, it can install a rule:
+$srcAddr=h1,dstAddr=h2,srcPort=12345,dstPort=22,protocol=tcp \rightarrow$
+\emph{PROCESSED} to the state table.
+
+The design with \concept{} has 5 steps: 1. The first packet arrives at the
+gateway $gw$ and then is forwarded to $fw$ (by getting a state
+\emph{NOT-PROCESSED} at $gw$); 2. $fw$ identifies the packet as \emph{SENSE} and
+then modifies its (\ie, 5-tuple) state at $a$ to \emph{SENSE}; 3. $fw$ sends the
+packet to $a$ where the packet gets state \emph{SENSE}; 4. $fw$ modifies the
+packet's state at $gw$ to \emph{PROCESSED}; 5. The following packets with the
+same match fields as the first packet enter $gw$ and then are all forwarded to
+$a$. Compared with the result of SNAP, this design can obtain a higher
+throughput as flows do not need to pass through the firewall except their first
+packets. However, the design not only needs to consider the paths but also the
+behavior of the firewall, \ie, modifying what state at which switches (like step
+2 and 4). Then, the problem is: Given a program and a topology, how to
+automatically setup the configurations of switches and middleboxes (\ie, their
+behavior) with local state sharing?
+
+

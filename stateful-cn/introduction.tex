@@ -1,0 +1,79 @@
+\section{Introduction}\label{sec:intro}
+The recent success of software defined networking~(SDN) systems~\cite{swan, b4,
+edgefabric} motivates the efforts to integrating SDN into military coalitions to
+realize an efficient, agile, and optimal software-defined coalition (SDC)
+infrastructure~\cite{vinod-sdc}. In SDC, autonomous coalition members operate
+under highly dynamic tactical network environments with resource constraints,
+such as limited power and processing capability, and dynamic connectivity. 
+
+One may think that the integration of SDN into SDC is straightforward, because SDN
+allows coalition members to realize efficient, flexible control over the
+coalition networks through flexible packet match-action processing on the data
+plane and logically centralized in the control plane~\cite{p4, rmt}.
+Despite these promising features, they are insufficient for supporting SDC.
+
+The fundamental reason behind this insufficiency is that SDC applications (\eg,
+flexible load-balancing and detection of DNS amplification attack) have
+stringent performance requirements (\eg, real-time, efficiency and reliability) 
+under \textit{highly dynamic tactical network environments}. Implementing SDC
+applications using the above SDN architecture in such environment would incur high communication overhead
+between the data and control planes of SDC applications, resulting in
+significant delay, efficiency and reliability issues.
+
+Some SDC datapaths are recently proposed, which offload \textit{complex,
+stateful} operations on packets (\eg, counting, flow security inspection and
+congestion control) from the control plane to data plane
+devices to improve the performance of SDC
+applications~\cite{bianchi2014openstate, opensdc}.  Different datapath primitives, such as state
+counter, packet buffer and packet in-network processing block, are designed in
+these systems to support various SDC applications, \eg, stateful firewall,
+proactive routing protection, and resilient routing. 
+
+However, these systems
+suffer from two limitations. First, results of offloaded stateful operations at
+data plane devices, which we refer to as \textit{local state} in the remaining
+of the paper, are not shared between data plane devices, resulting in
+substantial resource under-utilization in SDC networks. For example, a firewall
+middlebox is usually a bottleneck in an SDC network due to its
+limited processing speed. As such, once a data
+flow is identified as secure, non-sensitive by a firewall, all future packets of
+this flow should be forwarded along a path with higher reliability and throughput, without the need
+of passing the firewall again. However, the security state of this flow is only
+stored in the firewall and not shared with other devices. 
+Without knowing that this flow is non-malicious, an upstream
+device (\eg, a gateway router) in the SDC network still has to forward all the
+packets of this flow to the firewall. Second, although some distributed
+update primitives provide interfaces for sharing of local state between data
+plane devices~\cite{ddp}, configuring such low-level SDC datapaths still
+requires time-consuming and error-prone manual efforts.
+%Civilian high-level datapath programming systems, such as SNAP~\cite{snap}, do not support
+%the sharing of local state between data plane devices. Though this may 
+%work in more reliable civilian environments (\eg, campus and enterprise networks), 
+%it can substantially hurt the performance of SDC in the highly-dynamic tactical environments.  
+
+Toward addressing these two limitations, in this paper, we design \concept{}, a
+novel, high-level SDC programming system. Specifically,
+\concept{} introduces a series of novel programming primitives for users to
+model and specify the behavior of SDC data plane devices. In addition, we design
+a novel data structure called \textit{decision graph} and an efficient
+configuration framework to translate high-level SDC programs into
+efficient SDC datapath configurations. The translated configurations allow data
+plane devices in SDC to exchange local states with the goal of efficiently
+utilizing the resources in SDC networks (\eg, the packet processing capability
+of devices and the data transmitting capability between devices). We implement a prototype of \concept{} and demonstrate its efficiency and efficacy using experiments. Results show that with \concept{}, the total
+throughput can increase around two times higher than that of without
+\concept{}.
+
+The rest of this paper is organized as follows. Section~\ref{sec:motivation}
+discusses related work and gives an motivating example. 
+ Section~\ref{sec:system} gives an overview of \concept{} and Section~\ref{sec:details}
+ presents the details of how \concept{} translates a high-level SDC program into data plane configurations. We evaluate the
+ performance of \concept{} in Section~\ref{sec:eval} before concluding the paper
+ in Section~\ref{sec:conclusion}.
+
+
+
+
+
+
+

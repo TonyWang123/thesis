@@ -1,0 +1,10 @@
+\nomenclatureentry{01SDN@[{SDN}]\begingroup Software-Defined Network\nomeqref {0}|nompageref}{1}
+\nomenclatureentry{02IoV@[{IoV}]\begingroup Internet of Vehicles\nomeqref {0}|nompageref}{1}
+\nomenclatureentry{03SDIV@[{SDIV}]\begingroup Software-Defined Internet of Vehicles\nomeqref {0}|nompageref}{1}
+\nomenclatureentry{04AP@[{AP}]\begingroup Access Point\nomeqref {0}|nompageref}{1}
+\nomenclatureentry{05V@[{V}]\begingroup Vehicle\nomeqref {0}|nompageref}{1}
+\nomenclatureentry{06TCAM@[{TCAM}]\begingroup Ternary Content-Addressable Memory\nomeqref {0}|nompageref}{1}
+\nomenclatureentry{07T@[{T}]\begingroup Timeout for rules at switches\nomeqref {0}|nompageref}{1}
+\nomenclatureentry{08D(n, d)@[{D(n, d)}]\begingroup Euclidean distance between n and d\nomeqref {0}|nompageref}{1}
+\nomenclatureentry{09$F_i$@[{$F_i$}]\begingroup Data flow i\nomeqref {0}|nompageref}{1}
+\nomenclatureentry{10(S, D)@[{(S, D)}]\begingroup Packet with the source address S and the destination address D\nomeqref {0}|nompageref}{1}

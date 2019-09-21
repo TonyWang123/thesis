@@ -1,0 +1,207 @@
+%% bare_conf.tex
+%% V1.3
+%% 2007/01/11
+%% by Michael Shell
+%% See:
+%% http://www.michaelshell.org/
+%% for current contact information.
+%%
+%%*************************************************************************
+%% Legal Notice:
+%% This code is offered as-is without any warranty either expressed or
+%% implied; without even the implied warranty of MERCHANTABILITY or
+%% FITNESS FOR A PARTICULAR PURPOSE! 
+%% User assumes all risk.
+%% In no event shall IEEE or any contributor to this code be liable for
+%% any damages or losses, including, but not limited to, incidental,
+%% consequential, or any other damages, resulting from the use or misuse
+%% of any information contained here.
+%%
+%% All comments are the opinions of their respective authors and are not
+%% necessarily endorsed by the IEEE.
+%%
+%% This work is distributed under the LaTeX Project Public License (LPPL)
+%% ( http://www.latex-project.org/ ) version 1.3, and may be freely used,
+%% distributed and modified. A copy of the LPPL, version 1.3, is included
+%% in the base LaTeX documentation of all distributions of LaTeX released
+%% 2003/12/01 or later.
+%% Retain all contribution notices and credits.
+%% ** Modified files should be clearly indicated as such, including  **
+%% ** renaming them and changing author support contact information. **
+%%
+%% File list of work: IEEEtran.cls, IEEEtran_HOWTO.pdf, bare_adv.tex,
+%%                    bare_conf.tex, bare_jrnl.tex, bare_jrnl_compsoc.tex
+%%*************************************************************************
+%
+\documentclass[12pt, journal, onecolumn, draftclsnofoot]{IEEEtran}
+% correct bad hyphenation here
+\hyphenation{op-tical net-works semi-conduc-tor}
+
+%\usepackage{abstract}
+%Packages
+\usepackage{savesym}
+\usepackage{cite}
+\usepackage{subfigure}
+\usepackage{graphicx}
+\usepackage{setspace}
+\usepackage{amsmath}
+\usepackage{url}
+\usepackage{stackengine}
+\usepackage[linesnumbered,ruled,vlined]{algorithm2e}
+\usepackage{color}
+\usepackage{tabularx}
+\usepackage{etoolbox}
+\usepackage{amssymb}
+\usepackage{mathabx}
+\usepackage{amsthm}
+
+%Notation macros
+\SetKwProg{Fn}{Function}{}{end}
+\newcommand\Mark[1]{\textsuperscript#1}
+\newcommand{\para}[1]{\smallskip\noindent {\bf #1}}
+%Comment macros
+\newcommand{\yry}[1]{\textcolor{red}{[yry: #1]}}
+\newcommand{\cleet}[1]{\textcolor{red}{[cleet: #1]}}
+
+%Typological macros
+\newcommand\eg{{\em e.g.}}
+\newcommand\ie{{\em i.e.}}
+
+%Math macros
+\newtheorem{definition}{Definition}
+\newtheorem{lemma}{Lemma}
+\newtheorem{corrollary}{Corrollary}
+\DeclareMathOperator*{\argmin}{arg\,min}
+
+%General terminology macros
+\newcommand{\system}{Pipeline capacity}
+\newcommand{\exampledp}{\texttt{ExampleDP}}
+
+%Pipeline terminology macros
+\newcommand{\examplep}{$\mathit{example}$-$\mathit{p}$}
+\newcommand{\branches}{$\mathit{branches}$}
+\newcommand{\registerbits}{$\mathit{register}$-$\mathit{bits}$}
+
+%Theorem
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}{Proposition}
+
+%Table formatting lengths
+\newcolumntype{Z}{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}X}
+
+%Make verbatim font smaller
+\makeatletter
+\patchcmd{\@verbatim}
+  {\verbatim@font}
+  {\verbatim@font\fontsize{8}{10}\selectfont}
+  {}{}
+\makeatother
+
+%Correct bibtex compilation with no citations
+\makeatletter
+\def\endthebibliography{%
+  \def\@noitemerr{\@latex@warning{Empty `thebibliography' environment}}%
+  \endlist
+}
+\makeatother
+
+\IEEEoverridecommandlockouts
+
+\begin{document}
+%
+% paper title
+% can use linebreaks \\ within to get better formatting as desired
+\title{
+ %Toward Demand and Capacity Characteriztion of Programmable SDN DataPaths
+ %Realizability Analysis of High-Level SDN Programs to Low-Level SDN Data Paths
+ SDN Programming Capacity Theorem on Realizing High-Level Programs on Low-Level Datapaths
+}
+
+% author names and affiliations
+% use a multiple column layout for up to three different
+% affiliations
+%\author{
+%  Franck Le, Chris Leet, Christian Makaya, Miguel Rio, Xin Wang, Y. Richard Yang\Mark{1}\\%\vspace{0.03in}\\
+%Y. Richard Yang$^{+\ddagger}$ \\
+%Tongji$^+$ \hspace{0.5cm}
+%Yale$^\ddagger$
+%Y. Richard Yang \vspace{0.25in} Christopher Leet \vspace{0.25in} Franck Le 
+%\vspace{0.25in} Christian Makaya \vspace{0.25in} Miguel Rio\\
+%\Mark{1} Yale University\\
+%Paper ID: 1570387889
+%}
+
+\author{
+  \IEEEauthorblockN{
+    Xin Wang\IEEEauthorrefmark{2}\IEEEauthorrefmark{3},
+    Christopher Leet\IEEEauthorrefmark{1},
+    Y. Richard Yang\IEEEauthorrefmark{1}\IEEEauthorrefmark{2},
+    James Aspnes\IEEEauthorrefmark{1},
+    Changjun Jiang\IEEEauthorrefmark{2}\IEEEauthorrefmark{3}\IEEEauthorrefmark{4}
+  }\\
+  \IEEEauthorblockA{
+    \IEEEauthorrefmark{2}
+    Department of Computer Science, Tongji University
+  }
+  \IEEEauthorblockA{
+    \IEEEauthorrefmark{1}
+    Department of Computer Science, Yale University
+  }
+  \IEEEauthorblockA{
+    \IEEEauthorrefmark{3}
+    Key Laboratory of Embedded System and Service Computing, Ministry of Education, China
+  }
+  \IEEEauthorblockA{
+    \IEEEauthorrefmark{4}
+    Department of Computer Science, Donghua University
+  }
+  \thanks{A preliminary version of this work appeared in \cite{lee2018toward}.}
+}
+
+% make the title area
+\maketitle
+\thispagestyle{plain}
+\pagestyle{plain}
+
+\input{abstract}
+
+%\para{Keywords}: SDN, programmable SDN datapath, high-level SDN programing, capacity theorem
+
+% For peer review papers, you can put extra information on the cover
+% page as needed:
+% \ifCLASSOPTIONpeerreview
+% \begin{center} \bfseries EDICS Category: 3-BBND \end{center}
+% \fi
+%
+% For peerreview papers, this IEEEtran command inserts a page break and
+% creates the second title. It will be ignored for other modes.
+\IEEEpeerreviewmaketitle
+
+%\saythanks
+
+%\begin{spacing}{0.88}
+\input{introduction}
+\input{model}
+\input{main-results}
+\input{proofs}
+%\input{vector-calculation}
+%\input{pipeline-capacity-algebra}
+%\input{compression}
+\input{evaluation-2}
+%\input{evaluation}
+\input{related-work}
+\input{ack}
+
+\bibliographystyle{IEEEtran}
+%\bibliographystyle{abbrv}
+\bibliography{references}%[References]
+
+%\bibliography{./references}
+%\appendix
+%\input{proofs}
+%\input{pipeline-capacity-theorem}
+
+% that's all folks
+\end{document}
+
+
