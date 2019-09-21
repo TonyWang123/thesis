@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99999 (TeX Live 2018) (preloaded format=xelatex 2018.4.16)  20 SEP 2019 00:50
+This is XeTeX, Version 3.14159265-2.6-0.99999 (TeX Live 2018) (preloaded format=xelatex 2018.4.16)  21 SEP 2019 20:34
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1163,44 +1163,39 @@ LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
 (Font)                  OT1/cmtt/m/n --> TU/lmtt/bx/n on input line 48.
 
-(./global-cn-all.toc)
-\tf@toc=\write3
-\openout3 = `global-cn-all.toc'.
+
+LaTeX Warning: Citation `p4' on page 1 undefined on input line 54.
 
 
-
-LaTeX Warning: Citation `p4' on page 1 undefined on input line 56.
-
-
-LaTeX Warning: Citation `voellmy2013maple' on page 1 undefined on input line 56
+LaTeX Warning: Citation `voellmy2013maple' on page 1 undefined on input line 54
 .
 
 
-LaTeX Warning: Citation `beckett2016don' on page 1 undefined on input line 56.
+LaTeX Warning: Citation `beckett2016don' on page 1 undefined on input line 54.
 
 
-LaTeX Warning: Citation `tian2019safely' on page 1 undefined on input line 56.
+LaTeX Warning: Citation `tian2019safely' on page 1 undefined on input line 54.
 
 
-LaTeX Warning: Citation `snap' on page 1 undefined on input line 58.
+LaTeX Warning: Citation `snap' on page 1 undefined on input line 56.
+
+
+LaTeX Warning: Citation `snap' on page 1 undefined on input line 62.
+
+
+LaTeX Warning: Citation `sivaraman2016packet' on page 1 undefined on input line
+ 62.
+
+
+LaTeX Warning: Citation `gao2018t' on page 1 undefined on input line 62.
 
 LaTeX Font Info:    Font shape `TU/STSong(0)/m/sl' in size <10.53937> not avail
 able
 (Font)              Font shape `TU/STSong(0)/m/it' tried instead on input line 
-61.
+63.
 [1
 
 ]
-
-LaTeX Warning: Citation `snap' on page 2 undefined on input line 64.
-
-
-LaTeX Warning: Citation `sivaraman2016packet' on page 2 undefined on input line
- 64.
-
-
-LaTeX Warning: Citation `gao2018t' on page 2 undefined on input line 64.
-
 *************************************************
 * fontspec warning: "script-not-exist"
 * 
@@ -1234,80 +1229,81 @@ LaTeX Warning: Citation `gao2018t' on page 2 undefined on input line 64.
 . - 'small caps'  (m/sc) with NFSS spec.: 
 .................................................
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <10.53937> on input line 82.
+(Font)              <10.53937> on input line 80.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 82.
+(Font)              <7> on input line 80.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 82.
+(Font)              <5> on input line 80.
 File: figures/global-topo.pdf Graphic file (type pdf)
 <use figures/global-topo.pdf>
+
+LaTeX Warning: Reference `fig:topo' on page 2 undefined on input line 89.
+
 
 LaTeX Warning: Reference `fig:topo' on page 2 undefined on input line 91.
 
 [2]
 
-LaTeX Warning: Reference `fig:topo' on page 3 undefined on input line 93.
+LaTeX Warning: Citation `king1976symbolic' on page 3 undefined on input line 95
+.
 
 
-LaTeX Warning: Reference `voellmy2016magellan' on page 3 undefined on input lin
-e 97.
+LaTeX Warning: Citation `voellmy2016magellan' on page 3 undefined on input line
+ 95.
 
 File: figures/global-dt.pdf Graphic file (type pdf)
 <use figures/global-dt.pdf>
 [3]
 
 LaTeX Warning: No positions in optional float specifier.
-               Default added (so using `tbp') on input line 115.
+               Default added (so using `tbp') on input line 113.
 
 
-Overfull \hbox (19.15822pt too wide) in paragraph at lines 116--126
+Overfull \hbox (19.15822pt too wide) in paragraph at lines 114--124
 [][] 
  []
 
 
 LaTeX Warning: No positions in optional float specifier.
-               Default added (so using `tbp') on input line 130.
+               Default added (so using `tbp') on input line 128.
 
 
-Overfull \hbox (19.48495pt too wide) in paragraph at lines 131--139
+Overfull \hbox (19.48495pt too wide) in paragraph at lines 129--137
 [][] 
  []
 
-[4] [5]
+[4]
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 File: figures/global-topo2.pdf Graphic file (type pdf)
 <use figures/global-topo2.pdf>
 
-LaTeX Warning: Reference `gao2018t' on page 6 undefined on input line 219.
+LaTeX Warning: Reference `gao2018t' on page 5 undefined on input line 217.
 
-[6]
+[5] [6]
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[7] [8]
+[7]
 File: figures/global-eval-420-png.png Graphic file (type bmp)
 <figures/global-eval-420-png.png>
 File: figures/global-eval-820-png.png Graphic file (type bmp)
 <figures/global-eval-820-png.png>
 File: figures/global-eval-840-png.png Graphic file (type bmp)
 <figures/global-eval-840-png.png>
- [9] [10] (./global-cn-all.aux)
+ [8] [9] (./global-cn-all.aux)
 
 LaTeX Warning: There were undefined references.
 
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
  ) 
 Here is how much of TeX's memory you used:
- 15080 strings out of 492970
- 361952 string characters out of 6133938
- 450961 words of memory out of 5000000
- 18955 multiletter control sequences out of 15000+600000
+ 15088 strings out of 492970
+ 362788 string characters out of 6133938
+ 449961 words of memory out of 5000000
+ 18966 multiletter control sequences out of 15000+600000
  531518 words of font info for 54 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  53i,9n,67p,10419b,536s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on global-cn-all.pdf (10 pages).
+Output written on global-cn-all.pdf (9 pages).

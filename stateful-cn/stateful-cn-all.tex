@@ -46,11 +46,9 @@
  
 \begin{document}
  
-\tableofcontents
- 
 \section{引言}
 
-近年来软件定义网络（SDN）的成功~\cite{swan, b4, edgefabric} 促使研究人员考虑将SDN应用于军事联盟（military coalition）中，以实现一个高效、敏捷的软件定义联盟网络（SDC）~\cite{vinod-sdc}。在SDC中，多个联盟成员可以在一个高动态并受限（例如电力、处理能力）的战术网络中进行操作。
+近年来SDN的成功~\cite{swan, b4, edgefabric} 促使研究人员考虑将其应用于军事联合（military coalition）中，以实现一个高效、敏捷的软件定义联合（Software Defined Coalition，SDC）~\cite{vinod-sdc}。在SDC网络中，多个联合成员可以在一个高动态并受限（如电力）的战术网络中进行操作。
 
 %
 %The recent success of software defined networking~(SDN) systems~\cite{swan, b4,
@@ -60,7 +58,7 @@
 %under highly dynamic tactical network environments with resource constraints,
 %such as limited power and processing capability, and dynamic connectivity. 
 
-将SDN集成到SDC中相对直观，因为通过SDN数据面上的灵活的数据包匹配处理和控制面上的集中式控制，联盟成员可以在联盟网络上实现高效、灵活的控制~\cite{p4, rmt}。然而这些突出的性质仍然无法充分满足SDC的需求。
+将SDN与军事联合结合并形成SDC的想法相对直观，因为通过SDN数据面上的灵活的数据包匹配处理和控制面上的集中式控制，联合成员可以在联合网络上实现高效、灵活的控制~\cite{p4, rmt}。然而这些突出的性质仍然无法充分满足需求。
 
 %One may think that the integration of SDN into SDC is straightforward, because SDN
 %allows coalition members to realize efficient, flexible control over the
@@ -68,7 +66,7 @@
 %plane and logically centralized in the control plane~\cite{p4, rmt}.
 %Despite these promising features, they are insufficient for supporting SDC.
 
-根本原因是在一个高动态战术网络环境中，SDC应用（例如灵活的负载均衡、DNS放大攻击的探测）对性能（例如实时性、高效性、可靠性）有着非常苛刻的要求。在一个高动态战术网络环境中通过传统SDN架构实现的SDC应用会导致数据面和控制面之间频繁的数据传输，带来严重的时延，以及低效、不可靠等问题。
+根本原因是在一个高动态战术网络环境中，SDC应用（例如灵活的负载均衡、DNS放大攻击的探测）对性能（例如实时性、高效性、可靠性）有着非常苛刻的要求。在一个高动态战术网络环境中通过传统SDN架构运行的SDC应用，由于数据面和控制面之间频繁的数据传输，会受到严重的时延等问题。
 
 %The fundamental reason behind this insufficiency is that SDC applications (\eg,
 %flexible load-balancing and detection of DNS amplification attack) have
@@ -78,7 +76,7 @@
 %between the data and control planes of SDC applications, resulting in
 %significant delay, efficiency and reliability issues.
 
-最近研究人员提出了一些新的SDC数据平面设计~\cite{bianchi2014openstate, opensdc}。它们将对数据包进行的复杂的有状态的操作（例如计数、流安全探测、拥塞控制）从控制平面卸载到数据平面，以提高SDC应用的性能。在这些系统中，不同的数据平面原语，如状态计数器、数据包缓存以及数据包网络中（in-network）处理模块被设计出来以支持不同的SDC应用，如有状态防火墙、主动路由保护、弹性路由等。
+最近研究人员提出了一些新的SDC数据平面设计~\cite{bianchi2014openstate, opensdc}。它们将对数据包进行的复杂有状态的操作（例如计数、流安全探测、拥塞控制）从控制平面卸载到数据平面，以提高SDC应用的性能。在这些系统中，不同的数据平面原语，如状态计数器、数据包缓存以及数据包网络中计算（in-network compute）模块被设计出来以支持不同的SDC应用，如有状态防火墙、主动路由保护、弹性路由等。
 
 %Some SDC datapaths are recently proposed, which offload \textit{complex,
 %stateful} operations on packets (\eg, counting, flow security inspection and
@@ -89,7 +87,7 @@
 %these systems to support various SDC applications, \eg, stateful firewall,
 %proactive routing protection, and resilient routing. 
 
-然而，这些系统有以下两点不足：1. 那些被卸载的数据平面上的有状态操作的结果（以下我们称之为本地状态）并没有在多个数据平面设备上进行共享，导致SDC网络中的巨大的资源浪费。例如，由于防火墙中间盒的有限的处理速度，其在SDC网络中经常是一个瓶颈。当一个数据流通过防火墙被标志为安全非敏感数据后，其数据流的后续数据包应该沿着一个高可靠高带宽的路径进行转发，而不同再次经过该防火墙。然而，由于该数据流的安全状态只保存在该防火墙设备而非共享给其他设备，在不确定该数据流是否安全情况下，一个上流设备（例如，一个网关路由器）仍然需要将所有数据包转发到该防火墙；2. 尽管已有一些分布式更新原语提供了在多个数据面设备之间共享本地状态的能力~\cite{ddp}，配置这些低层次的SDC数据面任然需要花费大量的时间而且非常容易出错。
+然而，这些系统有以下两点不足：1. 那些被卸载到数据平面上的有状态操作的结果（以下我们称之为本地状态）并没有在多个数据平面设备上进行共享，导致SDC网络中的巨大的资源浪费。例如，由于防火墙中间盒的有限的处理速度，其在SDC网络中经常是一个瓶颈。当一个数据流通过防火墙被标志为安全非敏感数据后，其数据流的后续数据包应该沿着一个高可靠高带宽的路径进行转发，而不同再次经过该防火墙。然而，由于该数据流的安全状态只保存在该防火墙设备而非共享给其他设备，在不确定该数据流是否安全情况下，一个上流设备（例如，一个网关路由器）仍然需要将所有数据包转发到该防火墙；2. 尽管已有一些分布式更新原语提供了在多个数据面设备之间共享本地状态的能力~\cite{ddp}，配置这些低层次的SDC数据面任然需要花费大量的时间而且非常容易出错。
 
 %However, these systems
 %suffer from two limitations. First, results of offloaded stateful operations at
@@ -781,6 +779,10 @@ Without Dandelion & 4.5 (s)    & 10.8 (s)   & 11.5 (s)         \\ \hline
 \label{fig:eval34}
 \end{figure}
 
+
+\section{本章小结}
+
+本章针对SDC网络设计高级编程系统Dandelion，并基于共享本地状态的方法，优化系统性能。实验表明
 
 
 

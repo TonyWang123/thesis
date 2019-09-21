@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99999 (TeX Live 2018) (preloaded format=xelatex 2018.4.16)  20 SEP 2019 03:20
+This is XeTeX, Version 3.14159265-2.6-0.99999 (TeX Live 2018) (preloaded format=xelatex 2018.4.16)  21 SEP 2019 21:11
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1163,147 +1163,140 @@ LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
 (Font)                  OT1/cmtt/m/n --> TU/lmtt/bx/n on input line 47.
 
-(./stateful-cn-all.toc
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <10.53937> on input line 4.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 4.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 4.
-)
-\tf@toc=\write3
-\openout3 = `stateful-cn-all.toc'.
+
+LaTeX Warning: Citation `swan' on page 1 undefined on input line 51.
 
 
-
-LaTeX Warning: Citation `swan' on page 1 undefined on input line 53.
-
-
-LaTeX Warning: Citation `b4' on page 1 undefined on input line 53.
+LaTeX Warning: Citation `b4' on page 1 undefined on input line 51.
 
 
-LaTeX Warning: Citation `edgefabric' on page 1 undefined on input line 53.
+LaTeX Warning: Citation `edgefabric' on page 1 undefined on input line 51.
 
 
-LaTeX Warning: Citation `vinod-sdc' on page 1 undefined on input line 53.
+LaTeX Warning: Citation `vinod-sdc' on page 1 undefined on input line 51.
 
 
-LaTeX Warning: Citation `p4' on page 1 undefined on input line 63.
+LaTeX Warning: Citation `p4' on page 1 undefined on input line 61.
 
 
-LaTeX Warning: Citation `rmt' on page 1 undefined on input line 63.
+LaTeX Warning: Citation `rmt' on page 1 undefined on input line 61.
 
 
 LaTeX Warning: Citation `bianchi2014openstate' on page 1 undefined on input lin
-e 81.
+e 79.
 
 
-LaTeX Warning: Citation `opensdc' on page 1 undefined on input line 81.
+LaTeX Warning: Citation `opensdc' on page 1 undefined on input line 79.
+
+
+LaTeX Warning: Citation `ddp' on page 1 undefined on input line 90.
 
 LaTeX Font Info:    Font shape `TU/STSong(0)/m/sl' in size <10.53937> not avail
 able
 (Font)              Font shape `TU/STSong(0)/m/it' tried instead on input line 
-82.
+116.
 [1
 
 ]
 
-LaTeX Warning: Citation `ddp' on page 2 undefined on input line 92.
-
-
-LaTeX Warning: Citation `arashloo2016snap' on page 2 undefined on input line 14
-1.
+LaTeX Warning: Citation `arashloo2016snap' on page 2 undefined on input line 13
+9.
 
 
 LaTeX Warning: Citation `heorhiadi2016simplifying' on page 2 undefined on input
- line 141.
+ line 139.
 
 
-LaTeX Warning: Citation `soule2014merlin' on page 2 undefined on input line 141
+LaTeX Warning: Citation `soule2014merlin' on page 2 undefined on input line 139
 .
 
 
-LaTeX Warning: Citation `benet2018mp' on page 2 undefined on input line 141.
+LaTeX Warning: Citation `benet2018mp' on page 2 undefined on input line 139.
 
 
-LaTeX Warning: Citation `katta2016hula' on page 2 undefined on input line 141.
+LaTeX Warning: Citation `katta2016hula' on page 2 undefined on input line 139.
 
 
 LaTeX Warning: Citation `gember2012stratos' on page 2 undefined on input line 1
-41.
+39.
 
 
 LaTeX Warning: Citation `anwer2015programming' on page 2 undefined on input lin
-e 141.
+e 139.
 
 
 LaTeX Warning: Citation `monsanto2012compiler' on page 2 undefined on input lin
-e 141.
+e 139.
 
 
-LaTeX Warning: Citation `kohler2018p4cep' on page 2 undefined on input line 141
+LaTeX Warning: Citation `kohler2018p4cep' on page 2 undefined on input line 139
 .
 
 
 LaTeX Warning: Citation `bianchi2014openstate' on page 2 undefined on input lin
-e 141.
+e 139.
 
 
-LaTeX Warning: Citation `opensdc' on page 2 undefined on input line 141.
+LaTeX Warning: Citation `opensdc' on page 2 undefined on input line 139.
 
 
 LaTeX Warning: Citation `heorhiadi2016simplifying' on page 2 undefined on input
- line 141.
+ line 139.
 
 
-LaTeX Warning: Citation `soule2014merlin' on page 2 undefined on input line 141
+LaTeX Warning: Citation `soule2014merlin' on page 2 undefined on input line 139
 .
 
 
-LaTeX Warning: Citation `kohler2018p4cep' on page 2 undefined on input line 141
+LaTeX Warning: Citation `kohler2018p4cep' on page 2 undefined on input line 139
 .
 
 
-LaTeX Warning: Citation `opensdc' on page 2 undefined on input line 141.
+LaTeX Warning: Citation `opensdc' on page 2 undefined on input line 139.
 
 
-LaTeX Warning: Citation `arashloo2016snap' on page 2 undefined on input line 14
-1.
-
-[2]
-
-LaTeX Warning: Citation `ddp' on page 3 undefined on input line 168.
+LaTeX Warning: Citation `arashloo2016snap' on page 2 undefined on input line 13
+9.
 
 
-LaTeX Warning: Citation `katta2016hula' on page 3 undefined on input line 168.
+LaTeX Warning: Citation `ddp' on page 2 undefined on input line 166.
 
 
-LaTeX Warning: Citation `benet2018mp' on page 3 undefined on input line 168.
+LaTeX Warning: Citation `katta2016hula' on page 2 undefined on input line 166.
+
+
+LaTeX Warning: Citation `benet2018mp' on page 2 undefined on input line 166.
 
 File: figures/ss-122.pdf Graphic file (type pdf)
 <use figures/ss-122.pdf>
 File: figures/ss-123.pdf Graphic file (type pdf)
 <use figures/ss-123.pdf>
 
-Overfull \hbox (3.50961pt too wide) in paragraph at lines 181--191
+Overfull \hbox (3.50961pt too wide) in paragraph at lines 179--189
  [][] 
  []
 
 
-Overfull \hbox (3.50961pt too wide) in paragraph at lines 181--191
+Overfull \hbox (3.50961pt too wide) in paragraph at lines 179--189
  [] 
  []
 
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <10.53937> on input line 195.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 195.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 195.
+[2]
 
 LaTeX Warning: Citation `arashloo2016snap' on page 3 undefined on input line 21
-5.
+3.
 
 [3]
 
-LaTeX Warning: Reference `sec:motivation' on page 4 undefined on input line 332
+LaTeX Warning: Reference `sec:motivation' on page 4 undefined on input line 330
 .
 
-[4]
 *************************************************
 * fontspec warning: "script-not-exist"
 * 
@@ -1336,94 +1329,88 @@ LaTeX Warning: Reference `sec:motivation' on page 4 undefined on input line 332
 . - 'normal' (m/n) with NFSS spec.: <->"STFangsong/OT"
 . - 'small caps'  (m/sc) with NFSS spec.: 
 .................................................
-[5]
+[4]
 File: figures/ss-125.pdf Graphic file (type pdf)
 <use figures/ss-125.pdf>
 File: figures/ss-124.pdf Graphic file (type pdf)
 <use figures/ss-124.pdf>
- [6]
+ [5] [6]
 
 LaTeX Warning: Citation `arashloo2016snap' on page 7 undefined on input line 50
-7.
+5.
 
 
-LaTeX Warning: Citation `smolka2015fast' on page 7 undefined on input line 507.
+LaTeX Warning: Citation `smolka2015fast' on page 7 undefined on input line 505.
 
 
-[7]
 File: figures/ss-126.pdf Graphic file (type pdf)
 <use figures/ss-126.pdf>
- [8]
+[7]
 File: figures/ss-127.pdf Graphic file (type pdf)
 <use figures/ss-127.pdf>
- [9]
+ [8]
 
 LaTeX Warning: No positions in optional float specifier.
-               Default added (so using `tbp') on input line 551.
+               Default added (so using `tbp') on input line 549.
 
 
 LaTeX Warning: No positions in optional float specifier.
-               Default added (so using `tbp') on input line 580.
+               Default added (so using `tbp') on input line 578.
 
 File: figures/ss-128.pdf Graphic file (type pdf)
 <use figures/ss-128.pdf>
-[10]
+[9] [10]
 File: figures/ss-129.pdf Graphic file (type pdf)
 <use figures/ss-129.pdf>
- [11]
 File: figures/ss-130.pdf Graphic file (type pdf)
 <use figures/ss-130.pdf>
- [12] [13]
+ [11] [12]
 File: figures/ss-eval1.pdf Graphic file (type pdf)
 <use figures/ss-eval1.pdf>
 File: figures/ss-eval2.pdf Graphic file (type pdf)
 <use figures/ss-eval2.pdf>
 
-Overfull \hbox (3.50961pt too wide) in paragraph at lines 697--702
+Overfull \hbox (3.50961pt too wide) in paragraph at lines 695--700
  [][] 
  []
 
 
-Overfull \hbox (3.50961pt too wide) in paragraph at lines 697--702
+Overfull \hbox (3.50961pt too wide) in paragraph at lines 695--700
  [] 
  []
 
 
 LaTeX Warning: No positions in optional float specifier.
-               Default added (so using `tbp') on input line 746.
+               Default added (so using `tbp') on input line 744.
 
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7.52812> on input line 748.
-[14]
+(Font)              <7.52812> on input line 746.
 File: figures/ss-eval3.pdf Graphic file (type pdf)
 <use figures/ss-eval3.pdf>
 File: figures/ss-eval4.pdf Graphic file (type pdf)
 <use figures/ss-eval4.pdf>
 
-Overfull \hbox (3.50961pt too wide) in paragraph at lines 774--779
+Overfull \hbox (3.50961pt too wide) in paragraph at lines 772--777
  [][] 
  []
 
 
-Overfull \hbox (3.50961pt too wide) in paragraph at lines 774--779
+Overfull \hbox (3.50961pt too wide) in paragraph at lines 772--777
  [] 
  []
 
-[15] [16] (./stateful-cn-all.aux)
+[13] [14] [15] (./stateful-cn-all.aux)
 
 LaTeX Warning: There were undefined references.
 
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
  ) 
 Here is how much of TeX's memory you used:
- 15174 strings out of 492970
- 366983 string characters out of 6133938
- 441965 words of memory out of 5000000
- 19050 multiletter control sequences out of 15000+600000
+ 15170 strings out of 492970
+ 366933 string characters out of 6133938
+ 442965 words of memory out of 5000000
+ 19049 multiletter control sequences out of 15000+600000
  532402 words of font info for 53 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  53i,8n,67p,10421b,534s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on stateful-cn-all.pdf (16 pages).
+Output written on stateful-cn-all.pdf (15 pages).
