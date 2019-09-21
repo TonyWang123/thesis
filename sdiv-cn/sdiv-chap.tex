@@ -57,6 +57,8 @@
 %Most applications and services in IoV, e.g., road security, fleet management, navigation, billing, and multimedia, rely on data transfers between vehicles and roadside infrastructure (V2I) and among vehicles (V2V) \cite{du2015information}.
 %Several researches \cite{ott2005disconnection, balasubramanian2008interactive} have demonstrated the feasibility of providing connectivity via road-side APs and the ubiquity of WiFi.
 
+
+% TODO XXX
 Hare等人~\cite{hare2012policy}设计一个集中式的策略框架来管理车辆网络的光谱资源来保证用户需要的数据传输性能。Abadi等人（XXX）根据有限的交通信息，对交通流量进行预测以及交通拥塞控制。Wu等人~\cite{wu2013improving}结合GPS信息提高了对车辆姿态估计的准确度。Ahn等人~\cite{ahn2012risa}第一个提出了面向车辆网络的分布式路面状况探测以及数据分发的架构。Calafate等人~\cite{calafate2012efficient}研究通过计算最优数据包大小以及决定最优前向纠错，实现广播下的可靠数据传送机制。
 
 %The studies \cite{joshi2011vehicular, xu2011utilizing} deal with the efficient communication between APs and vehicles. For routing and data forwarding, \cite{sahu2015bang, zhang2014geomob, zhu2013zoom, nzouonta2009vanet} study the routing protocol and fast forwarding. Routing in IoV in different categories is well reviewed in \cite{cheng2015its}. To manage vehicular networks, a centralized policy framework is introduced and called Virtuoso in \cite{hare2012policy}. It manages spectrum resources while ensuring users to have suitable access to meet their communication needs. In \cite{abadi2015traffic}, traffic flow prediction for traffic forecasting and congestion management is made. The work \cite{wu2013improving} estimates the attitude of a vehicle for low-cost inertial navigation system/GPS. Ahn et al. \cite{ahn2012risa} present the Road Information Sharing Architecture (RISA), representing the first distributed approach to road condition detection and dissemination for vehicular networks. \textcolor{blue}{Calafate et al. \cite{calafate2012efficient} study reliable data delivery through broadcasting by computing the optimal packet size and determining the best Forward Error Correction (FEC) scheme.}
@@ -295,7 +297,7 @@ Kim等人~\cite{kim2013improving}考虑在校园网络以及家庭网络中利�
 
 \begin{algorithm}[t]
 \caption{ModifyAddress($s,d,path$)}
-\label{Algorithm 3}
+\label{Algorithm3}
 \begin{algorithmic}[1]
 %\algsetup{linenosize=\footnotesize}
 %\footnotesize
@@ -330,7 +332,7 @@ Kim等人~\cite{kim2013improving}考虑在校园网络以及家庭网络中利�
 \vspace{-0.3in}
 \end{figure}
 
-在本小节中，我们将展示如何在交换机上安装规则。如算法XXX所示，其主要思想是我们通过利用OpenFlow特性在分支节点（第八至九行）添加数据包头修改操作。输入$s$表示数据源，$d$表示车辆的当前位置，$path$由$PathFind$计算生成。当数据包匹配规则并修改匹配字段时，它将在转发到特定端口之前应用修改。修改后的地址使数据包转发到直接连接到车辆的交换机。通过使用地址修改算法，我们让具有不同源地址但相同目的地地址的数据包匹配相同的规则，从而减少规则数量并减少流表大小。我们将此方法称为目标驱动模型，因为它只需要匹配目标地址。
+在本小节中，我们将展示如何在交换机上安装规则。如算法~\ref{Algorithm3}所示，其主要思想是我们通过利用OpenFlow特性在分支节点（第八至九行）添加数据包头修改操作。输入$s$表示数据源，$d$表示车辆的当前位置，$path$由$PathFind$计算生成。当数据包匹配规则并修改匹配字段时，它将在转发到特定端口之前应用修改。修改后的地址使数据包转发到直接连接到车辆的交换机。通过使用地址修改算法，我们让具有不同源地址但相同目的地地址的数据包匹配相同的规则，从而减少规则数量并减少流表大小。我们将此方法称为目标驱动模型，因为它只需要匹配目标地址。
 
 %In this subsection, we will show how to install rules at switches. The main idea is that we add a packet header modifying action at the branching nodes (Line 8-9) by leveraging the properties of OpenFlow as shown in Algorithm 2. The input $s$ denotes the source of data, $d$ denotes the current location of the vehicle and $path$ is computed by $PathFind$. \textcolor{blue}{When a packet matches a rule to modify the match field, it will first apply the modification before forwarding to a particular port, and this process is guaranteed by the OpenFlow protocol. The modified address makes the packet forwarded to the switch directly connecting to the vehicle.} We clarify that the rule matching $s$ means that the controller records the source address of every request, not the rule in the switch matches $s$. By using the address modification algorithm, we let packets with different source addresses but the same destination address match the same rule and hence reduce the number of rules and reduce the flow table size. We call this approach a destination-driven model, since it needs to match the destination address only.
 
@@ -347,14 +349,14 @@ Kim等人~\cite{kim2013improving}考虑在校园网络以及家庭网络中利�
 
 
 
-%\begin{figure} [t]
-%\begin{center}
-%\includegraphics[width=1\columnwidth]{fig-6-31.eps}
-%\caption{Data flow $F_{1}$ (red line) comes from $S_{1}$ and its destination is $C$; Data flow $F_{2}$ (blue line) comes from $S_{1}$ and its destination is $D$; Data flow $F_{3}$ (green line) comes from $S_{2}$ and its destination is $D$. The matching conditions only depend on the destination address.} \label{fig6}
-%\end{center}
-%\vspace{-0.3in}
-%\end{figure}
-%
+\begin{figure} [t]
+\begin{center}
+\includegraphics[width=1\columnwidth]{figures/fig-6-31.eps}
+\caption{Data flow $F_{1}$ (red line) comes from $S_{1}$ and its destination is $C$; Data flow $F_{2}$ (blue line) comes from $S_{1}$ and its destination is $D$; Data flow $F_{3}$ (green line) comes from $S_{2}$ and its destination is $D$. The matching conditions only depend on the destination address.} \label{fig6}
+\end{center}
+\vspace{-0.3in}
+\end{figure}
+
 
 
 \begin{figure} [t]
@@ -414,7 +416,7 @@ N对N场景作为一种普遍的情况，给出了有关如何实现优化的规
 
 \section{实验评估} \label{Evaluation}
 
-我们使用Floodlight~\cite{Floodlight}作为控制器以及Mininet~\cite{mininet}来构建SDN环境，以便评估SDIV中优化的流规则下发。我们在服务器上运行Floodlight，配置为16 AMD Opteron(tm)处理器6172和16GB内存。服务器安装了Linux内核版本2.6.32。我们在另一个单独的服务器上运行Mininet。服务器之间通过10Gbps以太网连接。
+我们使用Floodlight~\cite{floodlight}作为控制器以及Mininet~\cite{mininet}来构建SDN环境，以便评估SDIV中优化的流规则下发。我们在服务器上运行Floodlight，配置为16 AMD Opteron(tm)处理器6172和16GB内存。服务器安装了Linux内核版本2.6.32。我们在另一个单独的服务器上运行Mininet。服务器之间通过10Gbps以太网连接。
 
 
 %We use Floodlight~\cite{Floodlight} as the controller and Mininet~\cite{mininet} to build an SDN environment so as to evaluate the proposed improved rule installation approach in SDIV. We run Floodlight on a server, with 16 AMD Opteron(tm) processor 6172 and 16GB memory. Our server is installed with Linux kernel version 2.6.32. We run Mininet on a separate server. Servers are connected by a 10Gbps Ethernet network.
