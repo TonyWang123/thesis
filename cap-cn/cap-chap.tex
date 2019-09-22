@@ -20,16 +20,6 @@ SDN的一个主要研究方向是可编程、高效的数据通路(例如, OpenF
 
 然而，解决数据通路容量问题并非易事。考虑一个简单的数据通路，Simple-DP。如图~\ref{cap:fig:fig1-update}所示，它是最简单的数据通路之一，由构成流水线的三个表组成，其中第一个表(\texttt{t1})在源IP上匹配，并且可以跳到以下两个表，这两个表都在目标IP上匹配。
 
-\begin{figure}[h!]
-    \centering
-    % \vspace{-0.1in}
-    \includegraphics[scale = 0.9]{figures/figure1.pdf}
-    % \vspace{-0.1in}
-    \caption{一个简单的数据通路示例: Simple-DP}
-    % \vspace{-0.1in}
-    \label{cap:fig:fig1-update}
-\end{figure}
-
 我们再考虑下面两个简单的高级SDN程序，它们都采用算法性、事件驱动的编程模型（下面会给出有关编程模型的更多详细信息）。我们可以发现第一个程序可以通过Simple-DP实现，而第二个程序则不能。
 
 {\small
@@ -55,6 +45,18 @@ SDN的一个主要研究方向是可编程、高效的数据通路(例如, OpenF
     L7:     return Drop();
     \end{verbatim}
 }
+
+
+
+\begin{figure}[h!]
+    \centering
+    % \vspace{-0.1in}
+    \includegraphics[scale = 0.9]{figures/figure1.pdf}
+    % \vspace{-0.1in}
+    \caption{一个简单的数据通路示例: Simple-DP}
+    % \vspace{-0.1in}
+    \label{cap:fig:fig1-update}
+\end{figure}
 
 尽管前面的数据通路和高级程序是最简单的，但它们已经可以说明解决SDN数据通路容量问题并不明显。由于需要实现多个服务，一般数据通路和高级程序可能要复杂得多，因此它们在分析中可能会带来严峻的挑战。本章的目标是试图得到一个系统的方法来解决SDN数据通路容量问题。
 
@@ -100,6 +102,7 @@ f : dom(\mathcal{M}) \rightarrow \mathcal{R}.
 这样的函数所在的空间标识为$\mathcal{F}$。
 
 \para{示例}：我们用如下的路由函数\texttt{onPkt}来演示我们路由函数模型的一些关键特性。
+{\small
 \begin{verbatim}
 \\  Routing function: onPkt
     Map hostTbl[key: dstIP, value: switch]
@@ -115,10 +118,11 @@ L6:   dstSw = hostTbl[dstIP]
 L7:   return Forward(port = routeTbl[dstCond, dstSw])
 L8: return Drop()
 \end{verbatim}
+}
 
 具体来说, \texttt{onPkt}读取匹配字段
-$\mathcal{M} = \langle \texttt{ethType}, \texttt{srcIP}, \texttt{srcPort}, \texttt{dstIP}, \texttt{dstPort} \rangle$ 
-并将$\mathcal{M}$域中的每个值映射到$\mathcal{R}=\{\texttt{Drop()}, \texttt{Forward(port=x)} \}$中的路由操作。虽然我们将\texttt{onPkt}以命令式函数写出，需要强调的是我们的模型是完全通用的，并且没有指定编程范式。
+$\mathcal{M} = \langle \texttt{ethType}, \texttt{srcIP}, \texttt{srcPort},$ $ \texttt{dstIP}, \texttt{dstPort} \rangle$ 
+并将$\mathcal{M}$域中的每个值映射到$\mathcal{R}=\{\texttt{Drop()}, $ $\texttt{Forward(port=x)} \}$中的路由操作。虽然我们将\texttt{onPkt}以命令式函数写出，需要强调的是我们的模型是完全通用的，并且没有指定编程范式。
 
 
 具体地说，\texttt{onPkt}的前三行声明了键值表：\texttt{hostTable}和\texttt{condTable}。它们分别把每个IP地址和一个连接交换机以及主机条件(例如, 身份验证状态)进行关联，而\texttt{routeTable}将（交换机、条件）映射到其转发端口。在\texttt{onPkt}的主体部分上，\texttt{L2}和\texttt{L3}检测并丢弃非IPv4流量，而\texttt{L8}则丢弃来自未验证的终端的流量。如果验证通过，\texttt{L5}到\texttt{L7}设置\texttt{dstCond}和\texttt{dstSw}变量，然后基于这两个变量从\texttt{routeTbl}返回路由操作。
@@ -254,12 +258,12 @@ L8: if !g1: return Drop()
 
 \begin{table}
 \centering
-\begin{tabular}{| l | l |}
+\begin{tabular}{ l | l }
   \hline
   \textbf{符号} & \textbf{定义}\\
   \hline
   \hline
-  \multicolumn{2}{|l|}{\textbf{路由函数相关符号}} \\
+  \multicolumn{2}{l}{\textbf{路由函数相关符号}} \\
   \hline
   $f$ & 路由函数\\
   $\mathcal{F}$ & 路由函数空间\\
@@ -269,7 +273,7 @@ L8: if !g1: return Drop()
   $\mathcal{R}$ &  $\forall$有效路由行为的集合\\ 
   \hline
   \hline
-  \multicolumn{2}{|l|}{\textbf{流水线相关符号}} \\
+  \multicolumn{2}{l}{\textbf{流水线相关符号}} \\
   \hline
   $pl$ & 流水线\\
   $\mathcal{P}$ & 流水线函数空间\\
@@ -782,7 +786,7 @@ L6:     return route
 \begin{table*}[t]
 \centering
 \resizebox{\linewidth}{!}{
-\begin{tabular}{ | l | l | l | l | l | l | l | l | l | l | }
+\begin{tabular}{  l | l | l | l | l | l | l | l | l | l }
     \hline
     $f$ & $bits(IP)$ & $O(\texttt{hostTbl})$ & $O(\texttt{routeTbl})$ & $O(\texttt{condTbl})$ & $O(\texttt{fwdTbl})$ & $\tau$(f)(\texttt{srcIP}) & $\tau$(f)(\texttt{dstIP}) & $\tau_G$(f)(\texttt{srcIP}) & $\tau_G$(f)(\texttt{dstIP}) \\
     \hline   
@@ -868,7 +872,7 @@ L6:     return route
 \begin{table}[t]
 \centering
 \scalebox{0.8}{
-\begin{tabular}{ | l | l | l | l | l | }
+\begin{tabular}{ l | l | l | l | l }
     \hline
     流水线 & \#路径数量 & 时间 (ms) & \#有效 $M$ & \#$M$ \\
     \hline
@@ -900,7 +904,7 @@ L6:     return route
   % \subfigure[表数量 = 2]{
   %   \label{cap:fig:eval-rp:a} %% label for first subfigure
   %   \includegraphics[width=0.4\textwidth]{figures/figure-eval-rp-2.pdf}}
-  \begin{subfigure}[b]{0.4\textwidth}
+  \begin{subfigure}[b]{0.46\textwidth}
       \includegraphics[width=\textwidth]{figures/figure-eval-rp-2.pdf}
       \caption{表数量 = 2}
       \label{cap:fig:eval-rp:a}
@@ -909,7 +913,7 @@ L6:     return route
   % \subfigure[表数量 = 3]{
   %   \label{cap:fig:eval-rp:b} %% label for second subfigure
   %   \includegraphics[width=0.4\textwidth]{figures/figure-eval-rp-3.pdf}}
-  \begin{subfigure}[b]{0.4\textwidth}
+  \begin{subfigure}[b]{0.46\textwidth}
       \includegraphics[width=\textwidth]{figures/figure-eval-rp-3.pdf}
       \caption{表数量 = 3}
       \label{cap:fig:eval-rp:b}
@@ -919,7 +923,7 @@ L6:     return route
   %   \includegraphics[width=0.4\textwidth]{figures/figure-eval-rp-4.pdf}}
 
   \vspace{0.5cm}
-  \begin{subfigure}[b]{0.4\textwidth}
+  \begin{subfigure}[b]{0.46\textwidth}
       \includegraphics[width=\textwidth]{figures/figure-eval-rp-4.pdf}
       \caption{表数量 = 4}
       \label{cap:fig:eval-rp:c}
