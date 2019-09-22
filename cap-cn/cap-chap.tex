@@ -22,11 +22,11 @@ SDN的一个主要研究方向是可编程、高效的数据通路(例如, OpenF
 
 \begin{figure}[h!]
     \centering
-    \vspace{-0.1in}
-    \includegraphics[scale = 0.7]{figures/figure1.pdf}
-    \vspace{-0.1in}
+    % \vspace{-0.1in}
+    \includegraphics[scale = 0.9]{figures/figure1.pdf}
+    % \vspace{-0.1in}
     \caption{一个简单的数据通路示例: Simple-DP}
-    \vspace{-0.1in}
+    % \vspace{-0.1in}
     \label{cap:fig:fig1-update}
 \end{figure}
 
@@ -137,6 +137,7 @@ $\mathcal{M} = \langle \texttt{ethType}, \texttt{srcIP}, \texttt{srcPort}, \text
 
 例如，我们的示例路由函数\texttt{onPkt}转换如下：
 
+{\small
 \begin{verbatim}
 L1: def onPkt(...):
 L2: g0 = (ethType != IPv4)
@@ -147,6 +148,7 @@ L6: if  g1: dstSw = hostTbl[dstIP]
 L7: if  g1: return Forward(port = routeTbl[...])
 L8: if !g1: return Drop()
 \end{verbatim}
+}
 
 注意\texttt{onPkt}的\texttt{L2}处的\texttt{if}语句已经从条件表达式变成了guard变量 \texttt{g0}，\texttt{g0}又被附加给了\texttt{L3}，这一行之前是在\texttt{if}块内的。
 
@@ -163,12 +165,12 @@ L8: if !g1: return Drop()
 作为示例，我们给出 \texttt{onPkt}的DFG如下:
 \begin{figure}[tbh]
     \centering
-    \vspace{-1mm}
-    \includegraphics[scale = 0.6]{figures/figure2.pdf}
-    \vspace{-2mm}
+    % \vspace{-1mm}
+    \includegraphics[scale = 0.8]{figures/figure2.pdf}
+    % \vspace{-2mm}
     \caption{路由函数\texttt{onPkt}的DFG $G_{\texttt{onPkt}}$}
     \label{cap:fig:onpkt-dfg}
-    \vspace{-2mm}
+    % \vspace{-2mm}
 \end{figure}
 
 可以看到，点\texttt{dstSw}是由其赋值声明中的两个变量\texttt{g1}和\texttt{dstIP}派生得到的。该点的权重$10$表示\texttt{dstSw}的域值范围大小。
@@ -217,12 +219,12 @@ L8: if !g1: return Drop()
 
 \begin{figure*}[tbh]
     \centering
-    \vspace{-1mm}
-    \includegraphics[scale = 0.6]{figures/figure3.pdf}
-    \vspace{-2mm}
+    % \vspace{-1mm}
+    \includegraphics[width=0.9\linewidth]{figures/figure3.pdf}
+    % \vspace{-2mm}
     \caption{示例数据通路, \exampledp}
     \label{cap:fig:swPipeline}
-    \vspace{-2mm}
+    % \vspace{-2mm}
 \end{figure*}
 
 \para{示例}：我们现在给一个示例流水线\exampledp（如图~\ref{cap:fig:swPipeline}所示），来说明我们的流水线模型。要注意的是在这个例子中，一个流表的匹配列在它的左边，然后写入到它右边的寄存器中，而表中字段\texttt{output}表示这个表包含了输出路由操作。
@@ -293,12 +295,12 @@ L8: if !g1: return Drop()
 
 \begin{figure}[tbh]
     \centering
-    \vspace{-1mm}
-    \includegraphics[clip, trim=0in 8.5in 9.8in 0in, width=2in]{figures/function-spaces.pdf}
-    \vspace{-2mm}
+    % \vspace{-1mm}
+    \includegraphics[clip, trim=0in 8.5in 9.8in 0in, width=3in]{figures/function-spaces.pdf}
+    % \vspace{-2mm}
     \caption{空间$\mathcal{F}$, $\mathcal{P}$ 和$\mathcal{C}$ 及其它们之间的映射表示。}
     \label{cap:fig:function-spaces}
-    \vspace{-2mm}
+    % \vspace{-2mm}
 \end{figure}
 
 鉴于$\tau(f)$和$\kappa(pl)$都定义在了同一空间$\mathcal{C}$（其中$\tau(f)$对应点，$\kappa(pl)$对应一组点），人们就可以通过比较$\kappa(pl)$中的每个元素与$\tau(f)$，从而判断这个计算负载是否可以被一个计算能力``覆盖"，进而导出了我们的基本容量理论，即$\exists\ c \in \kappa(pl) \geq \tau(f), f \rightrightharpoons pl$。
@@ -434,7 +436,7 @@ $\tau_G(f)[scope]$的定义如之前所述。然而，我们不计算$\tau_G(f)[
 \begin{figure}[tbh]
     \centering
     %\vspace{-1mm}
-    \includegraphics[scale = 0.6]{figures/figure5.pdf}
+    \includegraphics[scale = 0.8]{figures/figure5.pdf}
     %\vspace{-2mm}
     \caption{路由函数\texttt{onPkt}的DFG $G_{\texttt{onPkt}}$和割集$(\texttt{srcIP}, \texttt{srcPort}, \texttt{dstPort})$}
     \label{cap:fig:onpkt-dfg}
@@ -779,7 +781,7 @@ L6:     return route
 
 \begin{table*}[t]
 \centering
-\scalebox{0.75}{
+\resizebox{\linewidth}{!}{
 \begin{tabular}{ | l | l | l | l | l | l | l | l | l | l | }
     \hline
     $f$ & $bits(IP)$ & $O(\texttt{hostTbl})$ & $O(\texttt{routeTbl})$ & $O(\texttt{condTbl})$ & $O(\texttt{fwdTbl})$ & $\tau$(f)(\texttt{srcIP}) & $\tau$(f)(\texttt{dstIP}) & $\tau_G$(f)(\texttt{srcIP}) & $\tau_G$(f)(\texttt{dstIP}) \\
@@ -799,7 +801,7 @@ L6:     return route
     \hline
   \end{tabular}
   }
-\vspace{1mm}
+% \vspace{1mm}
 \caption{不同统计量下路由函数的特征化结果}
 \label{cap:table:table1}
 \end{table*}
@@ -824,19 +826,17 @@ L6:     return route
   %   \label{cap:fig:eval-ct:a} 
   %   \includegraphics[width=0.4\textwidth]{figures/figure-eval-t1.pdf}}
 
-  \begin{subfigure}[b]{0.4\textwidth}
+  \begin{subfigure}[b]{0.45\textwidth}
       \includegraphics[width=\textwidth]{figures/figure-eval-t1.pdf}
       \caption{输入比特位长度变化}
       \label{cap:fig:eval-ct:a}
   \end{subfigure}
-
-  \hspace{1in}
+  % \hspace{1in}
   % \subfigure[表大小变化]{
   %   \label{cap:fig:eval-ct:b}
   %   \includegraphics[width=0.4\textwidth]{figures/figure-eval-t2.pdf}}
   % \caption{计算$\tau(\texttt{simpleRoute})$和$\tau_G(\texttt{simpleRoute})$的所需时间。}
-
-  \begin{subfigure}[b]{0.4\textwidth}
+  \begin{subfigure}[b]{0.45\textwidth}
       \includegraphics[width=\textwidth]{figures/figure-eval-t2.pdf}
       \caption{表大小变化}  %% TODO fix position 计算$\tau(\texttt{simpleRoute})$和$\tau_G(\texttt{simpleRoute})$的所需时间。
       \label{cap:fig:eval-ct:b}
@@ -900,34 +900,30 @@ L6:     return route
   % \subfigure[表数量 = 2]{
   %   \label{cap:fig:eval-rp:a} %% label for first subfigure
   %   \includegraphics[width=0.4\textwidth]{figures/figure-eval-rp-2.pdf}}
-
   \begin{subfigure}[b]{0.4\textwidth}
       \includegraphics[width=\textwidth]{figures/figure-eval-rp-2.pdf}
       \caption{表数量 = 2}
       \label{cap:fig:eval-rp:a}
   \end{subfigure}
-
-  \hspace{1in}
+  % \hspace{1in}
   % \subfigure[表数量 = 3]{
   %   \label{cap:fig:eval-rp:b} %% label for second subfigure
   %   \includegraphics[width=0.4\textwidth]{figures/figure-eval-rp-3.pdf}}
-
   \begin{subfigure}[b]{0.4\textwidth}
       \includegraphics[width=\textwidth]{figures/figure-eval-rp-3.pdf}
       \caption{表数量 = 3}
       \label{cap:fig:eval-rp:b}
   \end{subfigure}
-
   % \subfigure[表数量 = 4]{
   %   \label{cap:fig:eval-rp:c} %% label for second subfigure
   %   \includegraphics[width=0.4\textwidth]{figures/figure-eval-rp-4.pdf}}
 
+  \vspace{0.5cm}
   \begin{subfigure}[b]{0.4\textwidth}
       \includegraphics[width=\textwidth]{figures/figure-eval-rp-4.pdf}
       \caption{表数量 = 4}
       \label{cap:fig:eval-rp:c}
   \end{subfigure}
-
   \caption{对于不同表数量和寄存器位长度的实现成功百分比。}
   \label{cap:fig:eval-rp} %% label for entire figure
 \end{figure}
