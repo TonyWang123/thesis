@@ -36,7 +36,7 @@
 \end{tabular}
 \caption{（a）: 当车辆从$A$移到$B$时，它需要重新建立连接。虚线表示连接尚没建立；（b）当车辆同时连接多个摄像头时，对于每个连接建立路径下发规则并不高效由于所有的路径目的一样（即所有数据流目的地址为$A$）。} \label{fig1}
   \end{center}
-  \vspace{-0.3in}
+  % \vspace{-0.3in}
 \end{figure}
 
 为了解决实时查询服务中流规则设置问题，通过借助SDN的集中式细粒度的流控制，我们提出了以下技术：1. 为了减少车辆发出的请求数量，我们在数据从摄像头到车辆的最后一跳时采用多播地址；2. 为了保证在车辆移动过程中数据传输不会中断，我们根据车辆的行驶状况提前在交换机中设置流规则；3. 为了减少流规则数量以及保证数据传输的正确性，我们在分支节点更改数据包头。
@@ -96,10 +96,10 @@ Kim等人~\cite{kim2013improving}考虑在校园网络以及家庭网络中利�
 \begin{figure} [t]
 \begin{center}
 \includegraphics[width=0.8\columnwidth]{figures/sdiv-pf.pdf}
-\vspace{-0.2in}
+% \vspace{-0.2in}
 \caption{SDIV的数据通路架构以及编程框架。} \label{fig:sdiv-dp}
 \end{center}
-\vspace{-0.3in}
+% \vspace{-0.3in}
 \end{figure}
 
 
@@ -125,15 +125,15 @@ Kim等人~\cite{kim2013improving}考虑在校园网络以及家庭网络中利�
 \begin{figure} [t]
 \begin{center}
 \includegraphics[width=0.9\columnwidth,height=2.5in]{figures/fig-2-24.eps}
-\vspace{-0.2in}
+% \vspace{-0.2in}
 \caption{SDIV的三层架构模型。} \label{fig2}
 \end{center}
-\vspace{-0.3in}
+% \vspace{-0.3in}
 \end{figure}
 
 \subsection{工作流程}
 
-给出SDIV架构后，我们这里通过两个场景来描述SDIV的工作流程（如图~\ref{fig3}）。
+
 
 %After introducing the SDIV components, we describe how SDIV works with two scenarios as depicted in Fig. ~\ref{fig3}.
 
@@ -145,9 +145,10 @@ Kim等人~\cite{kim2013improving}考虑在校园网络以及家庭网络中利�
 \end{tabular}
 \caption{（a）：通过分析车辆状况，控制器可以提前下发流规则（虚线）以降低额外请求；（b）：控制器通过全局信息，实现智能带宽分配。} \label{fig3}
   \end{center}
-  \vspace{-0.3in}
+  % \vspace{-0.3in}
 \end{figure}
 
+给出SDIV架构后，我们这里通过两个场景来描述SDIV的工作流程（如图~\ref{fig3}）。
 图~\ref{fig3}(a)描述的是一个车辆试图接受从路况摄像头发过来的路况信息的典型场景。
 
 %Fig. ~\ref{fig3}(a) describes a typical scenario where a vehicle wants to receive the information about road conditions (maybe three blocks away from its current location) via surveillance cameras.
@@ -169,7 +170,6 @@ Kim等人~\cite{kim2013improving}考虑在校园网络以及家庭网络中利�
 %Table 1 summarizes the benefits of SDIV against traditional network technologies (multicast) besides its open interface of network equipment. Compared to the traditional multicast method that needs to broadcast messages periodically for establishing SPT, SDIV leverages the benefits of OpenFlow that makes switches forward packets with no matching rule in a flow table to the controller and then the controller installs rules for the packets. It is a reactive mode and rids the need to broadcast messages periodically. This reactive mode also makes it possible that the switches only need to keep the least number of rules in their flow tables instead of keeping $(S,G)$ entries at routers in a traditional multicast method. With the support of an up-to-date, global view of the network topology and traffic states, the application in the controller is able to compute the most possible path that a vehicle would choose and installs rules in advance for providing persistent connection between vehicles and devices.
 
 \begin{table}[t]
- \caption{\label{table1}传统网络技术与SDIV}
  \centering
  \begin{tabular}{c|c}
   \hline
@@ -185,6 +185,7 @@ Kim等人~\cite{kim2013improving}考虑在校园网络以及家庭网络中利�
   优势: 不需要控制器 & 劣势: 需要控制器 \\
   \hline
  \end{tabular}
+ \caption{\label{table1}传统网络技术与SDIV}
 \end{table}
 
 \section{优化的流规则下发}
@@ -277,7 +278,7 @@ Kim等人~\cite{kim2013improving}考虑在校园网络以及家庭网络中利�
 \STATE{~~Find($r,O,d$);}
 \STATE{~~return;}
 \end{algorithmic}
-\vspace{-0.06in}
+% \vspace{-0.06in}
 \end{algorithm}
 
 为了处理SDIV中车辆的移动性，有必要预测车辆选择的最可能路线，然后沿路线预先安装规则，以便在车辆移动时保持数据传输不中断。预测这种路线的一种简单方法是计算最短路径，但实际上并不总是正确。我们设计算法$PathFind(s,d,v)$（算法\ref{Predict the path}），来找到拓扑中最可能的路径。这里$s$代表当前位置，$d$表示目的地，$v$表示车辆的方向。$ A(s,c)$表示$s$和$c$的角度，$D(n,d)$表示$n$和$d$之间的欧几里德距离。
@@ -323,17 +324,17 @@ Kim等人~\cite{kim2013improving}考虑在校园网络以及家庭网络中利�
 \STATE{~~~~~~$emitRule(matchFor(d),act)$;}
 \STATE{~~return;}
 \end{algorithmic}
-\vspace{-0.06in}
+% \vspace{-0.06in}
 \end{algorithm}
 
-\vspace{-0.05in}
+% \vspace{-0.05in}
 
 \begin{figure} [t]
 \begin{center}
 \includegraphics[width=0.9\columnwidth]{figures/fig-5-31.eps}
 \caption{蓝色虚线代表当前位置到目的位置的最短路径。红色虚线代表车辆可能选择的路径。} \label{fig5}
 \end{center}
-\vspace{-0.3in}
+% \vspace{-0.3in}
 \end{figure}
 
 在本小节中，我们将展示如何在交换机上安装规则。如算法~\ref{Algorithm3}所示，其主要思想是我们通过利用OpenFlow特性在分支节点（第八至九行）添加数据包头修改操作。输入$s$表示数据源，$d$表示车辆的当前位置，$path$由$PathFind$计算生成。当数据包匹配规则并修改匹配字段时，它将在转发到特定端口之前应用修改。修改后的地址使数据包转发到直接连接到车辆的交换机。通过使用地址修改算法，我们让具有不同源地址但相同目的地地址的数据包匹配相同的规则，从而减少规则数量并减少流表大小。我们将此方法称为目标驱动模型，因为它只需要匹配目标地址。
@@ -358,7 +359,7 @@ Kim等人~\cite{kim2013improving}考虑在校园网络以及家庭网络中利�
 \includegraphics[width=1\columnwidth]{figures/fig-6-31.eps}
 \caption{数据流$F_{1}$（红色）从$S_{1}$到$C$；数据流$F_{2}$（蓝色）从$S_{1}$到$D$；数据流$F_{3}$（绿色）从$S_{2}$到$D$.匹配条件只依赖于目的地址。} \label{fig6}
 \end{center}
-\vspace{-0.3in}
+% \vspace{-0.3in}
 \end{figure}
 
 
@@ -366,11 +367,10 @@ Kim等人~\cite{kim2013improving}考虑在校园网络以及家庭网络中利�
 \begin{figure} [t]
 \begin{center}
 \begin{tabular}{cc}
-\includegraphics[width=0.9\columnwidth]{figures/fig8-big.eps}
+\includegraphics[width=\columnwidth]{figures/fig8-big.eps}
 \end{tabular}
 \caption{（a）：1对1场景即$V$接受$A$的数据；（b）：N对1场景即$V_{1}$和$V_{2}$同时接受$A$的数据；（c）：1对N场景即$V$同时接受$A$和$B$的数据；（d）：N对N场景即$V_{1}$接受$A$和$B$数据，而$V_{2}$接受$A$数据。} \label{fig7}
   \end{center}
-  \vspace{-0.3in}
 \end{figure}
 
 
@@ -464,7 +464,7 @@ N对N场景作为一种普遍的情况，给出了有关如何实现优化的规
 \end{tabular}
 \caption{（a）：上海市人民广场附近的场景图；（b）：车辆的出现和离开时间；（c）：（a）的简化图并保护车辆方向信息。} \label{fig8a}
   \end{center}
-  \vspace{-0.35in}
+  % \vspace{-0.35in}
 \end{figure}
 
 \begin{figure} [t]
@@ -479,9 +479,9 @@ N对N场景作为一种普遍的情况，给出了有关如何实现优化的规
 \includegraphics[width=0.9\columnwidth]{figures/fig-e-8bar-30.eps} \\
 (c)
 \end{tabular}
-\caption{（a）：两个策略的规则数量差异；（b）：不同时刻的车辆数量；（c）两个策略的车辆延迟时间。} \label{fig8b}
+\caption{（a）：两个策略的规则数量差异；（b）：不同时刻的车辆数量；（c）两个策略的车辆延迟时间。 Simple Installation为对比方法，Rule Optimization为优化的流规则方法。} \label{fig8b}
   \end{center}
-  \vspace{-0.35in}
+  % \vspace{-0.35in}
 \end{figure}
 
 \subsection{时延分析}
@@ -525,20 +525,20 @@ N对N场景作为一种普遍的情况，给出了有关如何实现优化的规
 \scalebox{0.9}
 {
 \begin{tabular}{ccc}
-\includegraphics[width=0.3\columnwidth]{figures/fig-e-31-a.eps}&
-\includegraphics[width=0.3\columnwidth]{figures/fig-e-1-24.eps}&\hspace{-0.1\columnwidth}
-\includegraphics[width=0.3\columnwidth]{figures/fig-e-2-24.eps} \\
+\includegraphics[width=0.33\columnwidth]{figures/fig-e-31-a.eps}&
+\includegraphics[width=0.33\columnwidth]{figures/fig-e-1-24.eps}&\hspace{-0.1\columnwidth}
+\includegraphics[width=0.33\columnwidth]{figures/fig-e-2-24.eps} \\
 (a) & (b) & (c)
 \\
-\includegraphics[width=0.3\columnwidth]{figures/fig-e-31-d.eps}&
-\includegraphics[width=0.3\columnwidth]{figures/fig-e-3-24.eps}&\hspace{-0.1\columnwidth}
-\includegraphics[width=0.3\columnwidth]{figures/fig-e-4-24.eps} \\
+\includegraphics[width=0.33\columnwidth]{figures/fig-e-31-d.eps}&
+\includegraphics[width=0.33\columnwidth]{figures/fig-e-3-24.eps}&\hspace{-0.1\columnwidth}
+\includegraphics[width=0.33\columnwidth]{figures/fig-e-4-24.eps} \\
 (d) & (e) & (f)
 \end{tabular}
 }
-\caption{（a）：N对1模式的拓扑；（b）：对于（a）中不同交换机数量的延迟时间；（c）：对于（a）中不同交换机数量的规则数量；（d）：1对N模式的拓扑；（e）：对于（d）中不同交换机数量的延迟时间；（c）：对于（d）中不同交换机数量的规则数量。} \label{fig9}
+\caption{（a）：N对1模式的拓扑；（b）：对于（a）中不同交换机数量的延迟时间；（c）：对于（a）中不同交换机数量的规则数量；（d）：1对N模式的拓扑；（e）：对于（d）中不同交换机数量的延迟时间；（c）：对于（d）中不同交换机数量的规则数量。Simple Installation为对比方法，Rule Optimization为优化的流规则方法。} \label{fig9}
   \end{center}
-\vspace{-0.3in}
+% \vspace{-0.3in}
 \end{figure*}
 
 

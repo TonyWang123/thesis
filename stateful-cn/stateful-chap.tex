@@ -305,6 +305,7 @@
 
 
 \begin{figure}[h]
+{\small
 \begin{verbatim}
 L1: mFW = middlebox("firewall", "stateless")
 L2: PATH1 = h1 -> b -> h2 //b: waypoint
@@ -318,6 +319,7 @@ L9:     else:
 L10:      return any(SPC.stable + PATH2)
 L11:  else: return DROP
 \end{verbatim}
+}
     \caption{对应研究动机例子的Dandelion程序。}
 \label{fig:code}
 \end{figure}
@@ -419,7 +421,7 @@ L11:  else: return DROP
 %\vspace{-2mm}
 \centering
 
-      \centering\includegraphics[width=\linewidth]{figures/ss-125.pdf}
+      \centering\includegraphics[width=0.5\linewidth]{figures/ss-125.pdf}
 %\vspace{-2mm}
 %\caption{\footnotesize{The CDF of job latency local and remote jobs.}}
 \caption{Dandelion架构以及工作流程。}
@@ -430,7 +432,7 @@ L11:  else: return DROP
 \begin{figure}[!htbp]
 %\vspace{-2mm}
 \centering
-      \centering\includegraphics[width=0.8\linewidth]{figures/ss-124.pdf}
+      \centering\includegraphics[width=0.95\linewidth]{figures/ss-124.pdf}
    %\vspace{-2mm}
 %\caption{\footnotesize{The CDF of job latency local and remote jobs.}}
     \caption{从图~\ref{fig:code}中程序转换后的配置。}
@@ -516,17 +518,20 @@ L11:  else: return DROP
 
 %\para{System objective}: Based on the model, as the forwarding of the first few packets has little influence on the performance of the flow, a simple path computation (that only considers the stable forwarding) would be the following. We consider the objective of the network is to maximize the total throughput, \ie, maximize $\sum_ib_i$ where $i$ is the index of the path constraint $pc_i$ and $b_i$ is its throughput. The definition of variables can be found at Table~\ref{table:variables}. And the constraints can be found at Table~\ref{table:constraints} (where $Path(x, y, E)$ means there exists a simple path starting from $x$ to $y$ in $E$). In this paper we focus on the waypoints constraints for the path constraints (as they may complicate the path computation) and we consider the waypoints constraint as a set of node pairs where a pair has the form $(x, y)$ which indicates packets must pass through $x$ before $y$. (Note that $x$ and $y$ can be source/destination nodes.)
 
-\begin{table}[]
+\begin{table}[ht]
+\centering
 \begin{tabular}{l|l}
+\hline
 变量     & 含义                                                             \\ \hline
 $u_i$, $v_i$ & 路径约束$pc_i$的源和目的节点                            \\ 
 $E$          & 网络中所有的边（其中一个边表示为$e$: $(e.src, e.dst)$）                       \\
 $m_e$        & 边$e$的最大带宽                                            \\
 $W_i$        &  $pc_i$的一组节点对\\
 $z^i_e$      &  $pc_i$选出的边$e$\\
-$b_i$          & 使用$pc_i$的流的带宽                            
+$b_i$          & 使用$pc_i$的流的带宽\\
+\hline
 \end{tabular}
-\caption{变量及其含义。}
+\caption{本节路径计算用到的变量及其含义。}
 \label{table:variables}
 \end{table}
 
@@ -545,14 +550,17 @@ $b_i$          & 使用$pc_i$的流的带宽
 %\label{table:variables}
 %\end{table}
 
-\begin{table}[]
+\begin{table}[ht]
+\centering
 \begin{tabular}{l|l}
+\hline
 约束                                        & 含义                               \\ \hline
 $\forall i, \forall (x, y) \in W_i, Path(x, y, E)$                    & 路径约束                  \\
 $\forall i, Path(u_i, v_i, E)$      & 路径存在于$E$     \\
-$\forall e \in E, \sum_ib_i*z^i_e \le m_e$   & 边的带宽约束
+$\forall e \in E, \sum_ib_i*z^i_e \le m_e$   & 边的带宽约束\\
+\hline
 \end{tabular}
-\caption{约束及其含义。}
+\caption{本节路径计算用到的约束及其含义。}
 \label{table:constraints}
 \end{table}
 
@@ -594,7 +602,7 @@ $\forall e \in E, \sum_ib_i*z^i_e \le m_e$   & 边的带宽约束
 %\vspace{-2mm}
 \centering
       \centering\includegraphics[width=\linewidth]{figures/ss-129.pdf}
-\caption{\small Skip the same nodes.}
+\caption{\small 跳过相同节点。}
 %\vspace{-1mm}
 \label{fig:skip}
 \end{figure}
@@ -664,7 +672,7 @@ $\forall e \in E, \sum_ib_i*z^i_e \le m_e$   & 边的带宽约束
 %       \label{fig:eval1} 
 %       \centering\includegraphics[width=\linewidth]{figures/ss-eval1.pdf}}
 
-  \begin{subfigure}[b]{\linewidth}
+  \begin{subfigure}[b]{0.6\linewidth}
       \includegraphics[width=\linewidth]{figures/ss-eval1.pdf}
       \label{fig:eval1}
       \caption{不同场景下的时延}
@@ -675,7 +683,8 @@ $\forall e \in E, \sum_ib_i*z^i_e \le m_e$   & 边的带宽约束
 %      \label{fig:eval2} 
 %       \centering\includegraphics[width=\linewidth]{figures/ss-eval2.pdf}}
 
-  \begin{subfigure}[b]{\linewidth}
+  \vspace{0.5cm}
+  \begin{subfigure}[b]{0.6\linewidth}
       \includegraphics[width=\linewidth]{figures/ss-eval2.pdf}
       \label{fig:eval2}
       \caption{不同场景下的吞吐量}
@@ -726,14 +735,15 @@ $\forall e \in E, \sum_ib_i*z^i_e \le m_e$   & 边的带宽约束
 
 
 \begin{table}[]
-\footnotesize
-\begin{tabular}{|l|l|l|l|}
+\centering
+% \footnotesize
+\begin{tabular}{l|l|l|l}
 \hline
              & \footnotesize(F=5, M=1) & \footnotesize (F=5, M=3) & \footnotesize (F=5, M=3 (S=1)) \\ \hline
-With Dandelion    & 1.3 (s)    & 1.4 (s)    & 4.2 (s)          \\ \hline
-Without Dandelion & 4.5 (s)    & 10.8 (s)   & 11.5 (s)         \\ \hline
+使用Dandelion    & 1.3 (s)    & 1.4 (s)    & 4.2 (s)          \\ \hline
+不使用Dandelion & 4.5 (s)    & 10.8 (s)   & 11.5 (s)         \\ \hline
 \end{tabular}
-\caption{\small The execution time of path computation to maximize total throughput for different scenarios.}
+\caption{\small 不同场景下对于求最大吞吐量的路径计算所需时间。}
 \label{table:eval1}
 \end{table}
 
@@ -755,7 +765,7 @@ Without Dandelion & 4.5 (s)    & 10.8 (s)   & 11.5 (s)         \\ \hline
 %       \label{fig:eval3}
 %       \centering\includegraphics[width=\linewidth]{figures/ss-eval3.pdf}}
 
-  \begin{subfigure}[b]{\linewidth}
+  \begin{subfigure}[b]{0.6\linewidth}
       \includegraphics[width=\linewidth]{figures/ss-eval3.pdf}
       \label{fig:eval3}
       \caption{基准点约束中有一个节点}
@@ -765,8 +775,8 @@ Without Dandelion & 4.5 (s)    & 10.8 (s)   & 11.5 (s)         \\ \hline
 % \subfigure[ 基准点约束中有三个节点。]{
 %       \label{fig:eval4} 
 %       \centering\includegraphics[width=\linewidth]{figures/ss-eval4.pdf}}
-
-  \begin{subfigure}[b]{\linewidth}
+  \vspace{0.5cm}
+  \begin{subfigure}[b]{0.6\linewidth}
       \includegraphics[width=\linewidth]{figures/ss-eval4.pdf}
       \label{fig:eval4}
       \caption{基准点约束中有三个节点}
