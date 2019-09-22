@@ -95,9 +95,9 @@ Kim等人~\cite{kim2013improving}考虑在校园网络以及家庭网络中利�
 
 \begin{figure} [t]
 \begin{center}
-\includegraphics[width=0.8\columnwidth]{figures/sdiv-dp.pdf}
+\includegraphics[width=0.8\columnwidth]{figures/sdiv-pf.pdf}
 \vspace{-0.2in}
-\caption{SDIV的数据通路架构。} \label{fig:sdiv-dp}
+\caption{SDIV的数据通路架构以及编程框架。} \label{fig:sdiv-dp}
 \end{center}
 \vspace{-0.3in}
 \end{figure}
@@ -109,11 +109,15 @@ Kim等人~\cite{kim2013improving}考虑在校园网络以及家庭网络中利�
 
 利用SDN技术，控制层中的控制器连接着网络中的每一个交换机（包括AP）。通过下发OpenFlow流规则，控制器可以控制IoV中数据的传输。当网络状态发生改变时，交换机会发送相应的消息至控制器，使其获取最新的全局网络状态。通过全局网络状态信息，控制器可以将上层应用的策略，如路径选择或接入控制，转化为特定交换机上的OpenFlow流规则。
 
+如图~\ref{fig:sdiv-dp}所示，对于面向静态转发路径部分，控制器支持通过主动式静态编译的方式将上层的高级SDN程序转化为底层数据平面的配置；对于面向动态转发路径部分，控制器采用响应式模式。
+
 %In the control layer, the controller connecting to every switch (including APs) acts as a mediator between upper layer applications and underlayer network through SDN. By using OpenFlow, it is able to control all data flows in IoV. Also when the network state changes, the switches (including APs) notify it. In SDIV, they act as a connector among vehicles, servers and other roadside electronic devices by forwarding data flows based on rules which are installed by the controller. Then the controller can convert the strategy of application, e.g., the path selection or access control, into the OpenFlow rules in particular switches, since it has an up-to-date, global view of the network topology and traffic flows. The global network view makes the controller available to provide a customized network state to applications, which is not \textcolor{blue}{possible} in the traditional network. By this means, different applications have different views which benefit both applications and network. The former can have a much simpler view of the network than the detailed, but unnecessary view of the whole network, which can simplify their tasks, e.g., traffic scheduling. For the later, privacy and security benefit from the customized network state which guarantees the former to access their needed data only instead of all data.
 
 \subsubsection{应用层}
 
 所有的IoV应用程序组成了SDIV应用层。应用程序复杂给IoV中的车辆提供服务，如实时查询服务，位置服务等。每个应用从控制层的控制器中获取网络信息，并根据自身策略进行决策。
+
+如图~\ref{fig:sdiv-dp}所示，对于面向静态转发路径部分的高级SDN程序可以直接转化为底层数据平面的配置；对于面向动态转发路径部分，则使用响应式模式进行开发。
 %
 %The strategy of each application is defined in the application layer. Applications provide services for vehicles in IoV, such as a real-time query service, location service and road information service. Each application gets the customized network state from the control layer and makes decisions according to its strategy. The strategy here instructs how to provide services to vehicles. A real-time query service example is to provide drivers the real-time conditions of roads. The network topology is required to compute the path for improving performance, which we will discuss later in Section~\ref{Rule Optimization}.
 %
@@ -536,4 +540,11 @@ N对N场景作为一种普遍的情况，给出了有关如何实现优化的规
   \end{center}
 \vspace{-0.3in}
 \end{figure*}
+
+
+\section{本章小结}
+
+
+
+
 
