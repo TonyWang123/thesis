@@ -59,7 +59,7 @@
 
 
 % TODO XXX
-Hare等人~\cite{hare2012policy}设计一个集中式的策略框架来管理车辆网络的光谱资源来保证用户需要的数据传输性能。Abadi等人（XXX）根据有限的交通信息，对交通流量进行预测以及交通拥塞控制。Wu等人~\cite{wu2013improving}结合GPS信息提高了对车辆姿态估计的准确度。Ahn等人~\cite{ahn2012risa}第一个提出了面向车辆网络的分布式路面状况探测以及数据分发的架构。Calafate等人~\cite{calafate2012efficient}研究通过计算最优数据包大小以及决定最优前向纠错，实现广播下的可靠数据传送机制。
+Hare等人~\cite{hare2012policy}设计一个集中式的策略框架来管理车辆网络的光谱资源来保证用户需要的数据传输性能。Wu等人~\cite{wu2013improving}结合GPS信息提高了对车辆姿态估计的准确度。Ahn等人~\cite{ahn2012risa}第一个提出了面向车辆网络的分布式路面状况探测以及数据分发的架构。Calafate等人~\cite{calafate2012efficient}研究通过计算最优数据包大小以及决定最优前向纠错，实现广播下的可靠数据传送机制。
 
 %The studies \cite{joshi2011vehicular, xu2011utilizing} deal with the efficient communication between APs and vehicles. For routing and data forwarding, \cite{sahu2015bang, zhang2014geomob, zhu2013zoom, nzouonta2009vanet} study the routing protocol and fast forwarding. Routing in IoV in different categories is well reviewed in \cite{cheng2015its}. To manage vehicular networks, a centralized policy framework is introduced and called Virtuoso in \cite{hare2012policy}. It manages spectrum resources while ensuring users to have suitable access to meet their communication needs. In \cite{abadi2015traffic}, traffic flow prediction for traffic forecasting and congestion management is made. The work \cite{wu2013improving} estimates the attitude of a vehicle for low-cost inertial navigation system/GPS. Ahn et al. \cite{ahn2012risa} present the Road Information Sharing Architecture (RISA), representing the first distributed approach to road condition detection and dissemination for vehicular networks. \textcolor{blue}{Calafate et al. \cite{calafate2012efficient} study reliable data delivery through broadcasting by computing the optimal packet size and determining the best Forward Error Correction (FEC) scheme.}
 
@@ -165,7 +165,7 @@ Kim等人~\cite{kim2013improving}考虑在校园网络以及家庭网络中利�
 %Table 1 summarizes the benefits of SDIV against traditional network technologies (multicast) besides its open interface of network equipment. Compared to the traditional multicast method that needs to broadcast messages periodically for establishing SPT, SDIV leverages the benefits of OpenFlow that makes switches forward packets with no matching rule in a flow table to the controller and then the controller installs rules for the packets. It is a reactive mode and rids the need to broadcast messages periodically. This reactive mode also makes it possible that the switches only need to keep the least number of rules in their flow tables instead of keeping $(S,G)$ entries at routers in a traditional multicast method. With the support of an up-to-date, global view of the network topology and traffic states, the application in the controller is able to compute the most possible path that a vehicle would choose and installs rules in advance for providing persistent connection between vehicles and devices.
 
 \begin{table}[t]
- \caption{\label{table1}Pros and cons of traditional network technologies (multicast) and SDIV}
+ \caption{\label{table1}传统网络技术与SDIV}
  \centering
  \begin{tabular}{c|c}
   \hline
@@ -352,7 +352,7 @@ Kim等人~\cite{kim2013improving}考虑在校园网络以及家庭网络中利�
 \begin{figure} [t]
 \begin{center}
 \includegraphics[width=1\columnwidth]{figures/fig-6-31.eps}
-\caption{Data flow $F_{1}$ (red line) comes from $S_{1}$ and its destination is $C$; Data flow $F_{2}$ (blue line) comes from $S_{1}$ and its destination is $D$; Data flow $F_{3}$ (green line) comes from $S_{2}$ and its destination is $D$. The matching conditions only depend on the destination address.} \label{fig6}
+\caption{数据流$F_{1}$（红色）从$S_{1}$到$C$；数据流$F_{2}$（蓝色）从$S_{1}$到$D$；数据流$F_{3}$（绿色）从$S_{2}$到$D$.匹配条件只依赖于目的地址。} \label{fig6}
 \end{center}
 \vspace{-0.3in}
 \end{figure}
