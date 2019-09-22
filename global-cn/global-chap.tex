@@ -15,6 +15,7 @@
 我们考虑的面向全网络SDN编程模型本质上与单交换机的编程模型类似，同样参考已有的SDN编程模型（如~\cite{snap,sivaraman2016packet}）。但面向全网络的SDN程序的返回则是网络中的一条路径（即多个交换机的操作），而非单个交换机的操作。因此，对于程序的返回，我们采用路由代数的形式进行表达~\cite{gao2018t}。我们通过以下示例程序进行说明。
 
 \begin{figure}[h]
+\small{
 \begin{verbatim}
 L1: def onPkt(pkt):
 L2:   if pkt.srcIP in whiteList:
@@ -26,6 +27,7 @@ L7:     else:
 L8:      return opt(srcHost -> c -> dstHost)
 L9:   else: return DROP
 \end{verbatim}
+}
     \caption{\small 一个简单的面向全网络的高级SDN程序。}
 \label{fig:code1}
 \end{figure}
@@ -35,7 +37,7 @@ L9:   else: return DROP
 \begin{figure}[!htbp]
 \includegraphics[width=0.8\linewidth]{figures/global-topo.pdf}
 \centering
-\caption{\small 网络拓扑。}
+\caption{\small 本节示例程序对应的网络拓扑。}
 \label{fig:topo1}
 \end{figure}
 
@@ -64,7 +66,9 @@ L9:   else: return DROP
 最终，通过计算混合整数线性规划，我们可以得到决策树中节点与网络交换机的对应关系，即对于每个交换机，我们可以得到它应该实现哪些程序语句，进而算出交换机配置。
 
 \begin{table}[]
+\centering
 \begin{tabular}{l|l}
+\hline
 变量     & 含义                                                             \\ \hline
 $p_i$ & 转发路径$i$，包含一串有序的网络节点以及一串有序的决策树节点                            \\ 
 $n_j^i$          &  $p_i$中第$j$个网络节点                      \\
@@ -72,22 +76,26 @@ $d_j^i$        & $p_i$中第$j$个决策树节点                               
 $code_i(n)$        &  网络节点$n$对于$p_i$的编号\\
 $N_j^i$     &  $d_j^i$可以选择的网络节点的集合\\
 $x(d_j^i, n)$      &  1: $d_j^i$选中网络节点$n$; 0: $d_j^i$未选中网络节点$n$\\
-$m(n)$              & 网络节点$n$最多可以实现的决策树节点数量              
+$m(n)$              & 网络节点$n$最多可以实现的决策树节点数量\\
+\hline              
 \end{tabular}
-\caption{\small 变量。}
+\caption{\small 本节线性规划所用的变量。}
 \label{table:variables}
 \end{table}
 
 \begin{table}[]
+\centering
 \begin{tabular}{l|l}
+\hline
 约束                                        & 含义                               \\ \hline
 $xc_j^i = \sum_n x(d_j^i, n)*code_i(n)$          & 决策树节点选中的网络节点的编号   \\
 $\forall d_j^i, xc_j^i \leq xc_j^{i+1}$                    & 保证决策树节点之间的依赖关系                  \\
 $\forall d_j^i, \exists n \in N_j^i, xc_j^i = code_i(n)$      & 对决策树节点可选的网络节点的范围进行约束     \\
 $\forall n, \sum_{d_j^i} x(d_j^i, n) \leq m(n)$   & 保证网络节点资源 \\
-$\forall d_j^i \sum_n x(d_j^i, n) = 1$  & 保证决策树节点与网络节点的一对一映射
+$\forall d_j^i \sum_n x(d_j^i, n) = 1$  & 保证决策树节点与网络节点的一对一映射\\
+\hline
 \end{tabular}
-\caption{\small 约束。}
+\caption{\small 本节线性规划所用的约束。}
 \label{table:constraints}
 \end{table}
 
@@ -101,7 +109,7 @@ $\forall d_j^i \sum_n x(d_j^i, n) = 1$  & 保证决策树节点与网络节点�
 除了中间盒原语之外，为了让用户指定数据包在网络传输的路径的约束，这里也引入了路由代数作为程序的返回。图~\ref{fig:grammar2}给出了对于部分可编程网络编程模型的抽象语法。对于中间盒，编程人员可以指定其属性，即有状态或无状态。中间盒的返回结果可以存储在一般变量中，在接下来的程序中调用。
 
 \begin{figure}[ht]
-{%\small
+{\small
 % \fontsize{10}{12}\selectfont 
 %\scriptsize
 %{\bf Abstract syntax:}
@@ -142,6 +150,7 @@ e^b & \bnfdef & e^r \bnfalt e^r\ \&\ e^r \bnfalt e^r\ |\ e^r \dots & (\textit{bo
 \para{示例}：基于图~\ref{fig:grammar2}给出的抽象语法，我们考虑如下引入了中间盒处理的高级SDN程序。同时网络场景为图~\ref{fig:topo2}所示。
 
 \begin{figure}[h]
+{\small
 \begin{verbatim}
 L1: mFW = middlebox("firewall", "stateless")
 L2: PATH1 = h1 -> b -> h2 //b: waypoint
@@ -155,6 +164,7 @@ L9:     else:
 L10:      return any(PATH2)
 L11:  else: return DROP
 \end{verbatim}
+}
     \caption{\small 引入中间盒处理的程序。}
 \label{fig:code2}
 \end{figure}
@@ -176,6 +186,7 @@ L11:  else: return DROP
 \para{系统路径约束}：为了解决上述问题，我们引入系统路径约束（System Path Constraint，SPC）的概念。在程序中，SPC表示为一个存有路径约束的全局变量。程序中的任何一个位置计算路径时需要满足SPC中的路径约束。其直观理解是，当一个数据包经过程序时，某些程序语句会给数据包添加路径约束。考虑图~\ref{fig:code3}中添加SPC后的程序。程序中的第六行添加了一个从$h_1$到$h_2$的路径约束；第七行添加了一个必须要经过防火墙的路径约束。因此，在第七行后，SPC全局变量包含如下约束：从$h_1$到$h_2$以及经过防火墙$fw$。第八行中使用\emph{opt}函数计算路径，其中``+''表示连接SPC的路径约束和PATH1的路径约束，而其结果为$gw, fw, a, b, d$。
 
 \begin{figure}[h]
+{\small
 \begin{verbatim}
 L1: mFW = middlebox("firewall", "stateless")
 L2: PATH1 = h1 -> b -> h2 //b: waypoint
@@ -189,6 +200,7 @@ L9:     else:
 L10:      return opt(PATH2 + SPC)
 L11:  else: return DROP
 \end{verbatim}
+}
     \caption{加入SPC的程序。}
 \label{fig:code3}
 \end{figure}
@@ -199,39 +211,32 @@ L11:  else: return DROP
 
 我们这里将对计算决策树中节点与网络交换机的对应关系中的混合整数线性规划的执行时间进行评估。评估是在16GB内存以及3.5 GHz Intel i7处理器上运行，系统为Mac OSX 10.13。
 
-\para{实验方法}：我们假设决策树具有完美二叉树结构，并通过改变决策树的大小，对相应的叶子节点（即转发路径）的数量以及程序语句的数量进行变化。给定转发路径数量下，在随机生成的拓扑图中随机生成相应数量且满足路径长度的转发路径，并随机地填充到决策树的叶子节点中。最后根据决策树以及拓扑图计算决策树中节点与网络交换机的对应关系，并记录混合整数线性规划的执行时间。
 
-\para{实验结果}：图~\ref{fig:eval-gb}给出在不同场景下的执行时间。其中\#P代表路径数量；\#N代表图中节点数量。从图~\ref{fig:eval-gb:a}可以看出，当路径长度增加时，混合整数线性规划的执行时间变长；通过比较图~\ref{fig:eval-gb:a}和图~\ref{fig:eval-gb:b}，我们可以发现，当路径数量增加时，混合整数线性规划的执行时间变长；通过比较图~\ref{fig:eval-gb:b}和图~\ref{fig:eval-gb:c}，我们可以发现，在其他变量不变情况下，拓扑的规模变大不会增长执行时间。这是因为，决策树节点的放置范围已经固定在各自所属的转发路径上，拓扑图中其他节点的增加不会影响已有决策树节点的放置范围。
-
-
-\begin{figure}
+\begin{figure}[ht]
   \centering
   % \subfigure[\#P = 4, \#N = 20]{
   %   \label{fig:eval-gb:a} %% label for first subfigure
   %   \includegraphics[width=0.4\textwidth]{figures/global-eval-420-png.png}}
 
-  \begin{subfigure}[b]{0.4\textwidth}
+  \begin{subfigure}[b]{0.47\textwidth}
       \includegraphics[width=\textwidth]{figures/global-eval-420-png.png}
       \caption{\#P = 4, \#N = 20}
       \label{fig:eval-gb:a}
   \end{subfigure}
-
-  \hspace{1in}
   % \subfigure[\#P = 8, \#N = 20]{
   %   \label{fig:eval-gb:b} %% label for second subfigure
   %   \includegraphics[width=0.4\textwidth]{figures/global-eval-820-png.png}}
-
-  \begin{subfigure}[b]{0.4\textwidth}
+  \begin{subfigure}[b]{0.47\textwidth}
       \includegraphics[width=\textwidth]{figures/global-eval-820-png.png}
       \caption{\#P = 8, \#N = 20}
       \label{fig:eval-gb:b}
   \end{subfigure}
-
   % \subfigure[\#P = 8, \#N = 40]{
   %   \label{fig:eval-gb:c} %% label for second subfigure
   %   \includegraphics[width=0.4\textwidth]{figures/global-eval-840-png.png}}
 
-  \begin{subfigure}[b]{0.4\textwidth}
+  \vspace{1cm}
+  \begin{subfigure}[b]{0.47\textwidth}
       \includegraphics[width=\textwidth]{figures/global-eval-840-png.png}
       \caption{\#P = 8, \#N = 40}
       \label{fig:eval-gb:c}
@@ -240,6 +245,13 @@ L11:  else: return DROP
   \caption{不同场景下的混合整数线性规划执行时间。}
   \label{fig:eval-gb} %% label for entire figure
 \end{figure}
+
+
+
+\para{实验方法}：我们假设决策树具有完美二叉树结构，并通过改变决策树的大小，对相应的叶子节点（即转发路径）的数量以及程序语句的数量进行变化。给定转发路径数量下，在随机生成的拓扑图中随机生成相应数量且满足路径长度的转发路径，并随机地填充到决策树的叶子节点中。最后根据决策树以及拓扑图计算决策树中节点与网络交换机的对应关系，并记录混合整数线性规划的执行时间。
+
+\para{实验结果}：图~\ref{fig:eval-gb}给出在不同场景下的执行时间。其中\#P代表路径数量；\#N代表图中节点数量。从图~\ref{fig:eval-gb:a}可以看出，当路径长度增加时，混合整数线性规划的执行时间变长；通过比较图~\ref{fig:eval-gb:a}和图~\ref{fig:eval-gb:b}，我们可以发现，当路径数量增加时，混合整数线性规划的执行时间变长；通过比较图~\ref{fig:eval-gb:b}和图~\ref{fig:eval-gb:c}，我们可以发现，在其他变量不变情况下，拓扑的规模变大不会增长执行时间。这是因为，决策树节点的放置范围已经固定在各自所属的转发路径上，拓扑图中其他节点的增加不会影响已有决策树节点的放置范围。
+
 
 
 \section{本章小结}
