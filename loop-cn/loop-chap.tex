@@ -61,10 +61,11 @@ L5:     return route
 
 \texttt{SimpleRoute}根据每个数据包的源IP地址指定的策略来路由数据包。由于每个语句都可以被视为一个流表，因此程序可以被转换为具有三个流表的流水线，如图~\ref{fig:srp}所示（即将程序主动编译为数据通路）。这里\codeword{return}语句不需要转换。需要注意的是，本章中所提的技术并不限定与特定的程序语法，而只需要满足每一个语句可以与一个流表对应即可，而对于大多数SDN高级程序（如~\cite{snap,sivaraman2016packet}），该条件都可以满足。
 
+\vspace{0.5cm}
 \begin{figure}[!htbp]
-\includegraphics[width=0.6\linewidth]{figures/lp-65.pdf}
+\includegraphics[width=0.8\linewidth]{figures/lp-65.pdf}
 \centering
-\vspace{-3mm}
+% \vspace{-3mm}
 \caption{\small \texttt{SimpleRoute}转换后的三张流表。每张表的结构 $a \rightarrow b$ 表示流表的匹配字段为 $a$以及数据包匹配后可以设置$b$的值。}
 \label{fig:srp}
 \end{figure}
@@ -141,9 +142,9 @@ L7:     ... #i from 2 to len(ports) - 1
 给定一个$pl^n$，当一个数据包$pkt$ 在没有任何路由操作（如Drop或Forward(port=i)）的情况下通过$pl_i$时，$pkt$将到达$pl_{i+1}$，其中$1 \leq i < n$。RSP及其SSA形式的示例如图~\ref{fig:pipelines}所示。
 
 \begin{figure}[!htbp]
-\includegraphics[width=0.8\linewidth]{figures/lp-66.pdf}
+\includegraphics[width=0.93\linewidth]{figures/lp-66.pdf}
 \centering
-\vspace{-3mm}
+% \vspace{-3mm}
 \caption{\small 流水线$PL$, $PL$的2-RSP形式（$PL_{RSP}$），SSA形式（$SSA(PL_{RSP})$）。}
 \label{fig:pipelines}
 \end{figure}
@@ -167,7 +168,7 @@ L7:     ... #i from 2 to len(ports) - 1
 \para{源节点选择}: 首先从DFG中的源节点（即入度为零的节点）中选出一个子集并放入$S$，如果DFG中的一个节点$v$的所有父节点都在$S$中，则可以将$v$添加到$S$中。一个选择可以包含多次添加过程。选择完成后，从原始DFG中移除$S$（即$S$从DFG中分割），然后$S$可以被视为一张流表$t$。在$S$中且没有任何父节点的节点被添加到$t.inputV$，在$S$中且没有任何子节点的节点被添加到$t.outputV$。源节点选择的示例如图~\ref{fig:dfg}所示。其中 $v_{a2}$可以添加到$S1$，但$v_{a3}$ 不能（即使将$v_{a2}$添加到$S1$之后），因为它的一些父节点不在$S1$中。通过将$v_{b2}$和 $v_{b3}$添加到$S2$，当前选择可以有三个表（如图~\ref{fig:dfg}中的红点线所示）： $(v_{a1}, v_{b1}) \rightarrow v_{a2}$, $v_c \rightarrow (v_{b2}, v_{b3})$, 以及 $(v_{a2}, v_{b2}) \rightarrow v_{b3}$ 。
 
 \begin{figure}[!htbp]
-\includegraphics[width=0.8\linewidth]{figures/lp-67.pdf}
+\includegraphics[width=0.6\linewidth]{figures/lp-67.pdf}
 \centering
 \vspace{-3mm}
 \caption{\small 流水线的DFG和源节点选择。}
@@ -193,7 +194,7 @@ L7:     ... #i from 2 to len(ports) - 1
 \begin{figure}[!htbp]
 \includegraphics[width=0.8\linewidth]{figures/lp-68.pdf}
 \centering
-\caption{\small SO-PL示例.}
+\caption{\small SO-PL的示例，其中$v_d$为流水线唯一输出变量。}
 \label{fig:sopl}
 \end{figure}
 
@@ -222,7 +223,7 @@ L7:     ... #i from 2 to len(ports) - 1
 
 
 \begin{figure}[!htbp]
-\includegraphics[width=0.8\linewidth]{figures/lp-69.pdf}
+\includegraphics[width=0.9\linewidth]{figures/lp-69.pdf}
 \centering
 \caption{\small 存在性定理的证明， 图中三个流水线 ($pl_1, pl_2, pl_3$) 在假设下只能被合并到至少四张表 ($t_1, t_2, t_3, t_4$) 。每个方块是一个流水线的DFG.}
 \label{fig:proof}
@@ -265,16 +266,15 @@ L7:     ... #i from 2 to len(ports) - 1
 \begin{figure}[!htbp]
     %\vspace{-2mm}
     \centering
-    \begin{minipage}{0.35\linewidth}
+    \begin{minipage}{0.47\linewidth}
         \centering\includegraphics[width=\linewidth]{figures/lp-70.png}
         \caption{\label{fig:eval1-a} \small $m$ = 10.}
     \end{minipage}
-    \hspace{0.03\linewidth}
-    \begin{minipage}{0.35\linewidth}
+    % \hspace{0.03\linewidth}
+    \begin{minipage}{0.47\linewidth}
         \centering\includegraphics[width=\linewidth]{figures/lp-71.png}
         \caption{\label{fig:eval1-b} \small $m$ = 20.}
     \end{minipage}
-    \vspace{-2mm}
     %\caption{\footnotesize{The CDF of job latency local and remote jobs.}}
     \caption{\small 两种方法的执行时间。$n$为迭代次数。$m$为顶点数量。}
     %\vspace{-2mm}
@@ -289,14 +289,17 @@ $n$和$m$的定义与上面执行时间的评估时相同。我们比较了RSP�
 
 \para{实验结果}: 结果见表~\ref{table:eval2}。对于黑盒方法，流规则的数量只取决于所有软件流水线的第一个DFG（等于第一个DFG的所有源节点的域大小的乘积），因此对于不同的$n$，值是相同的。结果表明，与单表设计方法相比，多表设计方法可以显著减少流规则的数量。值得注意的是，对于每个表，RSP方法可能有很多未使用的流规则。例如，可以将\codeword{while i in range(100)}语句视为匹配\emph{i}并包含100条流规则(即\emph{i} = 0, 1, ..., 99)并更改\emph{i}的流表。当该流表作为RSP的第一个流表时，该表有99个未使用的流规则。
 
+\vspace{0.5cm}
 \begin{table}[!htbp]
 \centering
+\scalebox{1.2}{
 \begin{tabular}{|l|l|l|}
 \hline
          & n =10, m = 10 & n = 50, m= 10 \\ \hline
 Single  & 3898434       & 3898434       \\ \hline
 RSP & 61856         & 224098        \\ \hline
 \end{tabular}
+}
 \caption{\small 单表方法和RSP方法下的流规则数。}
 \label{table:eval2}
 \end{table}
