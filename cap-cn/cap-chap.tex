@@ -101,14 +101,14 @@ f : dom(\mathcal{M}) \rightarrow \mathcal{R}.
 
 这样的函数所在的空间标识为$\mathcal{F}$。
 
-\para{示例}：我们用如下的路由函数\texttt{onPkt}来演示我们路由函数模型的一些关键特性。
+\para{示例}：我们用如下的路由函数\texttt{onPacket}来演示我们路由函数模型的一些关键特性。
 {\small
 \begin{verbatim}
-\\  Routing function: onPkt
+\\  Routing function: onPacket
     Map hostTbl[key: dstIP, value: switch]
     Map condTbl[key: (dstIP, port), value: cond]
     Map routeTbl[key: (switch, cond), value: outPort]
-L1: def onPkt(Type ethType, Addr srcIP, Port srcPort, \
+L1: def onPacket(Type ethType, Addr srcIP, Port srcPort, \
           Addr dstIP, Port dstPort):
 L2: if (ethType != IPv4):
 L3:   return Drop()
@@ -120,12 +120,12 @@ L8: return Drop()
 \end{verbatim}
 }
 
-具体来说, \texttt{onPkt}读取匹配字段
+具体来说, \texttt{onPacket}读取匹配字段
 $\mathcal{M} = \langle \texttt{ethType}, \texttt{srcIP}, \texttt{srcPort},$ $ \texttt{dstIP}, \texttt{dstPort} \rangle$ 
-并将$\mathcal{M}$域中的每个值映射到$\mathcal{R}=\{\texttt{Drop()}, $ $\texttt{Forward(port=x)} \}$中的路由操作。虽然我们将\texttt{onPkt}以命令式函数写出，需要强调的是我们的模型是完全通用的，并且没有指定编程范式。
+并将$\mathcal{M}$域中的每个值映射到$\mathcal{R}=\{\texttt{Drop()}, $ $\texttt{Forward(port=x)} \}$中的路由操作。虽然我们将\texttt{onPacket}以命令式函数写出，需要强调的是我们的模型是完全通用的，并且没有指定编程范式。
 
 
-具体地说，\texttt{onPkt}的前三行声明了键值表：\texttt{hostTable}和\texttt{condTable}。它们分别把每个IP地址和一个连接交换机以及主机条件(例如, 身份验证状态)进行关联，而\texttt{routeTable}将（交换机、条件）映射到其转发端口。在\texttt{onPkt}的主体部分上，\texttt{L2}和\texttt{L3}检测并丢弃非IPv4流量，而\texttt{L8}则丢弃来自未验证的终端的流量。如果验证通过，\texttt{L5}到\texttt{L7}设置\texttt{dstCond}和\texttt{dstSw}变量，然后基于这两个变量从\texttt{routeTbl}返回路由操作。
+具体地说，\texttt{onPacket}的前三行声明了键值表：\texttt{hostTable}和\texttt{condTable}。它们分别把每个IP地址和一个连接交换机以及主机条件(例如, 身份验证状态)进行关联，而\texttt{routeTable}将（交换机、条件）映射到其转发端口。在\texttt{onPacket}的主体部分上，\texttt{L2}和\texttt{L3}检测并丢弃非IPv4流量，而\texttt{L8}则丢弃来自未验证的终端的流量。如果验证通过，\texttt{L5}到\texttt{L7}设置\texttt{dstCond}和\texttt{dstSw}变量，然后基于这两个变量从\texttt{routeTbl}返回路由操作。
 
 
 
@@ -139,11 +139,11 @@ $\mathcal{M} = \langle \texttt{ethType}, \texttt{srcIP}, \texttt{srcPort},$ $ \t
   \item 通过将程序循环转换为黑盒函数来删除它们，黑盒函数的输入为循环中读取的所有变量，输出为循环中写入的所有变量。
 \end{itemize}
 
-例如，我们的示例路由函数\texttt{onPkt}转换如下：
+例如，我们的示例路由函数\texttt{onPacket}转换如下：
 
 {\small
 \begin{verbatim}
-L1: def onPkt(...):
+L1: def onPacket(...):
 L2: g0 = (ethType != IPv4)
 L3: if  g0: return Drop()
 L4: g1 = verify(srcPort, srcIP)):
@@ -154,7 +154,7 @@ L8: if !g1: return Drop()
 \end{verbatim}
 }
 
-注意\texttt{onPkt}的\texttt{L2}处的\texttt{if}语句已经从条件表达式变成了guard变量 \texttt{g0}，\texttt{g0}又被附加给了\texttt{L3}，这一行之前是在\texttt{if}块内的。
+注意\texttt{onPacket}的\texttt{L2}处的\texttt{if}语句已经从条件表达式变成了guard变量 \texttt{g0}，\texttt{g0}又被附加给了\texttt{L3}，这一行之前是在\texttt{if}块内的。
 
 在给出了这个转换后，我们定义$f$的$G_f$:
 
@@ -166,13 +166,13 @@ L8: if !g1: return Drop()
 \end{itemize}
 \end{definition}
 
-作为示例，我们给出 \texttt{onPkt}的DFG如下:
+作为示例，我们给出 \texttt{onPacket}的DFG如下:
 \begin{figure}[tbh]
     \centering
     % \vspace{-1mm}
     \includegraphics[scale = 0.8]{figures/figure2.pdf}
     % \vspace{-2mm}
-    \caption{路由函数\texttt{onPkt}的DFG $G_{\texttt{onPkt}}$}
+    \caption{路由函数\texttt{onPacket}的DFG $G_{\texttt{onPacket}}$}
     \label{cap:fig:onpkt-dfg}
     % \vspace{-2mm}
 \end{figure}
@@ -182,7 +182,6 @@ L8: if !g1: return Drop()
 
 %IPv4 packets' destination endpoints are mapped to their attachment switch and host condition in \texttt{L4} and \texttt{L5}, which \texttt{L6} uses to look up the packet's next hop forwarding port.
 
-%Elaborating, \texttt{onPkt}'s first three lines declare key-value map state variables. \texttt{hostTable} and \texttt{condTable} associate layer 3 endpoints with their attachment switch and host condition (\eg\ authentication status) respectively while \texttt{routeTable} maps switch condition pairs to their forwarding port. Moving on to \texttt{onPkt}'s body, \texttt{L1} and \texttt{L2} drop non-IPv4 traffic, while \texttt{L3} and \texttt{L7} drop traffic from unverified endpoints. Verified IPv4 packets' destination endpoints are mapped to their attachment switch and host condition in \texttt{L4} and \texttt{L5}, which \texttt{L6} uses to look up the packet's next hop forwarding port.
 
 
 %\yry{An example function}
@@ -358,7 +357,7 @@ C_i \trianglerighteq c_j \overset{\Delta}{=} \exists\ c_i \in C_i : c_i \geq c_j
 \end{equation*}
 \end{definition}
 
-$\tau(f)(M)[ec]$是我们根据``f等价"概念建立的属性: 
+$\tau(f)(M)[ec]$是我们根据``f等价''概念建立的属性: 
 %We define f-equivalence $\sim_f$ as a binary property between values of $M$ which denotes that these values cannot be distinguished by $f$. We formalize it as follows:
 \begin{definition} 我们定义f等价（标识为$\sim_f$），为$M$中两个值$v_i(M)$和$v_j(M)$之间的一种联系，即不能被$f$所区分:
 \begin{equation*}
@@ -426,33 +425,29 @@ $\tau_G(f)[scope]$的定义如之前所述。然而，我们不计算$\tau_G(f)[
 \end{equation*}
 \end{definition}
 
-\para{示例}： 现在用我们的示例路由函数\texttt{onPkt}来说明这些概念。
+\para{示例}： 现在用我们的示例路由函数\texttt{onPacket}来说明这些概念。
 
-考虑\texttt{onPkt}的匹配字段\texttt{srcIP}和\texttt{srcPort}。每个都只被读取一次：在\texttt{L4}上，由布尔函数\texttt{isVerified}读取。因此，虽然\texttt{srcIP}和\texttt{srcPort}可能分别有许多f等价类，(\texttt{srcIP}, \texttt{srcPort})只有两个：\texttt{isVerified}的值计算为$0$和它的值计算为$1$。
+考虑\texttt{onPacket}的匹配字段\texttt{srcIP}和\texttt{srcPort}。每个都只被读取一次：在\texttt{L4}上，由布尔函数\texttt{isVerified}读取。因此，虽然\texttt{srcIP}和\texttt{srcPort}可能分别有许多f等价类，(\texttt{srcIP}, \texttt{srcPort})只有两个：\texttt{isVerified}的值计算为$0$和它的值计算为$1$。
 
-假设\texttt{onPkt}是一个小型商业网络的路由函数，其外层是一个连接有$50$个主机的NAT，每个主机运行着一些受限制的应用，这个限制是指只能使用$200$个标准端口。给定这个条件下，$dom(\texttt{srcIP}, \texttt{srcPort}) = 10000$，以及$\tau(\texttt{onPkt})(\texttt{srcIP}, \texttt{srcPort}) = (10000, 2)$。
+假设\texttt{onPacket}是一个小型商业网络的路由函数，其外层是一个连接有$50$个主机的NAT，每个主机运行着一些受限制的应用，这个限制是指只能使用$200$个标准端口。给定这个条件下，$dom(\texttt{srcIP}, \texttt{srcPort}) = 10000$，以及$\tau(\texttt{onPacket})(\texttt{srcIP}, \texttt{srcPort}) = (10000, 2)$。
 
-虽然(\texttt{srcIP}, \texttt{srcPort})的等价类数是直接的，但\texttt{onPkt}输入的大多数其他子集的等价类数并不明显。因此，我们将$\tau(\texttt{onPkt})$ 用$\tau_G(\texttt{onPkt})$约束，它的计算使用\texttt{onPkt}的DFG（$G_{\texttt{onPkt}}$）。如图~\ref{cap:fig:onpkt-dfg}所示。
+虽然(\texttt{srcIP}, \texttt{srcPort})的等价类数是直接的，但\texttt{onPacket}输入的大多数其他子集的等价类数并不明显。因此，我们将$\tau(\texttt{onPacket})$ 用$\tau_G(\texttt{onPacket})$约束，它的计算使用\texttt{onPacket}的DFG（$G_{\texttt{onPacket}}$）。如图~\ref{cap:fig:onpkt-dfg}所示。
 
 
-%While finding the equivalence class number of (\texttt{srcIP}, \texttt{srcPort}) is straightforwards, the number of equivalence classes of other subsets of \texttt{onPkt}'s inputs such as (\texttt{srcIP}, \texttt{srcPort}, \texttt{dstIP}) is less obvious, making it difficult to calculate $c_{e,\texttt{onPkt}}$. Fortunately, we can calculate $c_{\texttt{onPkt}}$ more simply by generating \texttt{onPkt}'s DFG $G_{\texttt{onPkt}}$, shown in Fig.~\ref{fig:onpkt-dfg}.
 
 \begin{figure}[tbh]
     \centering
     %\vspace{-1mm}
     \includegraphics[scale = 0.8]{figures/figure5.pdf}
     %\vspace{-2mm}
-    \caption{路由函数\texttt{onPkt}的DFG $G_{\texttt{onPkt}}$和割集$(\texttt{srcIP}, \texttt{srcPort}, \texttt{dstPort})$}
+    \caption{路由函数\texttt{onPacket}的DFG $G_{\texttt{onPacket}}$和割集$(\texttt{srcIP}, \texttt{srcPort}, \texttt{dstPort})$}
     \label{cap:fig:onpkt-dfg}
     %\vspace{-2mm}
 \end{figure}
 
-%In $G_{\texttt{onPkt}}$, vertices such as \texttt{dstSw} correspond to \texttt{onPkt}'s variables, edges such as (\texttt{dstIP}, \texttt{dstSw}) imply that the source vertex \texttt{dstIP} is used in the target vertex \texttt{dstSw}'s assignment, and vertex weights such as $w(\texttt{srcIP}) = 50$ indicate their vertices' domain.
 
-我们考虑\texttt{onPkt}的输入为(\texttt{srcIP}, \texttt{srcPort}, \texttt{dstIP})的等价类数量。我们取它们的点和\texttt{onPkt}的其他输入: (\texttt{ethType}, \texttt{dstPort},\texttt{g0}, \texttt{dstCond}, \texttt{return})派生的每个点之间的$G_\texttt{onPkt}$中的顶点最小割集。图~\ref{cap:fig:onpkt-dfg}中用虚线表示了这个顶点最小割集。
+我们考虑\texttt{onPacket}的输入为(\texttt{srcIP}, \texttt{srcPort}, \texttt{dstIP})的等价类数量。我们取它们的点和\texttt{onPacket}的其他输入: (\texttt{ethType}, \texttt{dstPort},\texttt{g0}, \texttt{dstCond}, \texttt{return})派生的每个点之间的$G_\texttt{onPacket}$中的顶点最小割集。图~\ref{cap:fig:onpkt-dfg}中用虚线表示了这个顶点最小割集。
 
-
-%In $G_{\texttt{onPkt}}$, $G_{\texttt{onPkt}}.vertexMinCut(($\texttt{srcIP}, \texttt{srcPort}, \texttt{dstIP}$))$ is the product of vertex min cut weights between (\texttt{srcIP}, \texttt{srcPort}, \texttt{dstIP}) and the set of vertices descended from the remainder of \texttt{onPkt}'s inputs (\texttt{ethType}, \texttt{dstPort}): (\texttt{ethType}, \texttt{dstPort}, \texttt{g0}, \texttt{dstCond}, \texttt{return}), indicated by the dotted line in Fig.~\ref{fig:onpkt-dfg}. 
 
 该割集中的顶点(\texttt{g1}, \texttt{dstIP})的权重为$50$和$2$，因此$\tau_G(\texttt{srcIP}, \texttt{srcPort}, \texttt{dstIP}) = (50000,\ 100)$。
 
@@ -543,9 +538,9 @@ otherwise, \quad \quad \quad \quad \quad \quad \quad \ \ \ \ \, \, \,  (\mathrm{
 
 作为推论，因为$\tau_G(f) > \tau(f)$，流水线实现定理可以推广到$\tau_G(f)$。
 
-\para{示例}： 我们使用\texttt{onPkt}和\exampledp 来说明我们的流水线实现定理。具体来说，我们的流水线实现定理指出$\kappa(\exampledp) \trianglerighteq \tau(\texttt{onPkt}) \Rightarrow \exampledp \rightrightharpoons \texttt{onPkt}$。
+\para{示例}： 我们使用\texttt{onPacket}和\exampledp 来说明我们的流水线实现定理。具体来说，我们的流水线实现定理指出$\kappa(\exampledp) \trianglerighteq \tau(\texttt{onPacket}) \Rightarrow \exampledp \rightrightharpoons \texttt{onPacket}$。
 
-进一步，当$\kappa_\rho(\rho_{\texttt{L2}}) > \tau_G(\texttt{onPkt})$或者$\kappa_\rho(\rho_{\texttt{L3}}) > \tau_G(\texttt{onPkt})$时，$\kappa(\exampledp) \trianglerighteq \tau(\texttt{onPkt})$为真。我们通过比较每对特征函数给出的每个向量的每个分量来验证每个条件。举例来说，$\tau(\texttt{onPkt})(\texttt{srcIP},$ $\texttt{srcPort},$ $\texttt{dstIP}$) $ = (50000,\ 100)$,  $\kappa_\rho(\rho_{\texttt{L3}})(\texttt{srcIP},$ $\texttt{srcPort},$ $\texttt{dstIP}$) $ = (2^{20}, 2^{16})$，因此输入集(\texttt{srcIP}, \texttt{srcPort}, \texttt{dstIP})不会阻碍\texttt{onPkt}在$\rho_{\texttt{L3}}$上实现。
+进一步，当$\kappa_\rho(\rho_{\texttt{L2}}) > \tau_G(\texttt{onPacket})$或者$\kappa_\rho(\rho_{\texttt{L3}}) > \tau_G(\texttt{onPacket})$时，$\kappa(\exampledp) \trianglerighteq \tau(\texttt{onPacket})$为真。我们通过比较每对特征函数给出的每个向量的每个分量来验证每个条件。举例来说，$\tau(\texttt{onPacket})(\texttt{srcIP},$ $\texttt{srcPort},$ $\texttt{dstIP}$) $ = (50000,\ 100)$,  $\kappa_\rho(\rho_{\texttt{L3}})(\texttt{srcIP},$ $\texttt{srcPort},$ $\texttt{dstIP}$) $ = (2^{20}, 2^{16})$，因此输入集(\texttt{srcIP}, \texttt{srcPort}, \texttt{dstIP})不会阻碍\texttt{onPacket}在$\rho_{\texttt{L3}}$上实现。
 
 
 
@@ -601,7 +596,7 @@ otherwise, \quad \quad \quad \quad \quad \quad \quad \ \ \ \ \, \, \,  (\mathrm{
 \begin{definition} $f$的输入$M$的码字$\chi_f(M)$是一组整数，对应于$M$的f等价类。
 \end{definition}
 
-得到一个码字 $\in \chi_f(M)$等同于得到$M$ $v_i(M)$的值，因为可以确定地将码字映射回$v_i(M)$的等价类中的值。我们现在定义什么是``计算$M$的码字"，我们将在证明中使用它：
+得到一个码字 $\in \chi_f(M)$等同于得到$M$ $v_i(M)$的值，因为可以确定地将码字映射回$v_i(M)$的等价类中的值。我们现在定义什么是``计算$M$的码字''，我们将在证明中使用它：
 
 \begin{definition} 如果我们可以计算$M$的码字$\chi_f(M)$, $\forall\ v_i(M) \in dom(M)$我们可以计算与$v_i(M)$的等价类相关联的码字。
 \end{definition}
@@ -779,7 +774,7 @@ L6:     return route
 
 %From the evaluation of simpleRoute and f2, we can see the result of $\tau$ and $\tau_G$ are almost the same except an extreme case where $\#O(\texttt{condTbl})$ = 1. Also, the results are not influenced by $\#O(\texttt{routeTbl})$, which can be observed from the first three rows in the table. This is because, considering $s_1$ and $s_2$ as two values of $srcIP$, if \texttt{hostTbl}($s_1$) is not equal to \texttt{hostTbl}($s_2$), then the chance of $s_1 \sim_f s_2$ is very small.
 
-进一步发现，带有控制语句的函数：\texttt{secureRoute}以及\texttt{onPkt}，在$\tau$和$\tau_G$之间有一个很大的差距。这表明$\tau_G$的界在有分支程序上是较松的。然而，正如行b1(scR)和行b2(scR)所示，我们可以对程序的每一个分支计算特征函数来解决这个问题。对于每一个分支（如b1(scR)和行b2(scR)所示），$\tau$和$\tau_G$仍然保持着严密性。
+进一步发现，带有控制语句的函数：\texttt{secureRoute}以及\texttt{onPacket}，在$\tau$和$\tau_G$之间有一个很大的差距。这表明$\tau_G$的界在有分支程序上是较松的。然而，正如行b1(scR)和行b2(scR)所示，我们可以对程序的每一个分支计算特征函数来解决这个问题。对于每一个分支（如b1(scR)和行b2(scR)所示），$\tau$和$\tau_G$仍然保持着严密性。
 
 %For the functions with control statements, such as f3, the results of $\tau$ and $\tau_G$ have a large gap. However, in this case, we can split the function into different branches. For each branch, the result of $\tau$ and $\tau_G$ maintains the tightness, which is shown in the rows with $b1(\texttt{f3})$ and $b2(\texttt{f3})$ in Table~\ref{table:table1}. Also, we evaluate the example routing function \texttt{onPkt}, and the result is shown in the last row in the table. Need to mention that, both $\tau$(f)(\texttt{srcIP}) and $\tau$(f)(\texttt{dstIP}) are null means that the computation time is too long to compute the result.
 
@@ -801,7 +796,7 @@ L6:     return route
     scR & 10 & N/A & N/A & N/A & 100 & 2 & 100 & 2 & 1024 \\
     b1(scR) & 10 & N/A & N/A & N/A & N/A & 1 & N/A & 1 & N/A \\
     b2(scR) & 10 & N/A & N/A & N/A & 100 & 1 & 100 & 1 & 100 \\
-    \texttt{onPkt} & 32 & 100 & 30 & 50 & N/A & null & null & $2^{32}$ & $2^{32}$ \\
+    \texttt{onPacket} & 32 & 100 & 30 & 50 & N/A & null & null & $2^{32}$ & $2^{32}$ \\
     \hline
   \end{tabular}
   }
@@ -894,7 +889,7 @@ L6:     return route
 
 \subsection{流水线实现的分析}
 
-我们现在评估在流水线中成功实现函数的百分比，以查看成功实现的因素。我们考虑具有不同表内容的示例函数\texttt{onPkt}。具体来说，对于\texttt{condTbl}和\texttt{hostTbl}，我们随机设置表的输出值，范围从10到30。这意味着\texttt{dstCond}和\texttt{dstSW}的域大小是从10到30（即平均域大小为20）。对于流水线方面，我们随机决定表的数量（从2到4）以及每个表的输出寄存器的位长（从4到10）。另外我们设置生成的流水线的匹配字段必须包含\texttt{onPkt}所需的五个匹配字段，并且每个匹配字段只能出现在一个表中。最后我们通过实现定理计算\texttt{onPkt}的成功实现百分比和生成的流水线。
+我们现在评估在流水线中成功实现函数的百分比，以查看成功实现的因素。我们考虑具有不同表内容的示例函数\texttt{onPacket}。具体来说，对于\texttt{condTbl}和\texttt{hostTbl}，我们随机设置表的输出值，范围从10到30。这意味着\texttt{dstCond}和\texttt{dstSW}的域大小是从10到30（即平均域大小为20）。对于流水线方面，我们随机决定表的数量（从2到4）以及每个表的输出寄存器的位长（从4到10）。另外我们设置生成的流水线的匹配字段必须包含\texttt{onPacket}所需的五个匹配字段，并且每个匹配字段只能出现在一个表中。最后我们通过实现定理计算\texttt{onPacket}的成功实现百分比和生成的流水线。
 
 
 %We now evaluate the percentage of successful realization of a function in a pipeline to see the factors of successful realization. We consider the example function \texttt{onPkt} with different content of tables. Specifically, for tables \texttt{condTbl} and \texttt{hostTbl}, we set the number of output values of tables ranging from 10 to 30 randomly, which means the domain size of \texttt{dstCond} and \texttt{dstSW} is from 10 to 30 (\ie, the average domain size is 20). For the pipeline side, we randomly decide the number of tables (from 2 to 4) of a pipeline and the length of bits of registers (from 4 to 10) for each table. Also, we set the match fields of the generated pipeline must contain the five match fields required by \texttt{onPkt} and each match field can only appear in one table. Then, we compute the successful realization percentage of \texttt{onPkt} and the generated pipeline by using the realization theorem.

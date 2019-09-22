@@ -589,7 +589,7 @@ $\forall e \in E, \sum_ib_i*z^i_e \le m_e$   & 边的带宽约束\\
 \label{fig:c-example}
 \end{figure}
 
-然而，当前的路径约束可能会导致``过度约束"的问题。例如图~\ref{fig:c-example}，一个有状态中间盒处理节点$M$有两个路径约束$A_1$和$A_2$作为其DG中的子节点。并且$A_1$要求路径要经过交换机$a, b$；$A_2$要求路径要经过交换机$a, c$。根据之前的讨论，对于$A_1$和$A_2$，均包括路径约束$(M, a)$因为它只是简单地将\codeword{SPC.stable}中的基准点约束与$a, b$进行连接（同时与$a, c$进行连接）。然而，它只是一个充分条件，因为其忽略了其他满足要求的路径（例如，$a \rightarrow M \rightarrow b\ (c)$）。
+然而，当前的路径约束可能会导致``过度约束''的问题。例如图~\ref{fig:c-example}，一个有状态中间盒处理节点$M$有两个路径约束$A_1$和$A_2$作为其DG中的子节点。并且$A_1$要求路径要经过交换机$a, b$；$A_2$要求路径要经过交换机$a, c$。根据之前的讨论，对于$A_1$和$A_2$，均包括路径约束$(M, a)$因为它只是简单地将\codeword{SPC.stable}中的基准点约束与$a, b$进行连接（同时与$a, c$进行连接）。然而，它只是一个充分条件，因为其忽略了其他满足要求的路径（例如，$a \rightarrow M \rightarrow b\ (c)$）。
 
 %However, the current path constraints may cause \emph{excessive constraints} for paths. For example, a stateful middlebox-operation node ($M$) has two path constraints $A_1$ and $A_2$ as its children in a DG. And, $A_1$ specifies a path must pass through switches $s_1, s_2$; $A_2$ specifies a path must pass through switches $s_1, s_3$. Then, the path constraints have $(M, s_1)$ for both $A_1$ and $A_2$ as it simply connects the waypoints constraint in \codeword{SPC.stable} and $s_1, s_2$ (also $s_1, s_3$). However, this is only a sufficient condition as some other conforming paths are excluded (\eg, $s_1 \rightarrow M \rightarrow s_2\ (s_3)$).
 
