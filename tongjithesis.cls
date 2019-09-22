@@ -924,25 +924,25 @@
   \noindent\hangindent\wd0\hangafter1
     \box0\tongji@ekeywords}
 
-% \RequirePackage{tikz}
+\RequirePackage{tikz}
 \newcommand*{\zijubak}[1]{\renewcommand{\CJKglue}{\hskip #1}}
 \newcommand{\tongjishuji}{
 
     \begin{center}
-        \rotatebox{-90}{\mbox{\zijubak{4pt}\hskip 7cm\tongji@ctitle\hskip
-        1cm \hskip 0.3cm\tongji@schoolname\hskip 2cm}}
-% \tongji@cauthor
+        % \rotatebox{-90}{\mbox{\zijubak{4pt}\hskip 7cm\tongji@ctitle\hskip
+        % 1cm \hskip 0.3cm\tongji@schoolname\hskip 2cm}}
+        % \tongji@cauthor
 
-        % \renewcommand{\baselinestretch}{0.2}
-        % \linespread{0.2}
-        % \begin{tikzpicture} 
-        % %辅助网格
+        \renewcommand{\baselinestretch}{0.2}
+        \linespread{0.2}
+        \begin{tikzpicture} 
+        %辅助网格
         % \draw  [dashed,step=1,line width =0.5pt](0,0)grid(2,2);
-
-        % %实现文字竖排,关键是设置每一行为一个汉字text width =1em
-        % \node [above,rectangle,rounded corners=1mm,text width =1em,fill=blue!25,label=below:$(0\text{,}0)$] (A) at
-        % (0,0) {中国人民万岁};
-        % \end{tikzpicture}
+        %实现文字竖排,关键是设置每一行为一个汉字text width =1em
+        \node [above,rectangle,rounded corners=1mm,text width =1em,fill=white!25,label=below:$$] (A) at (0,15) {};
+        \node [above,rectangle,rounded corners=1mm,text width =1em,fill=white!25,label=below:$$] (A) at (0,3) {软件定义网络高级编程模型研究};
+        \node [above,rectangle,rounded corners=1mm,text width =1em,fill=white!25,label=below:$$] (B) at (0,0) {同济大学};
+        \end{tikzpicture}
     \end{center}
     \clearpage
 }
