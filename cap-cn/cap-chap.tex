@@ -889,7 +889,7 @@ L6:     return route
 
 \subsection{流水线实现的分析}
 
-我们现在评估在流水线中成功实现函数的百分比，以查看成功实现的因素。我们考虑具有不同表内容的示例函数\texttt{onPacket}。具体来说，对于\texttt{condTbl}和\texttt{hostTbl}，我们随机设置表的输出值，范围从10到30。这意味着\texttt{dstCond}和\texttt{dstSW}的域大小是从10到30（即平均域大小为20）。对于流水线方面，我们随机决定表的数量（从2到4）以及每个表的输出寄存器的位长（从4到10）。另外我们设置生成的流水线的匹配字段必须包含\texttt{onPacket}所需的五个匹配字段，并且每个匹配字段只能出现在一个表中。最后我们通过实现定理计算\texttt{onPacket}的成功实现百分比和生成的流水线。
+我们现在评估在流水线中成功实现函数的百分比，以查看成功实现的因素。我们考虑具有不同表内容的示例函数\texttt{onPacket}。具体来说，对于\texttt{condTbl}和\texttt{hostTbl}，我们随机设置表的输出值，范围从10到30。这意味着\texttt{routeCond}和\texttt{dstSW}的域大小是从10到30（即平均域大小为20）。其中\texttt{routeCond}的域表示共有多少个不同条件，而\texttt{dstSW}的域表示网络中有多少个交换机。对于流水线方面，我们随机决定表的数量（从2到4）以及每个表的输出寄存器的位长（从4到10）。另外我们设置生成的流水线的匹配字段必须包含\texttt{onPacket}所需的五个匹配字段，并且每个匹配字段只能出现在一个表中。最后我们通过实现定理计算\texttt{onPacket}的成功实现百分比和生成的流水线。
 
 
 %We now evaluate the percentage of successful realization of a function in a pipeline to see the factors of successful realization. We consider the example function \texttt{onPkt} with different content of tables. Specifically, for tables \texttt{condTbl} and \texttt{hostTbl}, we set the number of output values of tables ranging from 10 to 30 randomly, which means the domain size of \texttt{dstCond} and \texttt{dstSW} is from 10 to 30 (\ie, the average domain size is 20). For the pipeline side, we randomly decide the number of tables (from 2 to 4) of a pipeline and the length of bits of registers (from 4 to 10) for each table. Also, we set the match fields of the generated pipeline must contain the five match fields required by \texttt{onPkt} and each match field can only appear in one table. Then, we compute the successful realization percentage of \texttt{onPkt} and the generated pipeline by using the realization theorem.
