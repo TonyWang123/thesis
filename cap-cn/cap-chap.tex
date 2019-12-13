@@ -515,7 +515,7 @@ otherwise, \quad \quad \quad \quad \quad \quad \quad \ \ \ \ \, \, \,  (\mathrm{
 \exampledp{}包含两个$\rho$: $\rho_{\texttt{L2}}$和$\rho_{\texttt{L3}}$。考虑表\texttt{t4}，仅包含在$\rho_{\texttt{L3}}$中。由于\texttt{t4}读取\texttt{dstIP}和\texttt{r(t2)}，而\texttt{t2}依次读取\texttt{srcIP}和\texttt{srcPort}，因此输入闭包$\bar{M}_{\rho_{\texttt{L3}}}(\texttt{t4})$为(\texttt{srcIP}, \texttt{srcPort}, \texttt{dstIP})。闭包 $\bar{\bar{M}}_{\rho_\texttt{L3}}(\texttt{srcIP}, \texttt{srcPort}, \texttt{dstIP})$ 关于\texttt{t4}在$\rho_{\texttt{L3}}$的输入是$\{\texttt{t4}\}$。
 
 
-因此，$\kappa_{\rho_{\texttt{L3}}}(\bar{M}_{\rho_{\texttt{L3}}})$ $=$ $\kappa_{\rho_{\texttt{L3}}}(\texttt{srcIP}, \texttt{srcPort}, \texttt{dstIP})$ $=$ $(maxRules(\texttt{t4}),$ $2^{bits(r(\texttt{t4}))})$. 在\texttt{t4}有$2^{20}$规则数并且一个$16$bit输出寄存器这种情况下, $\kappa_{\rho_{\texttt{L3}}}(\bar{M}_{\rho_{\texttt{L3}}}) = (2^{20}, 2^{16})$.
+因此，$\kappa_{\rho_{\texttt{L3}}}(\bar{M}_{\rho_{\texttt{L3}}})$ $=$ $\kappa_{\rho_{\texttt{L3}}}(\texttt{srcIP}, \texttt{srcPort}, \texttt{dstIP})$ $=$ $(maxRules(\texttt{t4}),$ $2^{bits(r(\texttt{t4}))})$. 在\texttt{t4}有$2^{20}$规则数并且一个$16$ bit输出寄存器这种情况下, $\kappa_{\rho_{\texttt{L3}}}(\bar{M}_{\rho_{\texttt{L3}}}) = (2^{20}, 2^{16})$.
 
 进一步，我们考虑\exampledp{}的匹配域的子集$(\texttt{srcMac},\ \texttt{dstMac})$。$\rho_{\texttt{L3}}$并不包含\texttt{srcMac}以及\texttt{dstMac}，因此它只可以实现不包含\texttt{srcMac}以及\texttt{dstMac}的函数（或赋值为常数）。常数只有一个值，一个等价类。因此，对于任何输出包含\texttt{srcMac}，$\kappa_{\rho_{\texttt{L3}}}$的值为$(1, 1)$。
 
@@ -596,7 +596,7 @@ otherwise, \quad \quad \quad \quad \quad \quad \quad \ \ \ \ \, \, \,  (\mathrm{
 \begin{definition} $f$的输入$M$的码字$\chi_f(M)$是一组整数，对应于$M$的f等价类。
 \end{definition}
 
-得到一个码字 $\in \chi_f(M)$等同于得到$M$ $v_i(M)$的值，因为可以确定地将码字映射回$v_i(M)$的等价类中的值。我们现在定义什么是``计算$M$的码字''，我们将在证明中使用它：
+得到一个码字 $\chi_f(M)$等同于得到$M$ $v_i(M)$的值，因为可以确定地将码字映射回$v_i(M)$的等价类中的值。我们现在定义什么是``计算$M$的码字''，我们将在证明中使用它：
 
 \begin{definition} 如果我们可以计算$M$的码字$\chi_f(M)$, $\forall\ v_i(M) \in dom(M)$我们可以计算与$v_i(M)$的等价类相关联的码字。
 \end{definition}
