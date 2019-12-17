@@ -65,7 +65,7 @@ SDN的一个主要研究方向是可编程、高效的数据通路(例如, OpenF
 %本文的其余部分组织如下。我们在章节~\ref{sec:model-and-main-results}中给出了模型的精确定义。主要结果在章节.~\ref{sec:main-results}中给出。章节~\ref{sec:evaluation}是我们的测试评估结果。章节~\ref{sec:related-work}介绍相关工作。
 
 
-\section{相关工作}\label{sec:related-work}
+\section{相关工作}\label{sec:related-work-cap}
 \para{高级SDN程序编译器}： 过去几年，人们提出多种允许程序员用高级语言编写SDN程序，并将这些程序编译成流表的系统。因为它们需要检查高级程序到交换机流表的转换，因此这些系统与本章工作相关。我们将这些系统分为两类：无层和分层。
 
 无层系统(如SNAP~\cite{arashloo2016snap}, FML~\cite{hinrichs2009practical}, FlowLog~\cite{flowlog},  Maple~\cite{maple})，要求程序员通过编写数据包处理函数的形式，指定数据包的转发行为。然后SDN控制器使用这些函数来配置和更新网络状态。这样的系统启发了流水线容量定理中函数的概念。但是，这些系统在没有实际执行的情况下无法验证提交的函数是否可以写入给定的流水线结构。
@@ -166,14 +166,14 @@ L8: if !g1: return Drop()
 \end{itemize}
 \end{definition}
 
-作为示例，我们给出 \texttt{onPacket}的DFG如下:
+作为示例，我们给出 \texttt{onPacket}的DFG如图~\ref{cap:fig:onpkt-dfg-raw}所示:
 \begin{figure}[tbh]
     \centering
     % \vspace{-1mm}
     \includegraphics[scale = 0.8]{figures/figure2.pdf}
     % \vspace{-2mm}
     \caption{路由函数\texttt{onPacket}的DFG $G_{\texttt{onPacket}}$}
-    \label{cap:fig:onpkt-dfg}
+    \label{cap:fig:onpkt-dfg-raw}
     % \vspace{-2mm}
 \end{figure}
 
@@ -683,11 +683,11 @@ $\forall\ M \in \mathcal{M} : m_i \in M \rightarrow m_i \notin \bigcup_{t_i \in 
 %As a corrollary, we have shown that $G_f.vertexMinCut(M)$ bounds $M$'s equivalence classes.
 
 \begin{corrollary} 任一$M$的f等价类的数量$G_f.vertexMinCut(M)$所限。
-\label{lemma:eq-cl-approx}
+\label{lemma:eq-cl-approx1}
 \end{corrollary}
 
 \begin{corrollary} 特征方程$\tau_G(f)$支配特征方程 $\tau(f)$。
-\label{lemma:eq-cl-approx}
+\label{lemma:eq-cl-approx2}
 \end{corrollary}
 
 

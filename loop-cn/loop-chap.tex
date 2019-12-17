@@ -32,7 +32,7 @@
 
 
 \section{相关工作}
-\label{sec:related-work}
+\label{sec:related-work-loop}
 
 \para{高级SDN编程模型}:  对于被动式（reactive）高级SDN编程模型~\cite{voellmy2013maple,foster2011frenetic,monsanto2013composing}，数据包被转发到控制器并被处理。Maple~\cite{voellmy2013maple}可以支持对数据包（包括循环）的任意处理。但是，它需要在控制器中处理数据包，而这会增加时延。对于主动式编程模型~\cite{snap,sivaraman2016packet}，尽管它们可以通过利用多流表流水线编译到数据通路，但它们的模型不支持循环。
 
@@ -42,7 +42,7 @@
 
 
 \section{流水线设计与研究动机}
-\label{sec:motivation}
+\label{sec:motivation-loop}
 
 在本节中，我们将首先简要介绍高级SDN程序中的流水线设计。然后我们将给出在这些流水线设计中处理循环的研究动机。
 
@@ -261,24 +261,24 @@ L7:     ... #i from 2 to len(ports) - 1
 \para{实验方法}: 基于最优流水线设计的分析，考虑以下简单的流水线设计算法：给定一个DFG和$k$，递归地在DFG上应用源节点选择$k-1$次来枚举所有可能的硬件流水线。对于RSP和展开技术（unrolling）的比较评估，我们随机生成具有以下条件的DFG：对于RSP，我们变化RSP中的软件流水线数（即循环的迭代次数$n$）和每个流水线DFG中的节点数；对于展开技术，从RSP中生成的图的每一个软件流水线中随机移除几个节点。然后，我们比较流水线设计算法应用在RSP生成的图和展开技术生成的图的执行时间。因为我们没有考虑合并算法，枚举所有可能的流水线的复杂性相当于找到最佳流水线的复杂度。
 
 
-\para{实验结果}: 结果如图~\ref{fig:eval1}所示。水平轴指定循环的迭代次数($n$)。图~\ref{fig:eval1-a}和图~\ref{fig:eval1-b}之间的不同点是每个软件流水线的DFG中的节点数($m$)（对于展开技术，它是指随机移除节点之前的节点数）。其中图~\ref{fig:eval1-a}中的$m = 10$ ，图~\ref{fig:eval1-b}中的$m = 20$。所有流水线设计都设$k=10$作为流表数量的限制。结果表明，与$k < n$时的展开技术相比，RSP方法缩短了执行时间(大约十倍，当$n = 50$ 且 $m = 10$)。当$n = 10$时，RSP和展开在流水线设计中都考虑10个软件流水线，因此，两种方法的执行时间是相同的。当$n = 100$时，与RSP方法相比，展开的执行时间过长。
+\para{实验结果}: 结果如图~\ref{fig:eval1-loop}所示。水平轴指定循环的迭代次数($n$)。图~\ref{fig:eval1-loop-a}和图~\ref{fig:eval1-loop-b}之间的不同点是每个软件流水线的DFG中的节点数($m$)（对于展开技术，它是指随机移除节点之前的节点数）。其中图~\ref{fig:eval1-loop-a}中的$m = 10$ ，图~\ref{fig:eval1-loop-b}中的$m = 20$。所有流水线设计都设$k=10$作为流表数量的限制。结果表明，与$k < n$时的展开技术相比，RSP方法缩短了执行时间(大约十倍，当$n = 50$ 且 $m = 10$)。当$n = 10$时，RSP和展开在流水线设计中都考虑10个软件流水线，因此，两种方法的执行时间是相同的。当$n = 100$时，与RSP方法相比，展开的执行时间过长。
 
 \begin{figure}[!htbp]
     %\vspace{-2mm}
     \centering
     \begin{minipage}{0.47\linewidth}
         \centering\includegraphics[width=\linewidth]{figures/lp-70.png}
-        \caption{\label{fig:eval1-a} \small $m$ = 10.}
+        \caption{\label{fig:eval1-loop-a} \small $m$ = 10.}
     \end{minipage}
     % \hspace{0.03\linewidth}
     \begin{minipage}{0.47\linewidth}
         \centering\includegraphics[width=\linewidth]{figures/lp-71.png}
-        \caption{\label{fig:eval1-b} \small $m$ = 20.}
+        \caption{\label{fig:eval1-loop-b} \small $m$ = 20.}
     \end{minipage}
     %\caption{\footnotesize{The CDF of job latency local and remote jobs.}}
     \caption{\small 两种方法的执行时间。$n$为迭代次数。$m$为顶点数量。}
     %\vspace{-2mm}
-    \label{fig:eval1}
+    \label{fig:eval1-loop}
 \end{figure}
 
 \subsection{流规则数量}

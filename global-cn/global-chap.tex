@@ -63,7 +63,7 @@ L9:   else: return DROP
 \para{示例}：考虑图~\ref{fig:dg}中的决策树。我们发现对于边缘交换机$a$，决策树上的所有节点的可能的下一跳都相同（$b$）。因此，所有的语句可以不在$a$上执行。当整个决策树移到$b$时（此时叶子节点已经被更新），我们发现所有的节点的可能的下一跳都不同（均为$c$或$d$）。因此，我们得到所有语句的可以执行的范围为交换机$a$或$b$。
 
 
-在确定每个语句（决策树上内部节点）可以执行的交换机范围后，我们可以通过混合整数线性规划进行求解。其中变量在表~\ref{table:variables}给出；约束在表~\ref{table:constraints}给出。系统的目标可以是：minimize $max(\sum_{d_j^i} x(d_j^i, n))$，即最小化所有交换机最多实现的语句数量，使程序语句可以相对均匀地分布在网络中。
+在确定每个语句（决策树上内部节点）可以执行的交换机范围后，我们可以通过混合整数线性规划进行求解。其中变量在表~\ref{table:variables-global}给出；约束在表~\ref{table:constraints-global}给出。系统的目标可以是：minimize $max(\sum_{d_j^i} x(d_j^i, n))$，即最小化所有交换机最多实现的语句数量，使程序语句可以相对均匀地分布在网络中。
 
 最终，通过计算混合整数线性规划，我们可以得到决策树中节点与网络交换机的对应关系，即对于每个交换机，我们可以得到它应该实现哪些程序语句，进而算出交换机配置。
 
@@ -82,7 +82,7 @@ $m(n)$              & 网络节点$n$最多可以实现的决策树节点数量\
 \hline              
 \end{tabular}
 \caption{\small 本节线性规划所用的变量。}
-\label{table:variables}
+\label{table:variables-global}
 \end{table}
 
 \begin{table}[]
@@ -98,7 +98,7 @@ $\forall d_j^i \sum_n x(d_j^i, n) = 1$  & 保证决策树节点与网络节点�
 \hline
 \end{tabular}
 \caption{\small 本节线性规划所用的约束。}
-\label{table:constraints}
+\label{table:constraints-global}
 \end{table}
 
 
